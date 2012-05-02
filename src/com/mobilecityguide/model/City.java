@@ -5,9 +5,7 @@ import java.util.List;
 public class City {
 	
 	private String name;
-	
 	private List<POI> listPOI;
-	
 	private List<Itinerary> itineraryList;
 
 	public String getName() {
@@ -35,27 +33,27 @@ public class City {
 	}
 	
 	public void delPOI(){
-		
+		// TODO
 	}
 	
 	public void addPOI(){
-		
+		// TODO
 	}
 	
 	public void delItinerary(){
-		
+		// TODO
 	}
 	
 	public void addItinerary() {
-		
+		// TODO
 	}
 	
 	public void sortPOIList(String param){
-		
+		// TODO
 	}
 	
 	public void sortItineraryList(String param){
-		
+		// TODO
 	}
 
 }

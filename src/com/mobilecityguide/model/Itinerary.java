@@ -5,9 +5,7 @@ import java.util.List;
 public class Itinerary  {
 		
 	private List<String> title;
-	
 	private List<POI>POIList;
-	
 	private List<String> theme;
 
 	public List<String> getTitle(String language) {
@@ -35,11 +33,11 @@ public class Itinerary  {
 	}
 	
 	public void delPOI(){
-		
+		// TODO
 	}
 	
 	public void addPOI(){
-		
+		// TODO
 	}
 	
 

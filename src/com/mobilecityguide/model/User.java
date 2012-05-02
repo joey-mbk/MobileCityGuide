@@ -5,14 +5,9 @@ import java.util.List;
 public class User {
 	
 	private String name;
-	
 	private List<String> language;
-	
 	private String age;
-	
 	private List<Itinerary> userItineraryList;
-	
-	private City city;
 
 	public String getName() {
 		return name;
@@ -44,14 +39,6 @@ public class User {
 
 	public void setUserItineraryList(List<Itinerary> userItineraryList) {
 		this.userItineraryList = userItineraryList;
-	}
-
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
 	}
 
 }
