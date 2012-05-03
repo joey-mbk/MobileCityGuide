@@ -1,7 +1,9 @@
 package com.mobilecityguide;
 
 import com.mobilecityguide.R;
+import com.mobilecityguide.activity.About;
 import com.mobilecityguide.activity.Connect;
+import com.mobilecityguide.activity.Help;
 import com.mobilecityguide.activity.Registrer;
 
 import android.app.Activity;
@@ -37,6 +39,14 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 			break;
 		case R.id.bregistrer:
 			intent = new Intent(this, Registrer.class);
+			startActivity(intent);
+			break;
+		case R.id.bhelp:
+			intent = new Intent(this, Help.class);
+			startActivity(intent);
+			break;
+		case R.id.babout:
+			intent = new Intent(this, About.class);
 			startActivity(intent);
 			break;
 		}

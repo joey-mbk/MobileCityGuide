@@ -6,10 +6,10 @@
     <string name="username">Username</string>
     
     <string name="my_places_menu">My places</string>
-    <string name="settings_menu">Setting</string>
+    <string name="settings_menu">Settings</string>
     <string name="help_menu">Help</string>
-    <string name="about_menu">about</string>
-    <string name="interests_prompt">Centre of interest </string>
+    <string name="about_menu">About</string>
+    <string name="interests_prompt">Centre of interest</string>
     <string name="age_prompt">Choose your age</string>
     <string name="languages_prompt">Choose your language(s)</string>
     <string name="username_connect">Username</string>
