@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
+    <string name="interests_prompt">Centre of interest </string>
+    <string name="age_prompt">Choose your age</string>
+    <string name="languages_prompt">Choose your language(s)</string>
 
 </resources>
