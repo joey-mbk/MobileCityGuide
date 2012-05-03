@@ -1,5 +1,7 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 
 import com.mobilecityguide.controllers.UserController;
@@ -36,11 +38,29 @@ public class UserMapper {
 	}
 	
 	public boolean deleteUser(String name) {
-		// TODO UserController
 		return this.userGateway.deleteUser(name);
 	}
 	
-	public boolean editUser(String name, String col, String val) {
-		return this.userGateway.editUser(name, col, val);
+	public boolean save(User user) {
+		return this.userGateway.saveUser(user);
+	}
+	
+	public boolean setUserName(User user, String previousName) {
+		return this.userGateway.setUserName(user, previousName);
+	}
+	
+	public boolean addUser(User user) {
+		return this.userGateway.addUser(user);
+	}
+	
+	public ArrayList<String> getAllUsersNames(){
+		RecordSet r = userGateway.getAllUser(); // fetch the results from the gateway
+		ArrayList<String> usersNames = new ArrayList<String>();
+		try {
+		     //TODO
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usersNames;
 	}
 }
