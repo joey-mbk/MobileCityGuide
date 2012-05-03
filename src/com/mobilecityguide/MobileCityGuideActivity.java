@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.mobilecityguide.controllers.CityController;
 import com.mobilecityguide.datamappers.POIMapper;
+import com.mobilecityguide.controllers.GPSController;
+import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.datamappers.UserMapper;
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.exceptions.RecordSetException;

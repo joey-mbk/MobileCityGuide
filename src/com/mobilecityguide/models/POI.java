@@ -3,7 +3,7 @@ package com.mobilecityguide.models;
 import java.util.Dictionary;
 import java.util.List;
 
-public class POI  {
+public class POI  implements java.lang.Comparable<POI>{
 	
 	private String name;
 	private Dictionary<String, String> description;
@@ -100,5 +100,13 @@ public class POI  {
 	public String toString() {
 		return name;
 	}
-	
+
+	@Override
+	public int compareTo(POI poi1) {
+		  int stepPOI1 = poi1.getStep(); 
+	      int stepPOI2 = this.getStep(); 
+	      if (stepPOI1 > stepPOI2)  return -1; 
+	      else if(stepPOI1 == stepPOI2) return 0; 
+	      else return 1; 
+	}
 }
