@@ -2,6 +2,8 @@ package com.mobilecityguide;
 
 import java.util.ArrayList;
 
+import com.mobilecityguide.controllers.CityController;
+import com.mobilecityguide.datamappers.POIMapper;
 import com.mobilecityguide.datamappers.UserMapper;
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.exceptions.RecordSetException;
@@ -29,6 +31,11 @@ public class MobileCityGuideActivity extends Activity {
 	        String[] list = user.getLanguage();
 	        for (String lang:list)
 	        	System.out.println("Language: "+lang);
+	        
+	        /* Testing POI */
+	        CityController.city = "Louvain-La-Neuve";
+	        POIMapper poiMapper = new POIMapper(this);
+	        
 	        setContentView(R.layout.main);
         } else {
         	System.out.println("NULL !!!!");
