@@ -28,17 +28,6 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-            <ScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <LinearLayout
-                    android:id="@+id/contentLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical" >
-
                     <Button
                         android:id="@+id/bconnect"
                         android:layout_width="wrap_content"
@@ -50,11 +39,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bregistrer" />
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
 
-        <Button
+        </LinearLayout>
+    </SlidingDrawer>
+
+    <LinearLayout
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+        
+          <Button
             android:id="@+id/bhelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,12 +59,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/babout" />
-    </SlidingDrawer>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
 
     </LinearLayout>
 
