@@ -10,6 +10,7 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:text="@string/signup_register"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:paddingBottom="20dp"
@@ -28,6 +29,51 @@
                 android:layout_height="wrap_content" android:orientation="vertical">
                 <CheckBox android:id="@+id/RememberLoginBox" android:text="@string/remember_connect"
                         android:textColor="#888888" android:textSize="16sp"
+=======
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="311dp"
+            android:layout_height="354dp" >
+
+            <LinearLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.31"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:text="Usernam" />
+
+                    <EditText
+                        android:id="@+id/editText1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName" >
+
+                        <requestFocus />
+                    </EditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.31"
+                    android:orientation="horizontal" >
+
+                    <TextView
+>>>>>>> b78f4d3040fb7b8356d081daa258f5854efe0d9f
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 <CheckBox android:id="@+id/AutoLoginBox" android:text="@string/auto_connect"
