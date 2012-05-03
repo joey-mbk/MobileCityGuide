@@ -3,43 +3,53 @@
         android:orientation="vertical" android:layout_width="fill_parent"
         android:layout_height="fill_parent" android:gravity="center_horizontal"
         android:background="#FFF"
-        android:paddingTop="40px"
-        android:paddingLeft="20px" android:paddingRight="20px">
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp" android:paddingRight="20dp">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_connect"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:paddingBottom="20dp"
+        android:textColor="#000" />
 
         <EditText android:id="@+id/Username" android:nextFocusUp="@+id/LoginButton"
-                android:nextFocusDown="@+id/Password" android:hint="Username"
+                android:nextFocusDown="@+id/Password" android:hint="@string/username_connect"
                 android:inputType="textNoSuggestions" android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
-        <EditText android:id="@+id/Password" android:hint="Password"
+        
+        <EditText android:id="@+id/Password" android:hint="@string/password_connect"
                 android:inputType="textPassword" android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
         <LinearLayout android:layout_width="fill_parent"
                 android:layout_height="wrap_content" android:orientation="vertical">
-                <CheckBox android:id="@+id/RememberLoginBox" android:text=" Remember login"
+                <CheckBox android:id="@+id/RememberLoginBox" android:text="@string/remember_connect"
                         android:textColor="#888888" android:textSize="16sp"
-                        android:layout_centerVertical="true" android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                <CheckBox android:id="@+id/AutoLoginBox" android:text=" Automatically Login"
+                <CheckBox android:id="@+id/AutoLoginBox" android:text="@string/auto_connect"
                         android:textColor="#888888" android:textSize="16sp"
-                        android:layout_centerVertical="true" android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:checked="false"
+
                         android:enabled="false" />
+
 
 
 
         </LinearLayout>
         
-        <Button android:text="Login" android:id="@+id/LoginButton"
+        <Button android:text="@string/login_connect" android:id="@+id/LoginButton"
                 android:nextFocusUp="@+id/RememberLoginBox" android:nextFocusDown="@+id/Username"
                 android:textSize="20sp" android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
         </Button>
 
-        <Button android:text="Cancel" android:id="@+id/CancelButton"
+        <Button android:text="@string/back_connect" android:id="@+id/CancelButton"
                 android:textSize="20sp" android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
         </Button>
-        
-
 </LinearLayout>
