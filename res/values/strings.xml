@@ -6,5 +6,13 @@
     <string name="interests_prompt">Centre of interest </string>
     <string name="age_prompt">Choose your age</string>
     <string name="languages_prompt">Choose your language(s)</string>
+    <string name="username_connect">Username</string>
+    <string name="password_connect">Password</string>
+    <string name="remember_connect"> Remember login</string>
+    <string name="auto_connect"> Automatically Login</string>
+    <string name="login_connect">Login</string>
+    <string name="back_connect">Back</string>
+    <string name="signup_register">Signup</string>
+    
 
 </resources>
