@@ -15,19 +15,12 @@ import com.mobilecityguide.exceptions.GatewayException;
 public class SQLGateway extends SQLiteOpenHelper {
 	
 	private Context context;
-	public static SQLiteDatabase db;
 	
 	public SQLGateway(Context context) {
 		super(context, "mobilecityguide.db", null, 1);
-		this.context = context; // context is needed for accessing assets (see below)
-		SQLGateway.db = getReadableDatabase(); // open the database only once and store its object
+		this.context = context;
 	}
 
-	public SQLiteDatabase writeMode() {
-		db = getWritableDatabase();
-		return db;
-	}
-	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		executeSQLScript(db, "createdb.sql");
