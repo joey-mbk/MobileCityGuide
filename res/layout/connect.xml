@@ -1,17 +1,37 @@
-<?xml version="1.0" encoding="utf-8"?>
+?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFF"
-    android:orientation="vertical" >
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="fill_parent" android:gravity="center_horizontal"
+        android:background="#FFF"
+        android:paddingTop="40px"
+        android:paddingLeft="20px" android:paddingRight="20px">
 
-    <LinearLayout
-        android:id="@+id/contentLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical" >
 
+        <ImageView android:id="@+id/IntranetLogo" android:src="@drawable/logo"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+        <EditText android:id="@+id/Username" android:nextFocusUp="@+id/LoginButton"
+                android:nextFocusDown="@+id/Password" android:hint="Username"
+                android:inputType="textNoSuggestions" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        <EditText android:id="@+id/Password" android:hint="Password"
+                android:inputType="textPassword" android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+        <LinearLayout android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:orientation="vertical">
+                <CheckBox android:id="@+id/RememberLoginBox" android:text=" Remember login"
+                        android:textColor="#888888" android:textSize="16sp"
+                        android:layout_centerVertical="true" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                <CheckBox android:id="@+id/AutoLoginBox" android:text=" Automatically Login"
+                        android:textColor="#888888" android:textSize="16sp"
+                        android:layout_centerVertical="true" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:checked="false"
+                        android:enabled="false" />
+
+
+<<<<<<< HEAD
 
 
             <LinearLayout
@@ -89,4 +109,19 @@
             android:background="@drawable/bhelp" />
     </LinearLayout>
 
+=======
+        </LinearLayout>
+        
+        <Button android:text="Login" android:id="@+id/LoginButton"
+                android:nextFocusUp="@+id/RememberLoginBox" android:nextFocusDown="@+id/Username"
+                android:textSize="20sp" android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        </Button>
+
+        <Button android:text="Cancel" android:id="@+id/CancelButton"
+                android:textSize="20sp" android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+        </Button>
+        
+>>>>>>> dfda3a70b1d7e1846dae4baad5fb98decd5570ab
 </LinearLayout>
