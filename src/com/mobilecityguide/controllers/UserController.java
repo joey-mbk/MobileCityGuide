@@ -4,13 +4,13 @@ import com.mobilecityguide.models.User;
 
 public class UserController {
 
-	private User activeUser;
+	private static User activeUser;
 
-	public User getActiveUser() {
+	public static User getActiveUser() {
 		return activeUser;
 	}
 
 	public void setActiveUser(User activeUser) {
-		this.activeUser = activeUser;
+		UserController.activeUser = activeUser;
 	}
 }
