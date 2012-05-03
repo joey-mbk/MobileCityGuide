@@ -118,4 +118,9 @@ public class SQLSet implements RecordSet {
 		return list;
 	}
 
+	@Override
+	public int size() {
+		return this.set.getCount();
+	}
+
 }

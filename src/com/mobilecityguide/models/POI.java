@@ -1,35 +1,54 @@
 package com.mobilecityguide.models;
 
 import java.util.Dictionary;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class POI  implements java.lang.Comparable<POI>{
+public class POI implements java.lang.Comparable<POI>{
 	
-	private String name;
-	private Dictionary<String, String> description;
 	private String address;
+	private HashMap<String, String> category; // key is language, value is category title
+	private HashMap<String, String> name; // key is language, value is POI name
+	private HashMap<String, HashMap<String, String>> description; // key is language, value is another hashmap whose key is language and value is the description
+	private HashMap<String, String> locGuidelines; // key is language, value is guidelines
 	private double latitude;
 	private double longitude;
-	private List<String> images;
-	private String openingsHours;
-	private List<String> category;
+	private HashMap<String, String> images; // key is time of day, value is image path
+	private String openingsHours; // missing in the DB !!!
 	private int step;
-	private Dictionary<String, String> locguidelines;
 	
 	public String getName(String language) {
-		return name;
+		return this.name.get(language);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void addName(String language, String name) {
+		this.name.put(language, name);
 	}
 
-	public Dictionary<String,String> getDescription(String age,String language) {
-		return description;
+	public String getDescription(String age, String language) {
+		if (this.description.containsKey(age)) {
+			return this.description.get(age).get(language);
+		}
+		else
+			return null;
 	}
 
-	public void setDescription(Dictionary<String,String> description) {
-		this.description = description;
+	public void addDescription(String age, String language, String description) {
+		if (this.description.containsKey(age))
+			this.description.get(age).put(language, description);
+		else {
+			HashMap<String, String> desc = new HashMap<String, String>();
+			desc.put(language, description);
+			this.description.put(age, desc);
+		}
+	}
+	
+	public String getLocationGuidelines(String language) {
+		return this.locGuidelines.get(language);
+	}
+	
+	public void addLocationGuidelines(String language, String locGuidelines) {
+		this.locGuidelines.put(language, locGuidelines);
 	}
 
 	public String getAddress() {
@@ -56,12 +75,12 @@ public class POI  implements java.lang.Comparable<POI>{
 		this.longitude = longitude;
 	}
 
-	public List<String> getImages() {
-		return images;
+	public String getImages(String timeOfDay) {
+		return this.images.get(timeOfDay);
 	}
 
-	public void setImages(List<String> images) {
-		this.images = images;
+	public void addImage(String timeOfDay, String path) {
+		this.images.put(timeOfDay, path);
 	}
 
 	public String getOpeningsHours() {
@@ -72,12 +91,12 @@ public class POI  implements java.lang.Comparable<POI>{
 		this.openingsHours = openingsHours;
 	}
 
-	public List<String> getCategory(String language) {
-		return category;
+	public String getCategory(String language) {
+		return this.category.get(language);
 	}
 
-	public void setCategory(List<String> category) {
-		this.category = category;
+	public void addCategory(String language, String title) {
+		this.category.put(language, title);
 	}
 	
 	public int getStep() {
@@ -86,19 +105,6 @@ public class POI  implements java.lang.Comparable<POI>{
 
 	public void setStep(int step) {
 		this.step = step;
-	}
-
-	public Dictionary<String, String> getLocguidelines() {
-		return locguidelines;
-	}
-
-	public void setLocguidelines(Dictionary<String, String> locguidelines) {
-		this.locguidelines = locguidelines;
-	}
-
-	@Override
-	public String toString() {
-		return name;
 	}
 
 	@Override
