@@ -49,12 +49,12 @@ public class SQLGateway extends SQLiteOpenHelper {
 			outputStream.close();
 			inputStream.close();
 			
-			String[] createScript = outputStream.toString().split(";");
-			
+			String[] createScript = outputStream.toString().split("\n");
 			for (int i = 0; i < createScript.length; i++) {
 				String sqlStatement = createScript[i].trim();
 				if (sqlStatement.length() > 0) {
-					db.execSQL(sqlStatement + ";");
+					System.out.println(sqlStatement);
+					db.execSQL(sqlStatement);
 				}
 			}
 		} catch (Exception e) {
