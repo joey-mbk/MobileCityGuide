@@ -36,86 +36,6 @@
                         android:layout_height="wrap_content" android:checked="false"
                         android:state_enabled="false" />
 
-
-<<<<<<< HEAD
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.31"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:text="Usernam" />
-
-                <EditText
-                    android:id="@+id/editText1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName" >
-
-                    <requestFocus />
-                </EditText>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="0.31"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Password" />
-                 <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPassword" />
-            </LinearLayout>
-     
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.31"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/bback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="back" />
-
-        <Button
-            android:id="@+id/bconnect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bconnect" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.31"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/bhelp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bhelp" />
-    </LinearLayout>
-
-=======
         </LinearLayout>
         
         <Button android:text="@string/login_connect" android:id="@+id/LoginButton"
@@ -128,6 +48,5 @@
                 android:textSize="20sp" android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
         </Button>
-        
->>>>>>> dfda3a70b1d7e1846dae4baad5fb98decd5570ab
+       
 </LinearLayout>
