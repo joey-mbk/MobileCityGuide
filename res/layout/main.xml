@@ -2,11 +2,72 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#FFF"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="fill_parent"
+    <SlidingDrawer
+        android:id="@+id/SlidingDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="297dp"
+        android:content="@+id/contentLayout"
+        android:handle="@+id/slideButton"
+        android:orientation="vertical"
+        android:padding="50dip" >
+
+        <Button
+            android:id="@+id/slideButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/start" >
+        </Button>
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bconnect" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bregistrer" />
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+         <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bhelp" />
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/babout" />
+    </SlidingDrawer>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:orientation="horizontal" >
+    </LinearLayout>
 
 </LinearLayout>
