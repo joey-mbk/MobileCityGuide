@@ -1,16 +1,23 @@
 package com.mobilecityguide.datamappers;
 
+import android.content.Context;
+
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
+import com.mobilecityguide.gateways.SQL.SQLUserGateway;
 import com.mobilecityguide.models.User;
 
 public class UserMapper {
 	
 	private UserGateway userGateway;
 	
-	public User getUser(String name) throws GatewayException, RecordSetException {
+	public UserMapper(Context context) {
+		this.userGateway = new SQLUserGateway(context); // instantiate SQL type of User Gateway
+	}
+	
+	public User getUser(String name) throws Exception {
 		RecordSet r = userGateway.getUser(name); // fetch the results from the gateway
 		User user = null;
 		try {
@@ -21,7 +28,8 @@ public class UserMapper {
 				user.setLanguage(r.getList("language", "priority"));
 			}
 		} catch (Exception e) {
-			throw new RecordSetException("Error in the RecordSet while getting user '"+name+"' from the database.");
+			e.printStackTrace();
+			throw new Exception("Error in the RecordSet while getting user '"+name+"' from the database.");
 		}
 		return user;
 	}

@@ -15,18 +15,23 @@ public class MobileCityGuideActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UserMapper userMapper = new UserMapper();
+        UserMapper userMapper = new UserMapper(this);
         User user = null;
         try {
-			user = userMapper.getUser("Hervé");
+			user = userMapper.getUser("Maxime");
 		} catch (Exception e) {
 			System.out.println("Error");
+			e.printStackTrace();
 		}
-        System.out.println("Name: "+user.getName());
-        System.out.println("Age: "+user.getAge());
-        ArrayList<String> list = user.getLanguage();
-        for (String lang:list)
-        	System.out.println("Language: "+lang);
-        setContentView(R.layout.main);
+        if (user != null) {
+	        System.out.println("Name: "+user.getName());
+	        System.out.println("Age: "+user.getAge());
+	        String[] list = user.getLanguage();
+	        for (String lang:list)
+	        	System.out.println("Language: "+lang);
+	        setContentView(R.layout.main);
+        } else {
+        	System.out.println("NULL !!!!");
+        }
     }
 }

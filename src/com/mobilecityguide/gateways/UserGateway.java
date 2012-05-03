@@ -4,6 +4,6 @@ import com.mobilecityguide.exceptions.GatewayException;
 
 public interface UserGateway {
 
-	RecordSet getUser(String name) throws GatewayException;
+	RecordSet getUser(String name) throws Exception;
 
 }

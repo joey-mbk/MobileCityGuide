@@ -1,116 +1,120 @@
 package com.mobilecityguide.gateways.SQL;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import android.database.Cursor;
 
 import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
 
 public class SQLSet implements RecordSet {
 
-	private ResultSet set;
+	private Cursor set;
 	
-	public SQLSet(ResultSet set) {
-		this.set = set;
+	public SQLSet(Cursor cursor) {
+		this.set = cursor;
 	}
 
 	@Override
-	public boolean first() throws RecordSetException, SQLException {
+	public boolean first() throws Exception {
 		boolean r = false;
 		try {
-			r = this.set.first();
-		} catch (SQLException e) {
-			throw new SQLException("Error while selecting the first element in RecordSet.");
+			r = this.set.moveToFirst();
+		} catch (Exception e) {
+			throw new Exception("Error while selecting the first element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public boolean last() throws RecordSetException, SQLException {
+	public boolean last() throws Exception {
 		boolean r = false;
 		try {
-			r = this.set.last();
-		} catch (SQLException e) {
-			throw new SQLException("Error while selecting the last element in RecordSet.");
+			r = this.set.moveToLast();
+		} catch (Exception e) {
+			throw new Exception("Error while selecting the last element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public boolean previous() throws RecordSetException, SQLException {
+	public boolean previous() throws Exception {
 		boolean r = false;
 		try {
-			r = this.set.previous();
-		} catch (SQLException e) {
-			throw new SQLException("Error while selecting previous element in RecordSet.");
+			r = this.set.moveToPrevious();
+		} catch (Exception e) {
+			throw new Exception("Error while selecting previous element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public boolean next() throws RecordSetException, SQLException {
+	public boolean next() throws Exception {
 		boolean r = false;
 		try {
-			r = this.set.next();
-		} catch (SQLException e) {
-			throw new SQLException("Error while selecting next element in RecordSet.");
+			r = this.set.moveToNext();
+		} catch (Exception e) {
+			throw new Exception("Error while selecting next element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public String getString(String column) throws RecordSetException, SQLException {
+	public String getString(String column) throws Exception {
 		String r = null;
 		try {
-			r = this.set.getString(column);
-		} catch (SQLException e) {
-			throw new SQLException("Error while fetching String element in RecordSet.");
+			r = this.set.getString(this.set.getColumnIndex(column));
+		} catch (Exception e) {
+			throw new Exception("Error while fetching String element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public short getShort(String column) throws RecordSetException, SQLException {
+	public short getShort(String column) throws Exception {
 		short r = 0;
 		try {
-			r = this.set.getShort(column);
-		} catch (SQLException e) {
-			throw new SQLException("Error while fetching Short element in RecordSet.");
+			r = this.set.getShort(this.set.getColumnIndex(column));
+		} catch (Exception e) {
+			throw new Exception("Error while fetching Short element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public int getInt(String column) throws RecordSetException, SQLException {
+	public int getInt(String column) throws Exception {
 		int r = 0;
 		try {
-			r = this.set.getInt(column);
-		} catch (SQLException e) {
-			throw new SQLException("Error while fetching Int element in RecordSet.");
+			r = this.set.getInt(this.set.getColumnIndex(column));
+		} catch (Exception e) {
+			throw new Exception("Error while fetching Int element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public double getDouble(String column) throws RecordSetException, SQLException {
+	public double getDouble(String column) throws Exception {
 		double r = 0;
 		try {
-			r = this.set.getInt(column);
-		} catch (SQLException e) {
-			throw new SQLException("Error while fetching Double element in RecordSet.");
+			r = this.set.getDouble(this.set.getColumnIndex(column));
+		} catch (Exception e) {
+			throw new Exception("Error while fetching Double element in RecordSet.");
 		}
 		return r;
 	}
 
 	@Override
-	public ArrayList<String> getList(String valCol, String orderCol) throws RecordSetException, SQLException {
-		ArrayList<String> list = new ArrayList<String>();
-		int pos = this.set.getRow(); // save the cursor position in the resultset
-		first();
-		while (next())
-			list.add((getInt("priority")-1), getString("language")); // add the language at its priority index (minus one)
-		this.set.absolute(pos); // get back to previous cursor position
+	public String[] getList(String valCol, String orderCol) throws Exception {
+		String[] list = new String[this.set.getCount()];
+		int pos = this.set.getPosition(); // save the cursor position in the resultset
+		first(); // set position to last so that the next row is the first row
+		while (!this.set.isAfterLast()) {
+			list[(getInt("priority")-1)] = getString("language"); // add the language at its priority index (minus one)
+			next();
+		}
+		this.set.moveToPosition(pos); // get back to previous cursor position
 		return list;
 	}
 

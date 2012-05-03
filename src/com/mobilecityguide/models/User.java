@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class User {
 	
 	private String name;
-	private ArrayList<String> language;
+	private String[] language;
 	private String age;
 	private ArrayList<Itinerary> userItineraryList;
 	
@@ -17,11 +17,11 @@ public class User {
 		this.name = name;
 	}
 
-	public ArrayList<String> getLanguage() {
+	public String[] getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(ArrayList<String> language) {
+	public void setLanguage(String[] language) {
 		this.language = language;
 	}
 
