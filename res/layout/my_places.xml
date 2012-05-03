@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="20dip"
-    android:background="#FFF">
+	style="@style/MainStyle">
 
 	<LinearLayout
 		android:orientation="vertical"
@@ -18,8 +14,7 @@
 			android:layout_width="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginBottom="25dip"
-			 android:text="My places" 
-			 android:textSize="26dp"
+			 android:background="@drawable/direction" 
 			 />
 
 		<Button 

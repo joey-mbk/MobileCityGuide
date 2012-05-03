@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFF"
-    android:orientation="vertical" >
+    style="@style/MainStyle" >
 
     <SlidingDrawer
         android:id="@+id/SlidingDrawer"
@@ -28,28 +25,28 @@
             android:gravity="center"
             android:orientation="vertical" >
 
-                    <Button
-                        android:id="@+id/bconnect"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bconnect" />
+            <Button
+                android:id="@+id/bconnect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bconnect" />
 
-                    <Button
-                        android:id="@+id/bregistrer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bregistrer" />
-
+            <Button
+                android:id="@+id/bregistrer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bregistrer" />
         </LinearLayout>
     </SlidingDrawer>
 
     <LinearLayout
-        android:layout_width="304dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
-        
-          <Button
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/bhelp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +57,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/babout" />
-
     </LinearLayout>
 
 </LinearLayout>
