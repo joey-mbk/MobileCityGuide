@@ -7,6 +7,7 @@ public class User {
 	private String name;
 	private String[] language;
 	private String age;
+	private ArrayList<String> userCategoryList;
 	private ArrayList<Itinerary> userItineraryList;
 	
 	public String getName() {
@@ -39,6 +40,14 @@ public class User {
 
 	public void setUserItineraryList(ArrayList<Itinerary> userItineraryList) {
 		this.userItineraryList = userItineraryList;
+	}
+	
+	public ArrayList<String> getUserCategoryList() {
+		return userCategoryList;
+	}
+
+	public void setUserCategoryList(ArrayList<String> userCategoryList) {
+		this.userCategoryList = userCategoryList;
 	}
 
 }
