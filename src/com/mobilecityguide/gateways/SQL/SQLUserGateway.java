@@ -30,4 +30,30 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return results;
 	}
+	
+	public boolean deleteUser(String name) {
+		if (this.db.isReadOnly())
+			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+		String query = "DELETE FROM User WHERE userName = '"+name+"'";
+		try {
+			db.rawQuery(query, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean editUser(String name, String col, String val) {
+		if (this.db.isReadOnly())
+			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+		String query = "UPDATE User SET "+col+" = '"+val+"' WHERE userName = '"+name+"'";
+		try {
+			db.rawQuery(query, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

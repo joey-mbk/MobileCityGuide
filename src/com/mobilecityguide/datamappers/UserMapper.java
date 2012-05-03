@@ -2,6 +2,7 @@ package com.mobilecityguide.datamappers;
 
 import android.content.Context;
 
+import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
@@ -32,5 +33,14 @@ public class UserMapper {
 			throw new Exception("Error in the RecordSet while getting user '"+name+"' from the database.");
 		}
 		return user;
+	}
+	
+	public boolean deleteUser(String name) {
+		// TODO UserController
+		return this.userGateway.deleteUser(name);
+	}
+	
+	public boolean editUser(String name, String col, String val) {
+		return this.userGateway.editUser(name, col, val);
 	}
 }
