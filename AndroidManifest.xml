@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".activity.Connect"
+				android:label="Connection">
+		</activity>
+		
+        <activity android:name=".activity.Registrer"
+				android:label="Registering">
+		</activity>
+        
     </application>
 
 </manifest>
