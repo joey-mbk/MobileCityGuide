@@ -9,6 +9,18 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp" >
 
+    
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="310dp" >
+
+
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
@@ -18,101 +30,118 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#000" />
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:text="@string/username_connect"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000"
+        android:textSize="12dp" />
+
     <EditText
         android:id="@+id/Username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/username_connect"
         android:inputType="textNoSuggestions"
         android:nextFocusDown="@+id/Password"
         android:nextFocusUp="@+id/LoginButton" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:paddingTop="10dp"
+        android:text="@string/password_connect"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000"
+        android:textSize="12dp" />
 
     <EditText
         android:id="@+id/Password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password_connect"
         android:inputType="textPassword" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
+		
+        <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="2dp"
+        android:paddingTop="10dp"
+        android:text="@string/age_prompt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000"
+        android:textSize="12dp" />
+        
+         <Spinner
+             android:id="@+id/age"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:prompt="@string/age_prompt" />
+         
+         <TextView
+             android:id="@+id/textView5"
+    	     android:layout_width="match_parent"
+    	     android:layout_height="wrap_content"
+       		 android:paddingBottom="2dp"
+     	   	 android:paddingTop="10dp"
+       		 android:textAppearance="?android:attr/textAppearanceLarge"
+       		 android:textColor="#000"
+       		 android:textSize="12dp"
+             android:text="@string/interests_prompt" />
 
+         <Spinner
+            android:id="@+id/interests"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:prompt="@string/interests_prompt" />
+         
+         <TextView
+             android:id="@+id/textView6"
+    	     android:layout_width="match_parent"
+    	     android:layout_height="wrap_content"
+       		 android:paddingBottom="2dp"
+     	   	 android:paddingTop="10dp"
+       		 android:textAppearance="?android:attr/textAppearanceLarge"
+       		 android:textColor="#000"
+       		 android:textSize="12dp"
+             android:text="@string/languages_prompt" />
 
-            <ScrollView
-                android:layout_width="311dp"
-                android:layout_height="354dp" >
+         <Spinner
+            android:id="@+id/languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:prompt="@string/interests_prompt" />
+         
+       
+    </LinearLayout>    </LinearLayout>   </ScrollView>
+    
+    
+    <Button
+        android:id="@+id/RegisterButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:nextFocusDown="@+id/Username"
+        android:nextFocusUp="@+id/RememberLoginBox"
+        android:text="@string/signup_register"
+        android:textSize="20sp" >
+    </Button>
 
-                <LinearLayout
-                    android:id="@+id/contentLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical" >
+    <Button
+        android:id="@+id/CancelButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back_connect"
+        android:textSize="20sp" >
+    </Button>
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.31"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="100dp"
-                            android:text="Usernam" />
-
-                        <EditText
-                            android:id="@+id/editText1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ems="10"
-                            android:inputType="textPersonName" >
-
-                            <requestFocus />
-                        </EditText>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:layout_weight="0.31"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <CheckBox
-                            android:id="@+id/AutoLoginBox"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:checked="false"
-                            android:state_enabled="false"
-                            android:text="@string/auto_connect"
-                            android:textColor="#888888"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/LoginButton"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:nextFocusDown="@+id/Username"
-                        android:nextFocusUp="@+id/RememberLoginBox"
-                        android:text="@string/login_connect"
-                        android:textSize="20sp" >
-                    </Button>
-
-                    <Button
-                        android:id="@+id/CancelButton"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/back_connect"
-                        android:textSize="20sp" >
-                    </Button>
-                </LinearLayout>
-            </ScrollView>
-        </CheckBox>
-    </LinearLayout>
 </LinearLayout>
