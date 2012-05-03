@@ -4,7 +4,7 @@
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
     <string name="username">Username</string>
-    
+    <string name="disconnect">Disconnect</string>
     <string name="my_places_menu">My places</string>
     <string name="settings_menu">Settings</string>
     <string name="help_menu">Help</string>

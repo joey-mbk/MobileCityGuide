@@ -18,37 +18,24 @@
 			android:layout_width="wrap_content"
 			android:layout_gravity="center"
 			android:layout_marginBottom="25dip"
-			 android:background="@drawable/start" 
+			 android:text="My places" 
+			 android:textSize="26dp"
 			 />
 
 		<Button 
-			android:id="@+id/my_places_button"
+			android:id="@+id/free_walk_button"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content" 
-			android:text="@string/my_places_menu" />
+			android:text="Free walk" />
 
 		<Button 
-			android:id="@+id/settings_button"
+			android:id="@+id/Guides_tour_bouton"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content" 
-			android:text="@string/settings_menu" />
+			android:text="Guides tour" />
+		
+		
 			
-		<Button 
-			android:id="@+id/help_button"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" 
-			android:text="@string/help_menu" />
-			
-		<Button 
-			android:id="@+id/about_button"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" 
-			android:text="@string/about_menu" />
-		<Button 
-			android:id="@+id/about_button"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" 
-			android:text="@string/disconnect" />
 
 	</LinearLayout>
 	
