@@ -98,37 +98,43 @@ public class SQLUserGateway implements UserGateway {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}		return true;
+		}
+		//TODO Useritineraies Usercategories
+		return true;
 	}
 
 	public boolean addUser(User user){
-		String query1 = "INSERT INTO User VALUES '"+user.getName()+"','"+user.getAge()+"'";
+		if (this.db.isReadOnly())
+		this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+		
+		String query1 = "INSERT INTO User VALUES ('"+user.getName()+"','"+user.getAge()+"')";
 		try {
 			db.rawQuery(query1, null);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Error query1");
 			return false;
 		}
 
 		String [] languagesArray = user.getLanguage();
 		for(int i=0;i<languagesArray.length;i++){			
-			String query = "INSERT INTO Language VALUES ('"+user.getName()+"',"+i+",'"+languagesArray[i]+"')";
+			String query2 = "INSERT INTO Language VALUES ('"+user.getName()+"',"+i+",'"+languagesArray[i]+"')";
 			try {
-				db.rawQuery(query, null);
+				db.rawQuery(query2, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}
 		}
 		for(Category category : user.getUserCategories()) {
-		    String query = "INSERT INTO UserCategory VALUES '"+category.getId()+"','"+user.getName()+"'";
+		    String query3 = "INSERT INTO UserCategory VALUES ('"+category.getId()+"','"+user.getName()+"')";
 					try {
-				db.rawQuery(query, null);
+				db.rawQuery(query3, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}	
-		}			
+		}
 		return true;
 	}
 
