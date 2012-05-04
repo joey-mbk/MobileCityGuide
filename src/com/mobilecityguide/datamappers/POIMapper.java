@@ -43,7 +43,7 @@ public class POIMapper {
 				while (rDesc.next())
 					poi.addDescription(rDesc.getString("age"), rDesc.getString("language"), rDesc.getString("description"));
 				while (rLG.next())
-					poi.addLocationGuidelines(rLG.getString("language"), rLG.getString("locationGuidelines"));
+					poi.addLocationGuidelines(rLG.getString("language"), rLG.getString("locationGuideLines"));
 				while (rImg.next())
 					poi.addImage(rImg.getString("timeOfDay"), rImg.getString("path"));
 			}

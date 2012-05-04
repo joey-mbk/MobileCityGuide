@@ -17,6 +17,15 @@ public class POI implements java.lang.Comparable<POI>{
 	private String openingsHours; // missing in the DB !!!
 	private int step;
 	
+	public POI() {
+		/* Initialize all the hashmaps */
+		this.category = new HashMap<String, String>();
+		this.name = new HashMap<String, String>();
+		this.description = new HashMap<String, HashMap<String, String>>();
+		this.locGuidelines = new HashMap<String, String>();
+		this.images = new HashMap<String, String>();
+	}
+	
 	public String getName(String language) {
 		return this.name.get(language);
 	}
