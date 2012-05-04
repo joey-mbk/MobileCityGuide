@@ -36,7 +36,7 @@ public class CategoryMapper {
 		HashMap<String, String> category = new HashMap<String, String>();;
 		try {
 			while (r.next())
-				category.put(r.getString("language"), "title");
+				category.put(r.getString("language"), r.getString("title"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
