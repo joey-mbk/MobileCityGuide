@@ -40,6 +40,18 @@
         <activity android:name=".activity.MainMenu"
 				android:label="Main Menu">
 		</activity>
+
+        <activity android:name=".activity.MyPlace"
+				android:label="Choose your mode">
+		</activity>
+
+        <activity android:name=".activity.Settings"
+				android:label="Settings">
+		</activity>
+		
+        <activity android:name=".activity.Itinerary"
+				android:label="Itinerary">
+		</activity>
 		
     </application>
 

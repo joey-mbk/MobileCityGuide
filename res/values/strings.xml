@@ -11,6 +11,7 @@
     <string name="about_menu">About</string>
     <string name="interests_prompt">Centre of interest</string>
     <string name="age_prompt">Choose your age</string>
+    <string name="itinerary_prompt">Choose your itinerary</string>
     <string name="languages_prompt">Choose your language(s)</string>
     <string name="username_connect">Username</string>
     <string name="password_connect">Password</string>
@@ -28,8 +29,7 @@ in a city you are visiting for first time or
 you do not know well.</string>
 
 
-    <string name="app_name">MobileCity</string>
-    <string name="main_title">My City Guide</string>
+   
     
     <string name="settings_title">Settings</string>
     <string name="check_for_updates_label">Download last database version</string>
@@ -49,19 +49,11 @@ you do not know well.</string>
     
     
     <string name="help_title">MobileCity Help</string>
-    <string name="help_text">\
-<i>MobileCity</i>  is a traveling application.
-It will help you enhance your touristic experience
-in a city you are visiting for first time or
-you do not know well.
-	</string>
+    
 	
 	
 	<string name="about_title">About MobileCity 0.0.1</string>
-    <string name="about_text">\
-All rights reserved.
-For educational use only.
-	</string>
+    
 	
     
     <string name="poi_tab_info">Info</string>

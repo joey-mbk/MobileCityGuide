@@ -10,6 +10,7 @@
         android:layout_weight="0.80"
         android:orientation="vertical" >
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
             android:id="@+id/itinerary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="Choose your itinerary" />
+            android:prompt="@string/itinerary_prompt" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/contentLayout3"
@@ -47,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/back" />
+
 
         <Button
             android:id="@+id/free_walk"
