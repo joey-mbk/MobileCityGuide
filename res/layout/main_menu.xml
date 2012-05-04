@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainStyle"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent" >
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="260dp"
-        android:layout_height="327dp"
-        android:gravity="center"
-        android:orientation="vertical" >
+    style="@style/MainStyle" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,37 +9,23 @@
             android:background="@drawable/start" />
 
         <Button
-            android:id="@+id/my_places_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/start_button"
+            style="@style/MiddleBoutton"
             android:background="@drawable/bstart" />
 
         <Button
             android:id="@+id/my_places_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MiddleBoutton"
             android:background="@drawable/bmyplaces" />
 
         <Button
             android:id="@+id/settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MiddleBoutton"
             android:background="@drawable/bsettings" />
 
         <Button
-            android:id="@+id/help_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bhelp" />
-
-        <Button
             android:id="@+id/disconnect_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MiddleBoutton"
             android:background="@drawable/disconnect" />
-    </LinearLayout>
-
-    <ScrollView>
-    </ScrollView>
 
 </LinearLayout>

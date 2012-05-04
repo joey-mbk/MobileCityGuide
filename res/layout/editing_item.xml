@@ -5,10 +5,10 @@
 	
 	<!-- Note built-in ids for the 'list' -->
 
-    <ListView
+      <ListView
         android:id="@android:id/android:list"
         android:layout_width="wrap_content"
-        android:layout_height="324dp"
+        android:layout_height="237dp"
         android:background="@drawable/bg2" >
 
     </ListView>
@@ -30,7 +30,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/RegisterButton"
+            android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/edit"

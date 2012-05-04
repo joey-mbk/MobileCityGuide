@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainStyle"
-    android:baselineAligned="false" >
+    style="@style/MainStyle">
 
     <LinearLayout
         android:layout_width="261dp"
@@ -28,19 +27,13 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/CancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back" />
-
-        <Button
-            android:id="@+id/free_walk"
+            android:id="@+id/free_walk_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/free_walk" />
 
         <Button
-            android:id="@+id/guide_tour"
+            android:id="@+id/guide_tour_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/guide_tour" />

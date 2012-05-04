@@ -3,7 +3,7 @@
 	style="@style/MainStyle"
 	android:padding="20dip">
 	
-	<!-- Note built-in ids for the 'list' -->
+	<!-- Note built-in ids for the 'list' fichier non utilisé!! -->
 
     <ListView
         android:id="@android:id/android:list"

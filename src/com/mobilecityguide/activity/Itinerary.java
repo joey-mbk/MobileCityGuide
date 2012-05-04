@@ -9,6 +9,8 @@ public class Itinerary extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.itinerary);
+		setContentView(R.layout.list_of_items);
 	}
+	
+	
 }

@@ -4,7 +4,7 @@
 
     <SlidingDrawer
         android:id="@+id/SlidingDrawer"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="297dp"
         android:content="@+id/contentLayout"
         android:handle="@+id/slideButton"

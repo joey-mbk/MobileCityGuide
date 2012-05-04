@@ -4,10 +4,9 @@
     android:baselineAligned="false" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="340dp"
+        android:layout_width="225dp"
+        android:layout_height="186dp"
         android:layout_gravity="center"
-        android:layout_weight="0.80"
         android:orientation="vertical" >
 
         <TextView
@@ -17,37 +16,26 @@
             android:layout_marginBottom="25dip"
             android:background="@drawable/direction" />
 
-        <ListView
-            android:id="@+id/listView1"
-            android:layout_width="match_parent"
-            android:layout_height="327dp" >
-        </ListView>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/contentLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:baselineAligned="false"
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/CancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back" />
 
         <Button
-            android:id="@+id/free_walk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/free_walk_button"
+            android:layout_width="73dp"
+            android:layout_height="48dp"
             android:background="@drawable/free_walk" />
 
         <Button
-            android:id="@+id/guide_tour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/guide_tour_button"
+            android:layout_width="75dp"
+            android:layout_height="47dp"
             android:background="@drawable/guide_tour" />
     </LinearLayout>
 
