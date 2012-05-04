@@ -4,10 +4,9 @@
     android:baselineAligned="false" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="340dp"
+        android:layout_width="261dp"
+        android:layout_height="177dp"
         android:layout_gravity="center"
-        android:layout_weight="0.80"
         android:orientation="vertical" >
 
         <TextView
@@ -17,11 +16,7 @@
             android:layout_marginBottom="25dip"
             android:background="@drawable/direction" />
 
-        <ListView
-            android:id="@+id/listView1"
-            android:layout_width="match_parent"
-            android:layout_height="327dp" >
-        </ListView>
+       
     </LinearLayout>
 
     <LinearLayout
