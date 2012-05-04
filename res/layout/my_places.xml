@@ -1,39 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	style="@style/MainStyle">
+    android:baselineAligned="false"
+    style="@style/MainStyle" >
 
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_height="wrap_content"
-		android:layout_width="fill_parent"
-		android:layout_gravity="center" >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="340dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.80"
+        android:orientation="vertical" >
 
-		<TextView 
-			
-			android:layout_height="wrap_content" 
-			android:layout_width="wrap_content"
-			android:layout_gravity="center"
-			android:layout_marginBottom="25dip"
-			 android:background="@drawable/direction" 
-			 />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dip"
+            android:background="@drawable/direction" />
 
-		
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingTop="10dp"
+            android:text="itineraries"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000"
+            android:textSize="12dp" />
 
-		<Button 
-			android:id="@+id/free_walk_button"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" 
-			android:text="Free walk" />
+        <Spinner
+            android:id="@+id/itinerary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:prompt="Choose your itinerary" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/contentLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-		<Button 
-			android:id="@+id/Guides_tour_bouton"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content" 
-			android:text="Guides tour" />
-		
-		
-			
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back" />
 
-	</LinearLayout>
-	
+        <Button
+            android:id="@+id/free_walk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/free_walk"/>
+         <Button
+            android:id="@+id/guide_tour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/guide_tour"/>
+    </LinearLayout>
+
 </LinearLayout>
