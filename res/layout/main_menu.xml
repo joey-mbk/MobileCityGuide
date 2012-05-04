@@ -3,17 +3,19 @@
     style="@style/MainStyle" >
 	
     <ScrollView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="204dp"
+        android:layout_weight="0.60"
+        android:gravity="center">
     <LinearLayout 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:gravity="center" >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dip"
         android:background="@drawable/start" />
 
     <Button
@@ -33,12 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/bhelp" />
-
-    <Button
-        android:id="@+id/about_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/babout" />
 
     <Button
         android:id="@+id/disconnect_button"
