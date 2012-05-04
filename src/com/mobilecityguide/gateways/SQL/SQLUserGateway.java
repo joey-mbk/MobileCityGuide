@@ -11,6 +11,7 @@ import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.User;
 
 public class SQLUserGateway implements UserGateway {
@@ -36,6 +37,20 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return results;
 	}
+	
+	public RecordSet getUserCategories(String name) throws Exception {
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT CT.categoryID CT.title, CT.language FROM CategoryTitles CT, UserCategory U WHERE U.userName = '"+name+"' AND CT.categoryID = U.categoryID";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Error while getting categories of User '"+name+"' from database.");
+		}
+		return results;
+	}
+
 
 	public boolean deleteUser(String name) {
 		if (this.db.isReadOnly())
@@ -105,8 +120,8 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}
 		}
-		for(Entry<String, String> entry : user.getUserCategory().entrySet()) {
-		    String query = "INSERT INTO UserCategory VALUES '"+CategoryController.getCategoryID(entry.getValue(), entry.getKey())+"','"+user.getName()+"'";
+		for(Category category : user.getUserCategories()) {
+		    String query = "INSERT INTO UserCategory VALUES '"+category.getId()+"','"+user.getName()+"'";
 					try {
 				db.rawQuery(query, null);
 			} catch (Exception e) {

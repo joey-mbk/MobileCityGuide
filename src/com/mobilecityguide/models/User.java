@@ -1,13 +1,15 @@
 package com.mobilecityguide.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
 	
 	private String name;
 	private String[] language;
 	private String age;
-	private ArrayList<String> userCategoryList;
+	private ArrayList<Category> userCategories; // key is language, value is category title
+
 	private ArrayList<Itinerary> userItineraryList;
 	
 	public String getName() {
@@ -41,13 +43,20 @@ public class User {
 	public void setUserItineraryList(ArrayList<Itinerary> userItineraryList) {
 		this.userItineraryList = userItineraryList;
 	}
+
+	public void addCategory(Category category) {
+		this.userCategories.add(category);
+	}
 	
-	public ArrayList<String> getUserCategoryList() {
-		return userCategoryList;
+	public void delCategory(Category category) {
+		this.userCategories.remove(category);
+	}
+	
+	public ArrayList<Category> getUserCategories() {
+		return userCategories;
 	}
 
-	public void setUserCategoryList(ArrayList<String> userCategoryList) {
-		this.userCategoryList = userCategoryList;
+	public void setUserCategories(ArrayList<Category> userCategories) {
+		this.userCategories = userCategories;
 	}
-
 }

@@ -1,8 +1,12 @@
 package com.mobilecityguide.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import com.mobilecityguide.MobileCityGuideActivity;
+import com.mobilecityguide.datamappers.CategoryMapper;
 import com.mobilecityguide.datamappers.UserMapper;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
@@ -10,6 +14,8 @@ public class UserController {
 
 	public static User activeUser = null;
 	public static String userName = null; 
+	public static String city; // city which the user is currently in
+	
 	public static UserMapper userMapper;
 
 	public static void setActiveUser(User activeUser) {
@@ -21,12 +27,12 @@ public class UserController {
 		userMapper.save(activeUser);
 		userMapper.setUserName(activeUser,userName);
 	}
-
-	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<String> userCategoryList){
+    
+	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories){
 		newUser.setName(name);
 		newUser.setLanguage(languages);
 		newUser.setAge(age);
-		newUser.setUserCategoryList(userCategoryList);
+		newUser.setUserCategories(userCategories);
 		setActiveUser(newUser);
 		userMapper.addUser(activeUser);
 	}
@@ -51,13 +57,29 @@ public class UserController {
 		activeUser.setUserItineraryList(userItineraryList);
 	}
 
-	public static void setActiveUserCategory(ArrayList<String> userCategoryList){
-		activeUser.setUserCategoryList(userCategoryList);
+	public static void setActiveUserCategory(ArrayList<Category> userCategories){
+		activeUser.setUserCategories(userCategories);
+	}
+	
+	public static void addCategoryForActiveUser(Category category){
+		activeUser.addCategory(category);
+	}
+	
+	public static void delCategoryForActiveUser(Category category){
+		activeUser.delCategory(category);
 	}
 
 	public static ArrayList<String> getAllUsersNames(){
 		return userMapper.getAllUsersNames();
 
+	}
+	
+	public static String getCity() {
+		return city;
+	}
+
+	public static void setCity(String city) {
+		UserController.city = city;
 	}
 
 }
