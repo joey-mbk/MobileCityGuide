@@ -17,6 +17,8 @@
 			 android:background="@drawable/direction" 
 			 />
 
+		
+
 		<Button 
 			android:id="@+id/free_walk_button"
 			android:layout_width="fill_parent"
