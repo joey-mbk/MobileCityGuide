@@ -1,7 +1,5 @@
 package com.mobilecityguide.gateways;
 
-import com.mobilecityguide.models.POI;
-
 public interface POIGateway {
 
 	RecordSet getPOI(int id) throws Exception;

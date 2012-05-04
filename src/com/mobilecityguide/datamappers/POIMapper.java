@@ -2,6 +2,7 @@ package com.mobilecityguide.datamappers;
 
 import android.content.Context;
 
+import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.gateways.POIGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
@@ -15,11 +16,16 @@ public class POIMapper {
 	private POIGateway poiGateway;
 	
 	public POIMapper(Context context) {
-		this.poiGateway = new SQLPOIGateway(context); // instantiate SQL type of User Gateway
+		this.poiGateway = new SQLPOIGateway(context); // instantiate SQL type of POI Gateway
 	}
 	
 	/* Fetch a specific POI from the database */
 	public POI getPOI(int id) throws Exception {
+		
+		/* if POI has already been fetched from the database, return it */
+		POI poi = POIController.fetchedPOI.get(new Integer(id));
+		if (poi != null)
+			return poi;
 		
 		/* fetch the data from the gateway */
 		RecordSet rPoi = poiGateway.getPOI(id);
@@ -29,7 +35,6 @@ public class POIMapper {
 		RecordSet rLG = poiGateway.getLocGuidelines(id);
 		RecordSet rImg = poiGateway.getImages(id);
 		
-		POI poi = null;
 		try {
 			if (rPoi.first()) {
 				poi = new POI();
@@ -51,6 +56,7 @@ public class POIMapper {
 			e.printStackTrace();
 			throw new Exception("Error in the RecordSet while getting POI '"+id+"' from the database.");
 		}
+		POIController.fetchedPOI.put(new Integer(id), poi);
 		return poi;
 	}
 	

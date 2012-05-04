@@ -1,10 +1,8 @@
 package com.mobilecityguide.models;
 
-import java.util.Dictionary;
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class POI implements java.lang.Comparable<POI>{
+public class POI {
 	
 	private String address;
 	private HashMap<String, String> category; // key is language, value is category title
@@ -15,7 +13,6 @@ public class POI implements java.lang.Comparable<POI>{
 	private double longitude;
 	private HashMap<String, String> images; // key is time of day, value is image path
 	private String openingsHours; // missing in the DB !!!
-	private int step;
 	
 	public POI() {
 		/* Initialize all the hashmaps */
@@ -106,22 +103,5 @@ public class POI implements java.lang.Comparable<POI>{
 
 	public void addCategory(String language, String title) {
 		this.category.put(language, title);
-	}
-	
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
-
-	@Override
-	public int compareTo(POI poi1) {
-		  int stepPOI1 = poi1.getStep(); 
-	      int stepPOI2 = this.getStep(); 
-	      if (stepPOI1 > stepPOI2)  return -1; 
-	      else if(stepPOI1 == stepPOI2) return 0; 
-	      else return 1; 
 	}
 }
