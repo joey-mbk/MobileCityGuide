@@ -49,6 +49,10 @@
 				android:label="Settings">
 		</activity>
 		
+        <activity android:name=".activity.Itinerary"
+				android:label="Itinerary">
+		</activity>
+		
     </application>
 
 </manifest>
