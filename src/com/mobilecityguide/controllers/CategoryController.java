@@ -11,7 +11,7 @@ public class CategoryController {
 	
 	public static CategoryMapper categoryMapper;	
 	
-	public HashMap<String, String> getCategory(int ID){
+	public static HashMap<String, String> getCategory(int ID){
 		return categoryMapper.getCategory(ID);
 	}
 	
