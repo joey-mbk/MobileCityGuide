@@ -2,10 +2,12 @@ package com.mobilecityguide.gateways.SQL;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
@@ -81,8 +83,7 @@ public class SQLUserGateway implements UserGateway {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-		return true;
+		}		return true;
 	}
 
 	public boolean addUser(User user){
@@ -96,7 +97,7 @@ public class SQLUserGateway implements UserGateway {
 
 		String [] languagesArray = user.getLanguage();
 		for(int i=0;i<languagesArray.length;i++){			
-			String query = "INSERT INTO Language VALUES '"+user.getName()+"','"+i+"','"+languagesArray[i]+"'";
+			String query = "INSERT INTO Language VALUES ('"+user.getName()+"',"+i+",'"+languagesArray[i]+"')";
 			try {
 				db.rawQuery(query, null);
 			} catch (Exception e) {
@@ -104,61 +105,21 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}
 		}
-
-		ArrayList<String> categoriesArray = user.getUserCategoryList();
-		Iterator<String> categoriesIterator = categoriesArray.iterator();
-		while(categoriesIterator.hasNext()){
-			//TODO
-			/*	String query = "INSERT INTO UserCategory VALUES '"+getCategoryID(categoriesIterator.next())+"','"+user.getName()+"'";
-			try {
+		for(Entry<String, String> entry : user.getUserCategory().entrySet()) {
+		    String query = "INSERT INTO UserCategory VALUES '"+CategoryController.getCategoryID(entry.getValue(), entry.getKey())+"','"+user.getName()+"'";
+					try {
 				db.rawQuery(query, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
-			}*/	
+			}	
 		}			
 		return true;
 	}
 
-	public boolean delUser(User user){
-		String query1 = "DELETE FROM User WHERE userName ='"+user.getName();
-		try {
-			db.rawQuery(query1, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		String query2 = "DELETE FROM Language WHERE userName =  '"+user.getName();
-		try {
-			db.rawQuery(query2, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		String query3 = "DELETE FROM UserItinerary WHERE userName =  '"+user.getName();
-		try {
-			db.rawQuery(query3, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		String query4 = "DELETE FROM UserCategory WHERE userName =  '"+user.getName();
-		try {
-			db.rawQuery(query4, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
-
 	public RecordSet getAllUser(){
 		this.db = this.gw.getReadableDatabase();
-		String query = "SELECT U.userName FROM User U";
+		String query = "SELECT userName FROM User";
 		SQLSet results = null;
 		try {
 			results = new SQLSet(db.rawQuery(query, null));
