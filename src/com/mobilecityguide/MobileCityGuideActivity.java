@@ -24,10 +24,14 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
     }
 
 	private void setListeners() {
-        View myVisitsButton = findViewById(R.id.bconnect);
-        myVisitsButton.setOnClickListener(this);
-        View settingsButton = findViewById(R.id.bregistrer);
-        settingsButton.setOnClickListener(this);
+        View connectButton = findViewById(R.id.bconnect);
+        connectButton.setOnClickListener(this);
+        View registrerButton = findViewById(R.id.bregistrer);
+        registrerButton.setOnClickListener(this);
+        View aboutButton = findViewById(R.id.babout);
+        aboutButton.setOnClickListener(this);
+        View helpButton = findViewById(R.id.bhelp);
+        helpButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {

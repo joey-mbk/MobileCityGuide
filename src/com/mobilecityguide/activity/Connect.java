@@ -19,13 +19,19 @@ public class Connect extends Activity implements OnClickListener {
     }
 
 	private void setListeners() {
-        View myVisitsButton = findViewById(R.id.CancelButton);
-        myVisitsButton.setOnClickListener(this);
+        View loginButton = findViewById(R.id.LoginButton);
+        loginButton.setOnClickListener(this);
+        View cancelButton = findViewById(R.id.CancelButton);
+        cancelButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
+		case R.id.LoginButton:
+			intent = new Intent(this, MainMenu.class);
+			startActivity(intent);
+			break;
 		case R.id.CancelButton:
 			intent = new Intent(this, MobileCityGuideActivity.class);
 			startActivity(intent);

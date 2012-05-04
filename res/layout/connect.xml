@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:gravity="center_horizontal"
-        android:background="#FFF"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp" android:paddingRight="20dp">
+    style="@style/MainStyle" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
         android:text="@string/login_connect"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:paddingBottom="20dp"
         android:textColor="#000" />
 
-        <EditText android:id="@+id/Username" android:nextFocusUp="@+id/LoginButton"
-                android:nextFocusDown="@+id/Password" android:hint="@string/username_connect"
-                android:inputType="textNoSuggestions" android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-        
-        <EditText android:id="@+id/Password" android:hint="@string/password_connect"
-                android:inputType="textPassword" android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/Username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/username_connect"
+        android:inputType="textNoSuggestions"
+        android:nextFocusDown="@+id/Password"
+        android:nextFocusUp="@+id/LoginButton" />
 
-        <LinearLayout android:layout_width="fill_parent"
-                android:layout_height="wrap_content" android:orientation="vertical">
-                <CheckBox android:id="@+id/RememberLoginBox" android:text="@string/remember_connect"
-                        android:textColor="#888888" android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                <CheckBox android:id="@+id/AutoLoginBox" android:text="@string/auto_connect"
-                        android:textColor="#888888" android:textSize="16sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:checked="false"
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password_connect"
+        android:inputType="textPassword" />
 
-                        android:enabled="false" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
+        <CheckBox
+            android:id="@+id/RememberLoginBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember_connect"
+            android:textColor="#888888"
+            android:textSize="16sp" />
 
+        <CheckBox
+            android:id="@+id/AutoLoginBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/auto_connect"
+            android:textColor="#888888"
+            android:textSize="16sp" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center"
+        android:orientation="horizontal" >
 
-        </LinearLayout>
-        
-        <Button android:text="@string/login_connect" android:id="@+id/LoginButton"
-                android:nextFocusUp="@+id/RememberLoginBox" android:nextFocusDown="@+id/Username"
-                android:textSize="20sp" android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/CancelButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/back"
+            android:textSize="20sp" >
         </Button>
 
-        <Button android:text="@string/back_connect" android:id="@+id/CancelButton"
-                android:textSize="20sp" android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusDown="@+id/Username"
+            android:nextFocusUp="@+id/RememberLoginBox"
+            android:background="@drawable/login"
+            android:textSize="20sp" >
         </Button>
+    </LinearLayout>
+
 </LinearLayout>

@@ -18,6 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+       
+        <activity android:name=".activity.Help"
+				android:label="Help" 
+				android:theme="@android:style/Theme.Dialog">
+		</activity>
+		
+        <activity android:name=".activity.About"
+				android:label="About" 
+				android:theme="@android:style/Theme.Dialog">
+		</activity>
         
         <activity android:name=".activity.Connect"
 				android:label="Connection">
@@ -27,14 +37,8 @@
 				android:label="Registering">
 		</activity>
 		
-        <activity android:name=".activity.Help"
-				android:label="Help" 
-				android:theme="@android:style/Theme.Dialog">
-		</activity>
-		
-        <activity android:name=".activity.About"
-				android:label="About" 
-				android:theme="@android:style/Theme.Dialog">
+        <activity android:name=".activity.MainMenu"
+				android:label="Main Menu">
 		</activity>
 		
     </application>
