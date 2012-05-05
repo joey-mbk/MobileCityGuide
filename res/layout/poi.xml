@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/background"
+    style="@style/MainStyle"
     android:padding="20dip" >
 
     <!--
@@ -64,14 +62,6 @@
 					    />
                         -->
 
-                        <ImageView
-                            android:id="@+id/internet"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:gravity="right"
-                            android:maxHeight="20sp"
-                            android:src="@drawable/direction" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -85,6 +75,7 @@
                             android:layout_height="wrap_content"
                             android:paddingRight="20dp"
                             android:text="@string/location_latitude_label"
+                            android:textColor="#000"
                             android:textSize="9sp" />
 
                         <TextView

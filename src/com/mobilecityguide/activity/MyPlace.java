@@ -18,18 +18,18 @@ public class MyPlace extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View cancelButton = findViewById(R.id.CancelButton);
+		/*View cancelButton = findViewById(R.id.CancelButton);
 		cancelButton.setOnClickListener(this);
 		View addButton = findViewById(R.id.addButton);
 		addButton.setOnClickListener(this);
 		View dellButton = findViewById(R.id.dellButton);
-		dellButton.setOnClickListener(this);
+		dellButton.setOnClickListener(this);*/
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.CancelButton:
+		/*case R.id.CancelButton:
 			intent = new Intent(this, MainMenu.class);
 			startActivity(intent);
 			break;
@@ -40,7 +40,7 @@ public class MyPlace extends Activity implements OnClickListener {
 		case R.id.dellButton:
 			intent = new Intent(this, DellItem.class);
 			startActivity(intent);
-			break;
+			break;*/
 		}
 	}
 }
