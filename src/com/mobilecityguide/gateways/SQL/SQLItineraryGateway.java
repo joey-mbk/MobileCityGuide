@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
+import com.mobilecityguide.models.Itinerary;
 
 public class SQLItineraryGateway implements ItineraryGateway {
 
@@ -43,6 +44,22 @@ public class SQLItineraryGateway implements ItineraryGateway {
 			throw new Exception("Error while getting titles of itinerary '"+id+"' from database.");
 		}
 		return results;
+	}
+
+	@Override
+	public boolean addItinerary(Itinerary itinerary) throws Exception {
+		if (this.db.isReadOnly())
+			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+			
+		String query = "INSERT INTO User VALUES ('"+user.getName()+"','"+user.getAge()+"')";
+		try {
+			db.rawQuery(query, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.mobilecityguide.datamappers;
 
 import android.content.Context;
 
+import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.gateways.ItineraryGateway;
@@ -33,7 +34,7 @@ public class ItineraryMapper {
 		try {
 			if (rIt.first()) {
 				itinerary = new Itinerary();
-				itinerary.setTheme(CategoryController)
+				itinerary.setTheme(CategoryController.getCategory(id));
 				while (rT.next()) // add titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));
 				while (rIt.next()) { // add each POI of the itinerary
@@ -47,6 +48,10 @@ public class ItineraryMapper {
 		}
 		ItineraryController.fetchedItineraries.put(new Integer(id), itinerary);
 		return itinerary;
+	}
+	
+	public boolean addItinerary(Itinerary itinerary) throws Exception {
+		return this.itineraryGateway.addItinerary(itinerary);
 	}
 	
 }
