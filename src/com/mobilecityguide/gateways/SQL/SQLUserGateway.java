@@ -40,7 +40,7 @@ public class SQLUserGateway implements UserGateway {
 	
 	public RecordSet getUserCategories(String name) throws Exception {
 		this.db = this.gw.getReadableDatabase();
-		String query = "SELECT CT.categoryID CT.title, CT.language FROM CategoryTitles CT, UserCategory U WHERE U.userName = '"+name+"' AND CT.categoryID = U.categoryID";
+		String query = "SELECT CT.categoryID, CT.title, CT.language FROM CategoryTitles CT, UserCategory U WHERE U.userName = '"+name+"' AND CT.categoryID = U.categoryID";
 		SQLSet results = null;
 		try {
 			results = new SQLSet(db.rawQuery(query, null));
@@ -135,6 +135,7 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}	
 		}
+		//TODO itinéraire + regrouper
 		return true;
 	}
 

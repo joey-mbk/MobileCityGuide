@@ -9,8 +9,12 @@ public class User {
 	private String[] language;
 	private String age;
 	private ArrayList<Category> userCategories;
-
 	private ArrayList<Itinerary> userItineraryList;
+	
+	public User(){
+		this.userCategories= new ArrayList<Category>();
+		this.userItineraryList = new ArrayList<Itinerary>();
+	}
 	
 	public String getName() {
 		return name;
