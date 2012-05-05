@@ -24,8 +24,8 @@ public class MainMenu extends Activity implements OnClickListener {
 	private void setListeners() {
 		View startButton = findViewById(R.id.start_button);
 		startButton.setOnClickListener(this);
-		View myplaceButton = findViewById(R.id.my_places_button);
-		myplaceButton.setOnClickListener(this);
+		View itineraryButton = findViewById(R.id.itinerary_button);
+		itineraryButton.setOnClickListener(this);
 		View settingsButton = findViewById(R.id.settings_button);
 		settingsButton.setOnClickListener(this);
 		View disconnectButton = findViewById(R.id.disconnect_button);
@@ -39,8 +39,8 @@ public class MainMenu extends Activity implements OnClickListener {
 			intent = new Intent(this, Start.class);
 			startActivity(intent);
 			break;
-		case R.id.my_places_button:
-			intent = new Intent(this, MyPlace.class);
+		case R.id.itinerary_button:
+			intent = new Intent(this, Itinerary.class);
 			startActivity(intent);
 			break;
 		case R.id.settings_button:
