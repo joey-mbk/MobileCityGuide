@@ -1,44 +1,41 @@
 package com.mobilecityguide.models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Itinerary  {
 		
-	private List<String> title;
-	private List<POI>POIList;
-	private List<String> theme;
+	private HashMap<String, String> title;
+	private ArrayList<POI> POIList;
+	private Category theme;
 
-	public List<String> getTitle(String language) {
-		return title;
+	public String getTitle(String language) {
+		return this.title.get(language);
 	}
 
-	public void setTitle(List<String> title) {
-		this.title = title;
+	public void addTitle(String language, String title) {
+		this.title.put(language, title);
 	}
 
-	public List<POI> getPOIList() {
+	public ArrayList<POI> getPOIList() {
 		return POIList;
 	}
 
-	public void setPOIList(List<POI> pOIList) {
-		POIList = pOIList;
+	public void addPOI(int step, POI poi) {
+		this.POIList.add(step, poi);
 	}
 
-	public List<String> getTheme(String language) {
-		return theme;
+	public Category getTheme() {
+		return this.theme;
 	}
 
-	public void setTheme(List<String> theme) {
+	public void setTheme(Category theme) {
 		this.theme = theme;
 	}
 	
-	public void delPOI(){
-		// TODO
+	public void delPOI(POI poi){
+		this.POIList.remove(poi);
 	}
-	
-	public void addPOI(){
-		// TODO
-	}
-	
 
 }
