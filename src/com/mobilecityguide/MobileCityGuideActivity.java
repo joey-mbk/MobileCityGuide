@@ -2,7 +2,6 @@ package com.mobilecityguide;
 
 import java.util.ArrayList;
 
-import com.mobilecityguide.controllers.CityController;
 import com.mobilecityguide.datamappers.POIMapper;
 import com.mobilecityguide.controllers.GPSController;
 import com.mobilecityguide.controllers.POIController;
@@ -27,7 +26,7 @@ public class MobileCityGuideActivity extends Activity {
         UserMapper userMapper = new UserMapper(this);
         User user = null;
         POI poi = null;
-        CityController.city = "Louvain-La-Neuve";
+        UserController.city = "Louvain-La-Neuve";
         POIMapper poiMapper = new POIMapper(this);
         try {
 			user = userMapper.getUser("Maxime");
