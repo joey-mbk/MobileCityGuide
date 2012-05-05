@@ -4,10 +4,14 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.CategoryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLCategoryGateway;
+import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.POI;
 
 
 public class CategoryMapper {
@@ -18,15 +22,22 @@ public class CategoryMapper {
 		this.categoryGateway = new SQLCategoryGateway(context); 
 	}
 
-	public HashMap<String, String> getCategory(int ID){
+	public Category getCategory(int ID){
+		
+		/* if Category has already been fetched from the database, return it */
+		Category category = CategoryController.fetchedCategories.get(new Integer(ID));
+		if (category != null)
+			return category;
+		
 		RecordSet r = categoryGateway.getCategory(ID);
-		HashMap<String, String> category = new HashMap<String, String>();;
+		HashMap<String, String> categoriesMap = new HashMap<String, String>();;
 		try {
 			while (r.next())
-				category.put(r.getString("language"), "title");
+				categoriesMap.put(r.getString("language"), r.getString("title"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		category = new Category(ID,categoriesMap);
 
 		return category;
 	}
