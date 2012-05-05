@@ -1,5 +1,6 @@
 package com.mobilecityguide.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -9,34 +10,34 @@ import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
 public class VisitController {
-
+/*
 	private boolean reverse;
 	private boolean finished;
 
-	private final double MIN_DISTANCE = 0; 
+	private final double MIN_DISTANCE = 10; 
 
-/*
 	public void playTour(Itinerary itinerary){
 
-		List<POI> POIList = itinerary.getPOIList();
+		ArrayList<POI> POIList = itinerary.getPOIList();
 
 		if(reverse)
-			Collections.sort(POIList, Collections.reverseOrder());
-		else
-			Collections.sort(POIList);
-
-		Iterator<POI> poiIter = POIList.iterator();
+			Collections.reverse(POIList);
+		
+       	Iterator<POI> poiIter = POIList.iterator();
 		POI poi = poiIter.next();
-
+        
+		for(int i = 0; i<POIList.size(); i++)
+		{
 		setFinished(false);
 		while(!isFinished()){
-			if (MobileCityGuideActivity.gps_controller.getDistance(poi)<=MIN_DISTANCE){
-				//System.out.println("Near "+poi.getName(???.getActiveUser().getLanguage));
+			if (GPSController.getDistance(poi)<=MIN_DISTANCE){
+				System.out.println("Near "+POIController.getPOIName(poi));
 				if(poiIter.hasNext())
 					poi=poiIter.next();
 				else
 					setFinished(true);
 			}
+		}
 		}
 	}
 
@@ -46,7 +47,8 @@ public class VisitController {
 		while(!isFinished()){
 			POI closestPOI = MobileCityGuideActivity.gps_controller.getClosest(itinerary);
 			if (MobileCityGuideActivity.gps_controller.getDistance(closestPOI)<=MIN_DISTANCE){
-				//System.out.println("Near "+closestPOI.getName(???.getActiveUser().getLanguage));
+				System.out.println("Near "+POIController.getPOIName(closestPOI));
+				
 			}
 		}
 	}
@@ -70,6 +72,5 @@ public class VisitController {
 	public void finishVisit(){
 		finished = true;
 	}
-	*/
-
+*/
 }
