@@ -32,9 +32,9 @@ public class CategoryController {
 	}
 	
 	/*
-	 * Return category name in active user language
+	 * Return category name according to the active user language
 	 */ 
-	public static String getPOIName(Category category){
+	public static String getCategoryTitle(Category category){
 		String [] languages = UserController.activeUser.getLanguage();
 		for (String language : languages){
 		if(category.getCategory().containsKey(language))

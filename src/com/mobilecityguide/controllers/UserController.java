@@ -8,6 +8,7 @@ import com.mobilecityguide.datamappers.CategoryMapper;
 import com.mobilecityguide.datamappers.UserMapper;
 import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
+import com.mobilecityguide.models.POI;
 import com.mobilecityguide.models.User;
 
 public class UserController {
@@ -68,7 +69,18 @@ public class UserController {
 	public static void delCategoryForActiveUser(Category category){
 		activeUser.delCategory(category);
 	}
-
+    
+	/*
+	 * Return active user categories titles according to the active user language
+	 */ 
+	public static ArrayList<String> getActiveUserCategoriesNames(){
+		ArrayList<String> categoriesNames = new ArrayList<String>();
+		ArrayList<Category> categories= activeUser.getUserCategories();
+		for (Category category : categories){
+			categoriesNames.add(CategoryController.getCategoryTitle(category));
+		}
+		return null;
+	}
 	public static ArrayList<String> getAllUsersNames(){
 		return userMapper.getAllUsersNames();
 
