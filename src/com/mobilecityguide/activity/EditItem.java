@@ -18,9 +18,7 @@ public class EditItem extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View cancelButton = findViewById(R.id.CancelButton);
-		cancelButton.setOnClickListener(this);
-		View editBoutton = findViewById(R.id.editButton);
+		View editBoutton = findViewById(R.id.edit_button);
 		editBoutton.setOnClickListener(this);
 	}
 

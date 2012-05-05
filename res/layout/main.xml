@@ -20,19 +20,17 @@
 
         <LinearLayout
             android:id="@+id/contentLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            style="@style/LinearLayout"
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/bconnect"
+                android:id="@+id/connect_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bconnect" />
 
             <Button
-                android:id="@+id/bregistrer"
+                android:id="@+id/register_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bregistrer" />
@@ -40,20 +38,17 @@
     </SlidingDrawer>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:gravity="center"
+        style="@style/LinearLayout"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/bhelp"
+            android:id="@+id/help_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bhelp" />
 
         <Button
-            android:id="@+id/babout"
+            android:id="@+id/about_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/babout" />

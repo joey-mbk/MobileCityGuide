@@ -27,17 +27,12 @@ For educational use only.</string>
 It will help you enhance your touristic experience
 in a city you are visiting for first time or
 you do not know well.</string>
-
-
-   
-    
+ 
     <string name="settings_title">Settings</string>
     <string name="check_for_updates_label">Download last database version</string>
-    
-    
+        
     <string name="change_user_menu_item">Change User Profile</string>
     <string name="registered_users_title">User Profiles</string>
-    
     
     <string name="my_places_label">My Places</string>
     <string name="settings_label">Settings</string>
@@ -47,15 +42,10 @@ you do not know well.</string>
     <string name="locations_title">Available locations</string>
     <string name="empty_location">No locations found</string>
     
-    
     <string name="help_title">MobileCity Help</string>
-    
-	
-	
+    	
 	<string name="about_title">About MobileCity 0.0.1</string>
-    
-	
-    
+ 
     <string name="poi_tab_info">Info</string>
     <string name="poi_tab_children">Sublocations</string>
     <string name="poi_tab_itineraries">Itineraries</string>
@@ -90,7 +80,4 @@ you do not know well.</string>
     <string name="loading_db_text">Loading database</string>
     <string name="load_db_error_title">Impossible to load database file</string>
     <string name="load_db_error_text">Please reinstall the application</string>
-
-    
-
 </resources>

@@ -2,6 +2,9 @@
 <resources>
 
     <dimen name="padding">20dp</dimen>
+    <dimen name="Textpadding_top">10dp</dimen>
+    <dimen name="Textpadding_bottom">2dp</dimen>
+    <dimen name="TextSize1">12dp</dimen>
     <dimen name="middle_boutton_width">83dp</dimen>
     <dimen name="middle_boutton_hight">50dp</dimen>
     <dimen name="small_boutton_width">53dp</dimen>
@@ -19,13 +22,29 @@
     </style>
 
     <style name="MiddleBoutton">
-       <item name="android:layout_width">@dimen/middle_boutton_width</item>
+        <item name="android:layout_width">@dimen/middle_boutton_width</item>
         <item name="android:layout_height">@dimen/middle_boutton_hight</item>
     </style>
-    
+
     <style name="SmallBoutton">
-       <item name="android:layout_width">@dimen/small_boutton_width</item>
+        <item name="android:layout_width">@dimen/small_boutton_width</item>
         <item name="android:layout_height">@dimen/small_boutton_hight</item>
     </style>
 
+    <style name="TextFieldTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/Textpadding_top</item>
+        <item name="android:paddingBottom">@dimen/Textpadding_bottom</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/TextSize1</item>
+    </style>
+    
+    <style name="LinearLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
 </resources>

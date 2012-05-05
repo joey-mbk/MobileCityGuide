@@ -19,8 +19,7 @@ public class DellItem extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View cancelButton = findViewById(R.id.CancelButton);
-		cancelButton.setOnClickListener(this);
+		
 		
 	}
 

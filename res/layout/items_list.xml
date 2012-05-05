@@ -14,38 +14,19 @@
     
      <LinearLayout
         android:id="@+id/contentLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:gravity="center"
+        style="@style/LinearLayout"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/addButton"
+            android:id="@+id/add_button"
             style="@style/SmallBoutton"
             android:background="@drawable/add" />
 
         <Button
-            android:id="@+id/dellButton"
+            android:id="@+id/dell_button"
             style="@style/SmallBoutton"
             android:background="@drawable/dell" />
     </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/contentLayout3"
-        android:layout_width="226dp"
-        android:layout_height="100dp"
-        android:baselineAligned="false"
-        android:gravity="center"
-        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/CancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/back"
-            android:textSize="20sp" />
-
-    </LinearLayout>
 
 </LinearLayout>

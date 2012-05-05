@@ -4,10 +4,7 @@ import com.mobilecityguide.R;
 import com.mobilecityguide.activity.About;
 import com.mobilecityguide.activity.Connect;
 import com.mobilecityguide.activity.Help;
-import com.mobilecityguide.activity.MainMenu;
 import com.mobilecityguide.activity.Registrer;
-import com.mobilecityguide.activity.Settings;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,32 +48,32 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 	}
 
 	private void setListeners() {
-		View connectButton = findViewById(R.id.bconnect);
+		View connectButton = findViewById(R.id.connect_button);
 		connectButton.setOnClickListener(this);
-		View registrerButton = findViewById(R.id.bregistrer);
+		View registrerButton = findViewById(R.id.register_button);
 		registrerButton.setOnClickListener(this);
-		View aboutButton = findViewById(R.id.babout);
+		View aboutButton = findViewById(R.id.about_button);
 		aboutButton.setOnClickListener(this);
-		View helpButton = findViewById(R.id.bhelp);
+		View helpButton = findViewById(R.id.help_button);
 		helpButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.bconnect:
+		case R.id.connect_button:
 			intent = new Intent(this, Connect.class);
 			startActivity(intent);
 			break;
-		case R.id.bregistrer:
+		case R.id.register_button:
 			intent = new Intent(this, Registrer.class);
 			startActivity(intent);
 			break;
-		case R.id.bhelp:
+		case R.id.help_button:
 			intent = new Intent(this, Help.class);
 			startActivity(intent);
 			break;
-		case R.id.babout:
+		case R.id.about_button:
 			intent = new Intent(this, About.class);
 			startActivity(intent);
 			break;

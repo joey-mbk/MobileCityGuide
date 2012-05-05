@@ -54,8 +54,7 @@ public class Settings extends Activity implements OnClickListener {
 	}
 	
 	private void setListeners() {
-		View cancelButton = findViewById(R.id.CancelButton);
-		cancelButton.setOnClickListener(this);
+		
         View profil_userBouton = findViewById(R.id.profil_user_button);
         profil_userBouton.setOnClickListener(this);
 	}
@@ -63,10 +62,6 @@ public class Settings extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.CancelButton:
-			intent = new Intent(this, MainMenu.class);
-			startActivity(intent);
-			break;
 		case R.id.profil_user_button:
 			intent = new Intent(this, Itinerary.class);
 			startActivity(intent);

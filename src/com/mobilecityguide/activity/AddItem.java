@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
 public class AddItem extends Activity implements OnClickListener {
@@ -13,13 +14,12 @@ public class AddItem extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.items_list);
+		setContentView(R.layout.list_of_items);
 		setListeners();
 	}
 
 	private void setListeners() {
-		View cancelButton = findViewById(R.id.CancelButton);
-		cancelButton.setOnClickListener(this);
+		
 		
 	}
 
