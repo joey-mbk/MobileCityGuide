@@ -8,7 +8,7 @@ public class User {
 	private String name;
 	private String[] language;
 	private String age;
-	private ArrayList<Category> userCategories; // key is language, value is category title
+	private ArrayList<Category> userCategories;
 
 	private ArrayList<Itinerary> userItineraryList;
 	

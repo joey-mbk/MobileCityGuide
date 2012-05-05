@@ -2,6 +2,7 @@ package com.mobilecityguide.gateways;
 
 public interface CategoryGateway {
 
-	public RecordSet getCategoryID(String categoryName, String language);
+	public RecordSet getCategory(int ID);
+	public RecordSet getAllCategories();
 
 }
