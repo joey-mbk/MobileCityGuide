@@ -10,6 +10,10 @@ public class Itinerary  {
 	private ArrayList<POI> POIList;
 	private Category theme;
 
+	public HashMap<String, String> getTitle() {
+		return this.title;
+	}
+	
 	public String getTitle(String language) {
 		return this.title.get(language);
 	}
