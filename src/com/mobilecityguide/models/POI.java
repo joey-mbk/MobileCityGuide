@@ -24,6 +24,9 @@ public class POI {
 		this.images = new HashMap<String, String>();
 	}
 	
+	public HashMap<String, String> getName() {
+		return name;
+	}
 	public String getName(String language) {
 		return this.name.get(language);
 	}
