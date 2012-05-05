@@ -15,7 +15,7 @@ public class VisitController {
 
 	private final double MIN_DISTANCE = 0; 
 
-
+/*
 	public void playTour(Itinerary itinerary){
 
 		List<POI> POIList = itinerary.getPOIList();
@@ -70,5 +70,6 @@ public class VisitController {
 	public void finishVisit(){
 		finished = true;
 	}
+	*/
 
 }

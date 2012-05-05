@@ -3,7 +3,6 @@ package com.mobilecityguide.gateways.SQL;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mobilecityguide.controllers.CityController;
 import com.mobilecityguide.gateways.POIGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.models.POI;
