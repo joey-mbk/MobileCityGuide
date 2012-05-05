@@ -42,7 +42,7 @@
 		</activity>
 
         <activity android:name=".activity.MyPlace"
-				android:label="My places">
+				android:label="Choose your mode">
 		</activity>
 
         <activity android:name=".activity.Settings"
@@ -53,24 +53,10 @@
 				android:label="Itinerary">
 		</activity>
 
-		<activity android:name=".activity.Start"
-				android:label="Start">
-		</activity>
-		<activity android:name=".activity.AddItem"
-				android:label="Add">
-		</activity>
-		<activity android:name=".activity.EditItem"
-				android:label="Edit">
-		</activity>
-		<activity android:name=".activity.DellItem"
-				android:label="Dell">
-		</activity>
-
-
         <activity android:name=".activity.Start"
 				android:label="Let's go">
 		</activity>
-
+        
     </application>
 
 </manifest>
