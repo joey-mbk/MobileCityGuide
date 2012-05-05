@@ -1,5 +1,7 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.HashMap;
+
 import android.content.Context;
 
 import com.mobilecityguide.controllers.POIController;
@@ -8,6 +10,7 @@ import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.gateways.SQL.SQLPOIGateway;
 import com.mobilecityguide.gateways.SQL.SQLUserGateway;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.POI;
 import com.mobilecityguide.models.User;
 
@@ -41,8 +44,13 @@ public class POIMapper {
 				poi.setAddress(rPoi.getString("address"));
 				poi.setLatitude(rPoi.getDouble("latitude"));
 				poi.setLongitude(rPoi.getDouble("longitude"));
+				HashMap<String, String> categoriesMap = new HashMap<String,String>();
 				while (rCat.next())
-					poi.addCategory(rCat.getString("language"), rCat.getString("title"));
+				{
+					categoriesMap.put(rCat.getString("language"), rCat.getString("title"));
+					Category category = new Category(rCat.getInt("categoryID"), categoriesMap);
+					poi.addCategory(category);
+				}
 				while (rNames.next())
 					poi.addName(rNames.getString("language"), rNames.getString("title"));
 				while (rDesc.next())

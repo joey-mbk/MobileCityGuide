@@ -1,11 +1,12 @@
 package com.mobilecityguide.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class POI {
 	
 	private String address;
-	private HashMap<String, String> category; // key is language, value is category title
+	private ArrayList<Category> categories;
 	private HashMap<String, String> name; // key is language, value is POI name
 	private HashMap<String, HashMap<String, String>> description; // key is language, value is another hashmap whose key is language and value is the description
 	private HashMap<String, String> locGuidelines; // key is language, value is guidelines
@@ -15,8 +16,8 @@ public class POI {
 	private String openingsHours; // missing in the DB !!!
 	
 	public POI() {
+		this.categories = new ArrayList<Category>();
 		/* Initialize all the hashmaps */
-		this.category = new HashMap<String, String>();
 		this.name = new HashMap<String, String>();
 		this.description = new HashMap<String, HashMap<String, String>>();
 		this.locGuidelines = new HashMap<String, String>();
@@ -97,11 +98,19 @@ public class POI {
 		this.openingsHours = openingsHours;
 	}
 
-	public String getCategory(String language) {
-		return this.category.get(language);
+	public ArrayList<Category> getcategories() {
+		return categories;
+	}
+	
+	public  void setcategories(ArrayList<Category> categoriesList) {
+		this.categories = categoriesList;
 	}
 
-	public void addCategory(String language, String title) {
-		this.category.put(language, title);
+	public void addCategory(Category category) {
+		this.categories.add(category);
+	}
+	
+	public void delCategory(Category category) {
+		this.categories.remove(category);
 	}
 }
