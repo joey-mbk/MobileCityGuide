@@ -3,6 +3,9 @@ package com.mobilecityguide.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -10,23 +13,23 @@ import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
 public class MainMenu extends Activity implements OnClickListener {
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_menu);
-        setListeners();
-    }
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main_menu);
+		setListeners();
+	}
 
 	private void setListeners() {
 		View startButton = findViewById(R.id.start_button);
-        startButton.setOnClickListener(this);
-        View myplaceButton = findViewById(R.id.my_places_button);
-        myplaceButton.setOnClickListener(this);
-        View settingsButton = findViewById(R.id.settings_button);
-        settingsButton.setOnClickListener(this);
-        View disconnectButton = findViewById(R.id.disconnect_button);
-        disconnectButton.setOnClickListener(this);
+		startButton.setOnClickListener(this);
+		View myplaceButton = findViewById(R.id.my_places_button);
+		myplaceButton.setOnClickListener(this);
+		View settingsButton = findViewById(R.id.settings_button);
+		settingsButton.setOnClickListener(this);
+		View disconnectButton = findViewById(R.id.disconnect_button);
+		disconnectButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -48,6 +51,6 @@ public class MainMenu extends Activity implements OnClickListener {
 			intent = new Intent(this, MobileCityGuideActivity.class);
 			startActivity(intent);
 			break;
-	}
+		}
 	}
 }

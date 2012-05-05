@@ -52,7 +52,11 @@
         <activity android:name=".activity.Itinerary"
 				android:label="Itinerary">
 		</activity>
-		
+
+        <activity android:name=".activity.Start"
+				android:label="Let's go">
+		</activity>
+        
     </application>
 
 </manifest>
