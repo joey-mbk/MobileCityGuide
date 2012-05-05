@@ -22,11 +22,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/buser_profil" />
 
-        <Button
-            android:id="@+id/itinerary_bouton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/itinerary" />
     </LinearLayout>
 
     <LinearLayout

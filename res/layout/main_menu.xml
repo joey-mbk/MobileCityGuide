@@ -14,9 +14,9 @@
             android:background="@drawable/bstart" />
 
         <Button
-            android:id="@+id/my_places_button"
+            android:id="@+id/itinerary_button"
             style="@style/MiddleBoutton"
-            android:background="@drawable/bmyplaces" />
+            android:background="@drawable/itinerary" />
 
         <Button
             android:id="@+id/settings_button"
