@@ -18,6 +18,39 @@ public class MainMenu extends Activity implements OnClickListener {
 		setListeners();
 	}
 
+	//Méthode qui se déclenchera lorsque vous appuierez sur le bouton menu du téléphone
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		//Création d'un MenuInflater qui va permettre d'instancier un Menu XML en un objet Menu
+		MenuInflater inflater = getMenuInflater();
+		//Instanciation du menu XML spécifier en un objet Menu
+		inflater.inflate(R.layout.menu, menu);
+		
+		return true;
+
+	}
+
+	//Méthode qui se déclenchera au clic sur un item
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
+		switch (item.getItemId()) {
+		case R.id.main_menu:
+			intent = new Intent(this, MainMenu.class);
+			startActivity(intent);
+			return true;
+		case R.id.settings:
+			intent = new Intent(this, Settings.class);
+			startActivity(intent);
+			return true;
+		case R.id.disconnect:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return false;
+	}
+	
 	private void setListeners() {
 		View startButton = findViewById(R.id.start_button);
 		startButton.setOnClickListener(this);
@@ -37,7 +70,7 @@ public class MainMenu extends Activity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.itinerary_button:
-			intent = new Intent(this, Itinerary.class);
+			intent = new Intent(this, MyPlace.class);
 			startActivity(intent);
 			break;
 		case R.id.settings_button:
