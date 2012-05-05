@@ -135,6 +135,7 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}	
 		}
+		//TODO itinéraire + regrouper
 		return true;
 	}
 
