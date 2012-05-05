@@ -1,9 +1,7 @@
 package com.mobilecityguide.activity;
-
 import java.util.ArrayList;
 
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.ItemAdapter.UserRecord;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,26 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class AddItem extends Activity {
+public class ItemAdapter extends Activity {
 
-	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_of_items);
-        
-        ArrayList<UserRecord> users = new ArrayList<UserRecord>();
-        UserRecord user1 = new UserRecord("Justin", "someemail@gmail.com");
-        users.add(user1);
-        UserRecord user2 = new UserRecord("Jeremy", "someemail@yahoo.com");
-        users.add(user2);
-        UserRecord user3 = new UserRecord("Frank", "someemail@hotmail.com");
-        users.add(user3);
-        
-        ListView listView = (ListView) this.findViewById(R.id.list);
-        listView.setAdapter(new Item_Adapter(this, android.R.layout.simple_list_item_1, users));
-    }
 	
-	public class Item_Adapter extends ArrayAdapter<UserRecord> {
+	public class Item_Adapter extends ArrayAdapter<UserRecord>  {
 		private ArrayList<UserRecord> users;
 
 		public Item_Adapter(Context context, int textViewResourceId, ArrayList<UserRecord> users) {
