@@ -23,12 +23,24 @@ public class CategoryController {
 		
 		ArrayList<String> categories = new ArrayList<String>(); // List of all categories in activeUser language
 		HashMap <String, String> allCategories = categoryMapper.getAllCategories();
-
+        String[]languages = UserController.activeUser.getLanguage();
 		for(Entry<String, String> entry : allCategories.entrySet()) {
-		    if (UserController.activeUser.getLanguage().equals(entry.getKey()))
+		    if (languages[0].equals(entry.getKey()))//TODO gestion langues
 		    	categories.add(entry.getValue());
 		}
 		return categories;
+	}
+	
+	/*
+	 * Return category name in active user language
+	 */ 
+	public static String getPOIName(Category category){
+		String [] languages = UserController.activeUser.getLanguage();
+		for (String language : languages){
+		if(category.getCategory().containsKey(language))
+			return category.getCategory(language);
+		}
+		return null;
 	}
 
 }
