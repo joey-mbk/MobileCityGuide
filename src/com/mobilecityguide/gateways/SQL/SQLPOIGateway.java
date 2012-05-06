@@ -130,4 +130,17 @@ public class SQLPOIGateway implements POIGateway {
 		return results;
 	}
 
+	@Override
+	public RecordSet getAllCities() {
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT city FROM POI";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
 }

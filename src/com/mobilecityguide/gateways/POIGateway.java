@@ -10,5 +10,6 @@ public interface POIGateway {
 	RecordSet getImages(int id) throws Exception;
 	RecordSet getPOIsOfCity(String city) throws Exception;
 	RecordSet getPOIsOfCategory(String city, int category) throws Exception;
+	RecordSet getAllCities();
 
 }

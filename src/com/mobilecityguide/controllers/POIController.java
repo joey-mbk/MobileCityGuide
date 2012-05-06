@@ -19,6 +19,10 @@ public class POIController {
 		return poiMapper.getPOI(id);
 	}
 	
+	public static ArrayList<String> getCitiesNames() throws Exception{		
+		return poiMapper.getCitiesNames();
+	}
+	
 	public static ArrayList<String> getPOINamesOfCity() throws Exception{
 		POI[] poiList = poiMapper.getPOIsOfCity(UserController.city);
 		ArrayList<String> poiNames = new ArrayList<String>();

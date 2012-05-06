@@ -1,10 +1,12 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
 
 import com.mobilecityguide.controllers.POIController;
+import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.POIGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
@@ -89,6 +91,17 @@ public class POIMapper {
 			i++;
 		}
 		return list;
+	}
+
+	public ArrayList<String> getCitiesNames() throws RecordSetException, Exception {
+		RecordSet r = poiGateway.getAllCities();
+		ArrayList<String>citiesNames = new ArrayList<String>();
+		int i = 0;
+		while (r.next()) {
+			citiesNames.add(r.getString("city"));
+		}
+		return citiesNames;
+		
 	}
 	
 }
