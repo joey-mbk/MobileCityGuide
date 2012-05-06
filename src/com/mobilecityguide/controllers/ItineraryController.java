@@ -51,7 +51,7 @@ public class ItineraryController {
 			HashMap<String,String> titles = itineraryMapper.getItineraryTitles(id);
 			if(titles.containsKey(language)){
 				String title = titles.get(language);
-				titlesIDItinerariesMap.put(title, id);
+				titlesIDItinerariesMap.put(title, id); //To keep the link between title and id
 				return title;
 			}
 		}
@@ -78,5 +78,14 @@ public class ItineraryController {
 	 */ 
 	public static ArrayList<String> getCityItinerariesTitles(){
 		return getItinerariesTitles(getCityItinerariesID());
+	}
+	
+	public static ArrayList<Integer> getItineraryOfCategory(ArrayList<Integer>itineraryID, Category category){
+		ArrayList<Integer>itinerariesOfCategory = new ArrayList<Integer>();
+		for(int id: itineraryID){
+			if(itineraryMapper.getItineraryCategory(id).equals(category.getCategory()))
+				itinerariesOfCategory.add(id);
+		}
+		return itinerariesOfCategory;
 	}
 }

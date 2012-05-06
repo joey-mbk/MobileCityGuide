@@ -7,6 +7,7 @@ import android.content.Context;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
+import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLItineraryGateway;
@@ -71,4 +72,17 @@ public class ItineraryMapper {
 		}
 		return titlesMap;
 	}
+	public HashMap<String,String>getItineraryCategory(int id){
+		RecordSet r;
+		HashMap<String, String> categoryMap = new HashMap<String, String>();
+		r = itineraryGateway.getItineraryCategory(id);
+		try {
+			categoryMap.put(r.getString("language"), r.getString("title"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return categoryMap;
+	}
+	
 }

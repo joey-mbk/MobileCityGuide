@@ -80,5 +80,17 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		
 		return true;
 	}
+	
+	public RecordSet getItineraryCategory(int id){
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT language, title FROM ItineraryCategory WHERE itineraryID = '"+id+"'";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
 
 }
