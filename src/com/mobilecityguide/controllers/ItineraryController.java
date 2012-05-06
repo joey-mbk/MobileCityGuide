@@ -88,4 +88,13 @@ public class ItineraryController {
 		}
 		return itinerariesOfCategory;
 	}
+	
+	public static void saveItinerary(Itinerary itinerary){
+		try {
+			itineraryMapper.addItinerary(itinerary);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

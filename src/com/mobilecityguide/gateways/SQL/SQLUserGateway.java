@@ -12,6 +12,7 @@ import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
 public class SQLUserGateway implements UserGateway {
@@ -112,7 +113,25 @@ public class SQLUserGateway implements UserGateway {
 			e.printStackTrace();
 			return false;
 		}
-		//TODO Useritineraies Usercategories
+		
+		for(Category category : user.getUserCategories()) {
+		String query3 = "UPDATE UserCategory SET categoryID = '"+category.getId()+"' WHERE userName = '"+user.getName()+"'";
+		try {
+			db.rawQuery(query3, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		}
+		for(int itineraryID : user.getUserItinerariesID()) {
+		String query4 = "UPDATE UserItinerary SET itineraryID = '"+itineraryID+"' WHERE userName = '"+user.getName()+"'";
+		try {
+			db.rawQuery(query4, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 		return true;
 	}
 
@@ -148,7 +167,16 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}	
 		}
-		//TODO itinéraire + regrouper
+		for(int itineraryID : user.getUserItinerariesID()) {
+		    String query3 = "INSERT INTO UserItinerary VALUES ('"+itineraryID+"','"+user.getName()+"')";
+					try {
+				db.rawQuery(query3, null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}	
+		}
+		
 		return true;
 	}
 
