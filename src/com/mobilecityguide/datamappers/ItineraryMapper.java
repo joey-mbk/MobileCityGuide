@@ -11,6 +11,7 @@ import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLItineraryGateway;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
@@ -38,7 +39,7 @@ public class ItineraryMapper {
 			if (rIt.first()) {
 				itinerary = new Itinerary();
 				itinerary.setId(id);
-				itinerary.setTheme(CategoryController.getCategory(id));
+				itinerary.setTheme(getItineraryCategory(id));
 				while (rT.next()) // add titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));
 				while (rIt.next()) { // add each POI of the itinerary
@@ -72,17 +73,19 @@ public class ItineraryMapper {
 		}
 		return titlesMap;
 	}
-	public HashMap<String,String>getItineraryCategory(int id){
+	public Category getItineraryCategory(int id){
 		RecordSet r;
 		HashMap<String, String> categoryMap = new HashMap<String, String>();
 		r = itineraryGateway.getItineraryCategory(id);
+		Category category = null;
 		try {
 			categoryMap.put(r.getString("language"), r.getString("title"));
+			category = new Category(r.getInt("categoryID"), categoryMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return categoryMap;
+		return category;
 	}
 	
 }
