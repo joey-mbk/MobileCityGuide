@@ -1,6 +1,5 @@
 package com.mobilecityguide.gateways;
 
-import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.models.User;
 
 public interface UserGateway {

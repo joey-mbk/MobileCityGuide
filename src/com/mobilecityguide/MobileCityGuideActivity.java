@@ -2,55 +2,88 @@ package com.mobilecityguide;
 
 import java.util.ArrayList;
 
+import com.mobilecityguide.datamappers.CategoryMapper;
+import com.mobilecityguide.datamappers.ItineraryMapper;
 import com.mobilecityguide.datamappers.POIMapper;
-import com.mobilecityguide.controllers.GPSController;
+import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.datamappers.UserMapper;
-import com.mobilecityguide.exceptions.GatewayException;
-import com.mobilecityguide.exceptions.RecordSetException;
-import com.mobilecityguide.models.POI;
-import com.mobilecityguide.models.User;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 public class MobileCityGuideActivity extends Activity {
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        POIController.poiMapper = new POIMapper(this); // keep this
-        
-        UserMapper userMapper = new UserMapper(this);
-        User user = null;
-        POI poi = null;
-        UserController.city = "Louvain-La-Neuve";
-        POIMapper poiMapper = new POIMapper(this);
-        try {
-			user = userMapper.getUser("Maxime");
-			poi = poiMapper.getPOI(1);
-		} catch (Exception e) {
-			System.out.println("Error");
-			e.printStackTrace();
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		POIController.poiMapper = new POIMapper(this); // keep this
+		CategoryController.categoryMapper = new CategoryMapper(this);
+		ItineraryController.itineraryMapper = new ItineraryMapper(this);
+		UserController.userMapper = new UserMapper(this);
+
+
+		/*
+		 * Choix de l'utilisateur
+		 */
+		ArrayList<String>usersList = UserController.getAllUsersNames();
+		System.out.println("*******Liste des utilisateurs*******");
+		for(String userName: usersList)
+			System.out.println(userName);
+		try {
+			UserController.setActiveUser(UserController.getUser(usersList.get(0)));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.out.println("Error get user");
 		}
-        if (user != null) {
-	        System.out.println("Name: "+user.getName());
-	        System.out.println("Age: "+user.getAge());
-	        String[] list = user.getLanguage();
-	        for (String lang:list)
-	        	System.out.println("Language: "+lang);
-        } else {
-        	System.out.println("NULL !!!!");
-        }
-        if (poi != null) {
-	        System.out.println("Name: "+poi.getName(user.getLanguage()[0]));
-	        System.out.println("Description: "+poi.getDescription(user.getAge(), user.getLanguage()[0]));
-        } else {
-        	System.out.println("NULL !!!!");
-        }
-        
-        setContentView(R.layout.main);
-    }
+
+		/*
+		 * Affichage des données de l'utilisateur
+		 */
+		System.out.println("*******Données de l'utilisateur*******");
+		System.out.println("Nom: "+UserController.activeUser.getName());
+		System.out.println("Age: "+UserController.activeUser.getAge());
+		System.out.println("Langues:");
+		for(String language: UserController.activeUser.getLanguage())
+			System.out.println(language);
+
+
+
+
+		/*
+		 * Choix de la ville
+		 */
+		try {
+			ArrayList<String>citiesList = POIController.getCitiesNames();
+			UserController.setCity(citiesList.get(0));
+			
+			System.out.println("*******Liste des villes*******");
+			for(String cityName: citiesList)
+				System.out.println(cityName);	
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			System.out.println("Error get city");
+		}
+		
+		/*
+		 * Choix d'un itineraire de l'utilisateur
+		 */
+		try {
+			ArrayList<String>itinerariesList = UserController.getActiveUserItinerariesNames();
+			ItineraryController.getItinerary(itinerariesList.get(0));
+			
+			System.out.println("*******Liste des itinéraires*******");
+			for(String itineraryName: itinerariesList)
+				System.out.println(itineraryName);
+
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			System.out.println("Error get itinerary");
+		}
+
+		setContentView(R.layout.main);
+	}
 }

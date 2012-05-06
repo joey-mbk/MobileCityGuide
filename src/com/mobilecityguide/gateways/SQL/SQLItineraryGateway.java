@@ -1,6 +1,7 @@
 package com.mobilecityguide.gateways.SQL;
 
-import java.util.ArrayList;
+
+import java.util.HashMap;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,12 +13,10 @@ import com.mobilecityguide.models.POI;
 
 public class SQLItineraryGateway implements ItineraryGateway {
 
-	private Context context;
 	private SQLGateway gw;
 	private SQLiteDatabase db;
 	
 	public SQLItineraryGateway(Context context) {
-		this.context = context;
 		this.gw = new SQLGateway(context);
 	}
 	
@@ -67,7 +66,7 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		
 		int lastKey = results.getInt("last_key");
 		
-		ArrayList<POI> poiList = itinerary.getPOIList();
+		HashMap<Integer,POI> poiList = itinerary.getPOIList();
 		for (int i = 1; i <= poiList.size(); i++) {
 			String query = "INSERT INTO POIItinerary (itineraryID, poiID, step) VALUES ('"+lastKey+"','"+poiList.get(i).getId()+"', '"+i+"')";
 			try {

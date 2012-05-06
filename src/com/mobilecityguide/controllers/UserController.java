@@ -1,14 +1,9 @@
 package com.mobilecityguide.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.mobilecityguide.MobileCityGuideActivity;
-import com.mobilecityguide.datamappers.CategoryMapper;
 import com.mobilecityguide.datamappers.UserMapper;
 import com.mobilecityguide.models.Category;
-import com.mobilecityguide.models.Itinerary;
-import com.mobilecityguide.models.POI;
 import com.mobilecityguide.models.User;
 
 public class UserController {
@@ -37,6 +32,10 @@ public class UserController {
 		setActiveUser(newUser);
 		userMapper.addUser(activeUser);
 	}
+	
+	public static User getUser(String name) throws Exception{
+		return userMapper.getUser(name);
+	}
 
 	public static void delActiveUser(){
 		userMapper.deleteUser(activeUser.getName());
@@ -58,8 +57,8 @@ public class UserController {
 		activeUser.setUserItinerariesID(userItinerariesID);
 	}
 	
-	public static void getActiveUserItinerariesNames(){
-		ItineraryController.getItinerariesTitles(activeUser.getUserItinerariesID());
+	public static ArrayList<String> getActiveUserItinerariesNames(){
+		return ItineraryController.getItinerariesTitles(activeUser.getUserItinerariesID());
 	}
 
 	public static void setActiveUserCategory(ArrayList<Category> userCategories){

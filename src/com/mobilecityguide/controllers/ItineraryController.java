@@ -6,12 +6,11 @@ import java.util.HashMap;
 import com.mobilecityguide.datamappers.ItineraryMapper;
 import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
-import com.mobilecityguide.models.POI;
 
 public class ItineraryController {
 	public static ItineraryMapper itineraryMapper;
 	public static HashMap<Integer, Itinerary> fetchedItineraries = new HashMap<Integer, Itinerary>();
-	private static HashMap<String, Integer> titlesIDItinerariesMap = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> titlesIDItinerariesMap = new HashMap<String, Integer>();
 
 	public static Itinerary getItinerary(int id) throws Exception{
 		return itineraryMapper.getItinerary(id);
@@ -47,8 +46,8 @@ public class ItineraryController {
 	 */ 
 	public static String getItineraryTitle(int id){
 		String [] languages = UserController.activeUser.getLanguage();
+		HashMap<String,String> titles = itineraryMapper.getItineraryTitles(id);
 		for (String language : languages){
-			HashMap<String,String> titles = itineraryMapper.getItineraryTitles(id);
 			if(titles.containsKey(language)){
 				String title = titles.get(language);
 				titlesIDItinerariesMap.put(title, id); //To keep the link between title and id

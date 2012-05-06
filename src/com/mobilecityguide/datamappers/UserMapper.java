@@ -5,14 +5,10 @@ import java.util.HashMap;
 
 import android.content.Context;
 
-import com.mobilecityguide.controllers.UserController;
-import com.mobilecityguide.exceptions.GatewayException;
-import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.gateways.SQL.SQLUserGateway;
 import com.mobilecityguide.models.Category;
-import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
 public class UserMapper {

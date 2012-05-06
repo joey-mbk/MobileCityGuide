@@ -5,16 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.mobilecityguide.gateways.POIGateway;
 import com.mobilecityguide.gateways.RecordSet;
-import com.mobilecityguide.models.POI;
 
 public class SQLPOIGateway implements POIGateway {
 
-	private Context context;
 	private SQLGateway gw;
 	private SQLiteDatabase db;
 	
 	public SQLPOIGateway(Context context) {
-		this.context = context;
 		this.gw = new SQLGateway(context);
 	}
 

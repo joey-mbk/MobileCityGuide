@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.datamappers.CategoryMapper;
 import com.mobilecityguide.models.Category;
-import com.mobilecityguide.models.POI;
 
 public class CategoryController {
 	

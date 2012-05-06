@@ -3,10 +3,7 @@ package com.mobilecityguide.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.content.Context;
-
 import com.mobilecityguide.datamappers.POIMapper;
-import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.POI;
 

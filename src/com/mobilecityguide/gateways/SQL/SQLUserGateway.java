@@ -1,28 +1,19 @@
 package com.mobilecityguide.gateways.SQL;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map.Entry;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mobilecityguide.controllers.CategoryController;
-import com.mobilecityguide.exceptions.GatewayException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.models.Category;
-import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
 public class SQLUserGateway implements UserGateway {
 
-	private Context context;
 	private SQLGateway gw;
 	private SQLiteDatabase db;
 
 	public SQLUserGateway(Context context) {
-		this.context = context;
 		this.gw = new SQLGateway(context);
 	}
 

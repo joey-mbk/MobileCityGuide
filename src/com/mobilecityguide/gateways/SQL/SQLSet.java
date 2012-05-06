@@ -1,12 +1,7 @@
 package com.mobilecityguide.gateways.SQL;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import android.database.Cursor;
 
-import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
 
 public class SQLSet implements RecordSet {

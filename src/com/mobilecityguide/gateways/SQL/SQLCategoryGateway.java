@@ -7,13 +7,11 @@ import com.mobilecityguide.gateways.CategoryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 
 public class SQLCategoryGateway implements CategoryGateway{
-	
-	private Context context;
+
 	private SQLGateway gw;
 	private SQLiteDatabase db;
 
 	public SQLCategoryGateway(Context context) {
-		this.context = context;
 		this.gw = new SQLGateway(context);
 	}
 

@@ -7,23 +7,23 @@ public class POI {
 	
 	private int id;
 	private String address;
-	private ArrayList<Category> categories;
-	private HashMap<String, String> name; // key is language, value is POI name
-	private HashMap<String, HashMap<String, String>> description; // key is language, value is another hashmap whose key is language and value is the description
-	private HashMap<String, String> locGuidelines; // key is language, value is guidelines
+	private ArrayList<Category> categories = new ArrayList<Category>();
+	private HashMap<String, String> name = new HashMap<String, String>(); // key is language, value is POI name
+	private HashMap<String, HashMap<String, String>> description = new HashMap<String, HashMap<String, String>>(); // key is language, value is another hashmap whose key is language and value is the description
+	private HashMap<String, String> locGuidelines = new HashMap<String, String>();; // key is language, value is guidelines
 	private double latitude;
 	private double longitude;
-	private HashMap<String, String> images; // key is time of day, value is image path
+	private HashMap<String, String> images = new HashMap<String, String>();; // key is time of day, value is image path
 	private String openingsHours; // missing in the DB !!!
 	
-	public POI() {
+	/*public POI() {
 		this.categories = new ArrayList<Category>();
 		/* Initialize all the hashmaps */
-		this.name = new HashMap<String, String>();
+	/*	this.name = new HashMap<String, String>();
 		this.description = new HashMap<String, HashMap<String, String>>();
 		this.locGuidelines = new HashMap<String, String>();
 		this.images = new HashMap<String, String>();
-	}
+	}*/
 	
 	public HashMap<String, String> getName() {
 		return name;

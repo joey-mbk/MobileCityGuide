@@ -9,12 +9,9 @@ import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.POIGateway;
 import com.mobilecityguide.gateways.RecordSet;
-import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.gateways.SQL.SQLPOIGateway;
-import com.mobilecityguide.gateways.SQL.SQLUserGateway;
 import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.POI;
-import com.mobilecityguide.models.User;
 
 public class POIMapper {
 
@@ -65,6 +62,7 @@ public class POIMapper {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("2.Error");
 			throw new Exception("Error in the RecordSet while getting POI '"+id+"' from the database.");
 		}
 		POIController.fetchedPOI.put(new Integer(id), poi);
@@ -96,7 +94,6 @@ public class POIMapper {
 	public ArrayList<String> getCitiesNames() throws RecordSetException, Exception {
 		RecordSet r = poiGateway.getAllCities();
 		ArrayList<String>citiesNames = new ArrayList<String>();
-		int i = 0;
 		while (r.next()) {
 			citiesNames.add(r.getString("city"));
 		}

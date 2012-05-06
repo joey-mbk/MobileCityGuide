@@ -1,13 +1,12 @@
 package com.mobilecityguide.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Itinerary  {
 	
 	private int id;
-	private HashMap<String, String> title;
-	private ArrayList<POI> POIList;
+	private HashMap<String, String> title = new HashMap<String,String>();
+	private HashMap<Integer,POI> POIList= new HashMap<Integer,POI>();
 	private Category theme;
 
 	public HashMap<String, String> getTitle() {
@@ -22,12 +21,12 @@ public class Itinerary  {
 		this.title.put(language, title);
 	}
 
-	public ArrayList<POI> getPOIList() {
+	public HashMap<Integer,POI> getPOIList() {
 		return POIList;
 	}
 
 	public void addPOI(int step, POI poi) {
-		this.POIList.add(step, poi);
+		this.POIList.put(step, poi);
 	}
 
 	public Category getTheme() {

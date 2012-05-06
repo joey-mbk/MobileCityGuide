@@ -5,13 +5,10 @@ import java.util.HashMap;
 import android.content.Context;
 
 import com.mobilecityguide.controllers.CategoryController;
-import com.mobilecityguide.controllers.POIController;
-import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.CategoryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLCategoryGateway;
 import com.mobilecityguide.models.Category;
-import com.mobilecityguide.models.POI;
 
 
 public class CategoryMapper {

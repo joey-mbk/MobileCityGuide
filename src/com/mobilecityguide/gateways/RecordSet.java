@@ -7,8 +7,6 @@
 
 package com.mobilecityguide.gateways;
 
-import java.util.ArrayList;
-
 import com.mobilecityguide.exceptions.RecordSetException;
 
 public interface RecordSet {

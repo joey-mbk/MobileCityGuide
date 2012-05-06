@@ -11,8 +11,8 @@ import android.os.Bundle;
 import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
-public class GPSController implements LocationListener{
-
+public class GPSController {//implements LocationListener{
+/*
 	private LocationManager	locationManager;
 	private double userLatitude;
 	private double userLongitude;
@@ -69,5 +69,5 @@ public class GPSController implements LocationListener{
 		// TODO Auto-generated method stub
 
 	}
-
+*/
 }

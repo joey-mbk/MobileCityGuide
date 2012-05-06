@@ -2,15 +2,11 @@ package com.mobilecityguide.gateways.SQL;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.sql.*;
 
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.mobilecityguide.exceptions.GatewayException;
 
 public class SQLGateway extends SQLiteOpenHelper {
 	
