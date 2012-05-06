@@ -1,5 +1,7 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.HashMap;
+
 import android.content.Context;
 
 import com.mobilecityguide.controllers.CategoryController;
@@ -55,4 +57,18 @@ public class ItineraryMapper {
 		return this.itineraryGateway.addItinerary(itinerary);
 	}
 	
+	public HashMap<String,String>getItineraryTitles(int id){
+		RecordSet r;
+		HashMap<String, String> titlesMap = new HashMap<String, String>();
+		try {
+			r = itineraryGateway.getItineraryTitles(id);
+		
+		
+			while (r.next())
+				titlesMap.put(r.getString("language"), r.getString("title"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return titlesMap;
+	}
 }

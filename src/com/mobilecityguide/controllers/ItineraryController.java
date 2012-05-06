@@ -11,24 +11,72 @@ import com.mobilecityguide.models.POI;
 public class ItineraryController {
 	public static ItineraryMapper itineraryMapper;
 	public static HashMap<Integer, Itinerary> fetchedItineraries = new HashMap<Integer, Itinerary>();
+	private static HashMap<String, Integer> titlesIDItinerariesMap = new HashMap<String, Integer>();
+
+	public static Itinerary getItinerary(int id) throws Exception{
+		return itineraryMapper.getItinerary(id);
+	}
+
+	public static Itinerary getItinerary(String name) throws Exception{
+        int id = titlesIDItinerariesMap.get(name);
+		return itineraryMapper.getItinerary(id);
+	}
+
 
 	/*
 	 * Return itinerary category title according to the active user language
 	 */ 
-	public static String getPOICategoryName(Itinerary itinerary){		
+	public static String getItineraryCategoryName(Itinerary itinerary){		
 		return CategoryController.getCategoryTitle(itinerary.getTheme());
 	}
-	
+
 	/*
 	 * Return itinerary title according to the active user language
 	 */ 
 	public static String getItineraryTitle(Itinerary itinerary){
 		String [] languages = UserController.activeUser.getLanguage();
 		for (String language : languages){
-		if(itinerary.getTitle().containsKey(language))
-			return itinerary.getTitle(language);
+			if(itinerary.getTitle().containsKey(language))
+				return itinerary.getTitle(language);
 		}
 		return null;
 	}
-	
+
+	/*
+	 * Return itinerary title according to the active user language
+	 */ 
+	public static String getItineraryTitle(int id){
+		String [] languages = UserController.activeUser.getLanguage();
+		for (String language : languages){
+			HashMap<String,String> titles = itineraryMapper.getItineraryTitles(id);
+			if(titles.containsKey(language)){
+				String title = titles.get(language);
+				titlesIDItinerariesMap.put(title, id);
+				return title;
+			}
+		}
+		return null;
+	}
+
+	/*
+	 * Return itineraries titles according to the active user language
+	 */ 
+	public static ArrayList<String> getItinerariesTitles(ArrayList<Integer>itinerariesID){
+		ArrayList<String>titles = new ArrayList<String>();		
+		for(Integer id: itinerariesID)
+			titles.add(getItineraryTitle(id));
+		return titles;
+	}
+
+
+	public static ArrayList<Integer> getCityItinerariesID(){
+		return itineraryMapper.getCityItineraries(UserController.city);
+	}
+
+	/*
+	 * Return city itineraries titles according to the active user language
+	 */ 
+	public static ArrayList<String> getCityItinerariesTitles(){
+		return getItinerariesTitles(getCityItinerariesID());
+	}
 }
