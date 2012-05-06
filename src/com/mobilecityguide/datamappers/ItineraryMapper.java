@@ -1,5 +1,6 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -73,10 +74,9 @@ public class ItineraryMapper {
 		}
 		return titlesMap;
 	}
-	public Category getItineraryCategory(int id){
-		RecordSet r;
+	public Category getItineraryCategory(int id) throws Exception{
 		HashMap<String, String> categoryMap = new HashMap<String, String>();
-		r = itineraryGateway.getItineraryCategory(id);
+		RecordSet r = itineraryGateway.getItineraryCategory(id);
 		Category category = null;
 		try {
 			categoryMap.put(r.getString("language"), r.getString("title"));
@@ -86,6 +86,19 @@ public class ItineraryMapper {
 		}
 		
 		return category;
+	}
+
+	public ArrayList<Integer> getCityItineraries(String city) throws Exception {
+		ArrayList<Integer> itineraries = new ArrayList<Integer>();
+		RecordSet r = itineraryGateway.getCityItineraries(city);
+		try {
+			while (r.next())
+				itineraries.add(new Integer(r.getInt("itineraryID")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return itineraries;
 	}
 	
 }

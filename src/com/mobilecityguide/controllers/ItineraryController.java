@@ -19,7 +19,7 @@ public class ItineraryController {
 
 	public static Itinerary getItinerary(String name) throws Exception{
         int id = titlesIDItinerariesMap.get(name);
-		return itineraryMapper.getItinerary(id);
+		return getItinerary(id);
 	}
 
 
@@ -69,18 +69,18 @@ public class ItineraryController {
 	}
 
 
-	public static ArrayList<Integer> getCityItinerariesID(){
+	public static ArrayList<Integer> getCityItinerariesID() throws Exception{
 		return itineraryMapper.getCityItineraries(UserController.city);
 	}
 
 	/*
 	 * Return city itineraries titles according to the active user language
 	 */ 
-	public static ArrayList<String> getCityItinerariesTitles(){
+	public static ArrayList<String> getCityItinerariesTitles() throws Exception{
 		return getItinerariesTitles(getCityItinerariesID());
 	}
 	
-	public static ArrayList<Integer> getItineraryOfCategory(ArrayList<Integer>itineraryID, Category category){
+	public static ArrayList<Integer> getItineraryOfCategory(ArrayList<Integer>itineraryID, Category category) throws Exception{
 		ArrayList<Integer>itinerariesOfCategory = new ArrayList<Integer>();
 		for(int id: itineraryID){
 			if(itineraryMapper.getItineraryCategory(id).equals(category))

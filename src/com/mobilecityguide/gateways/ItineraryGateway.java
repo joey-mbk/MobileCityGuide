@@ -7,6 +7,7 @@ public interface ItineraryGateway {
 	RecordSet getItinerary(int id) throws Exception;
 	RecordSet getItineraryTitles(int id) throws Exception;
 	boolean addItinerary(Itinerary itinerary) throws Exception;
-	RecordSet getItineraryCategory(int id);
+	RecordSet getItineraryCategory(int id) throws Exception;
+	RecordSet getCityItineraries(String city) throws Exception;
 	
 }

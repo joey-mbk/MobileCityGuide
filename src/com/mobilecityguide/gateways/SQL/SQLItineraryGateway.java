@@ -93,4 +93,17 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		return results;
 	}
 
+	@Override
+	public RecordSet getCityItineraries(String city) throws Exception {
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT itineraryID FROM POIItinerary WHERE  poiID IN (SELECT poiID FROM POI WHERE city = '"+city+"')";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
 }
