@@ -50,6 +50,19 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return results;
 	}
+	
+	public RecordSet getUserItinerariesID(String name) throws Exception {
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT itineraryID FROM UserItinerary UI WHERE userName = '"+name+"'";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Error while getting itineraries of User '"+name+"' from database.");
+		}
+		return results;
+	}
 
 
 	public boolean deleteUser(String name) {

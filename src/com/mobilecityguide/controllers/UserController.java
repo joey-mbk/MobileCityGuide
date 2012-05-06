@@ -29,7 +29,7 @@ public class UserController {
 		userMapper.setUserName(activeUser,userName);
 	}
     
-	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories){
+	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories, ArrayList<Integer> userItineraryID){
 		newUser.setName(name);
 		newUser.setLanguage(languages);
 		newUser.setAge(age);
@@ -54,8 +54,12 @@ public class UserController {
 		activeUser.setLanguage(languages);
 	}
 
-	public static void setActiveUserItineraryList(ArrayList<Itinerary> userItineraryList){
-		activeUser.setUserItineraryList(userItineraryList);
+	public static void setActiveUserItinerariesID(ArrayList<Integer> userItinerariesID){
+		activeUser.setUserItinerariesID(userItinerariesID);
+	}
+	
+	public static void getActiveUserItinerariesNames(){
+		ItineraryController.getItinerariesTitles(activeUser.getUserItinerariesID());
 	}
 
 	public static void setActiveUserCategory(ArrayList<Category> userCategories){

@@ -12,6 +12,7 @@ import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.gateways.SQL.SQLUserGateway;
 import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
 public class UserMapper {
@@ -25,6 +26,7 @@ public class UserMapper {
 	public User getUser(String name) throws Exception {
 		RecordSet rU = userGateway.getUser(name); // fetch the results from the gateway
 		RecordSet rCat = userGateway.getUserCategories(name);
+		RecordSet rI = userGateway.getUserItinerariesID(name);
 		User user = null;
 		try {
 			if (rU.first()) {
@@ -40,11 +42,15 @@ public class UserMapper {
 				Category category = new Category(rCat.getInt("categoryID"), categoriesMap);
 				user.addCategory(category);
 			}
+			while (rI.next())
+			{
+				user.getUserItinerariesID().add(rI.getInt("itineraryID"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Error in the RecordSet while getting user '"+name+"' from the database.");
 		}
-		
+
 		return user;
 	}
 

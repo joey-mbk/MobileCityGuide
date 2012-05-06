@@ -9,11 +9,11 @@ public class User {
 	private String[] language;
 	private String age;
 	private ArrayList<Category> userCategories;
-	private ArrayList<Itinerary> userItineraryList;
+	private ArrayList<Integer> userItinerariesID;
 	
 	public User(){
 		this.userCategories= new ArrayList<Category>();
-		this.userItineraryList = new ArrayList<Itinerary>();
+		this.userItinerariesID = new ArrayList<Integer>();
 	}
 	
 	public String getName() {
@@ -40,14 +40,6 @@ public class User {
 		this.age = age;
 	}
 
-	public ArrayList<Itinerary> getUserItineraryList() {
-		return userItineraryList;
-	}
-
-	public void setUserItineraryList(ArrayList<Itinerary> userItineraryList) {
-		this.userItineraryList = userItineraryList;
-	}
-
 	public void addCategory(Category category) {
 		this.userCategories.add(category);
 	}
@@ -62,5 +54,13 @@ public class User {
 
 	public void setUserCategories(ArrayList<Category> userCategories) {
 		this.userCategories = userCategories;
+	}
+	
+	public ArrayList<Integer> getUserItinerariesID() {
+		return userItinerariesID;
+	}
+
+	public void setUserItinerariesID(ArrayList<Integer> userItinerariesID) {
+		this.userItinerariesID = userItinerariesID;
 	}
 }
