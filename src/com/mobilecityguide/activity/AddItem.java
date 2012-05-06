@@ -3,8 +3,6 @@ package com.mobilecityguide.activity;
 import java.util.ArrayList;
 
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.ItemAdapter.UserRecord;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,10 +30,10 @@ public class AddItem extends Activity {
         users.add(user3);
         
         ListView listView = (ListView) this.findViewById(R.id.list);
-        listView.setAdapter(new Item_Adapter(this, android.R.layout.simple_list_item_1, users));
+        listView.setAdapter((ListAdapter) new ItemAdapter(this, android.R.layout.simple_list_item_1, users));
     }
 	
-	public class Item_Adapter extends ArrayAdapter<UserRecord> {
+	/*public class Item_Adapter extends ArrayAdapter<UserRecord> {
 		private ArrayList<UserRecord> users;
 
 		public Item_Adapter(Context context, int textViewResourceId, ArrayList<UserRecord> users) {
@@ -66,7 +65,7 @@ public class AddItem extends Activity {
 			return v;
 		}
 	}
-	
+	*/
 	public class UserRecord {
 		public String username;
 		public String email;

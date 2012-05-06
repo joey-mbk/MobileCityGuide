@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.AddItem.Item_Adapter;
 import com.mobilecityguide.activity.AddItem.UserRecord;
 
 public class MyPlace extends Activity implements OnClickListener {
@@ -31,7 +30,7 @@ public class MyPlace extends Activity implements OnClickListener {
         users.add(user1);
         UserRecord user2 = new UserRecord("Jeremy", "someemail@yahoo.com");
         users.add(user2);
-        UserRecord user3 = new UserRecord("Frank", "someemail@hotmail.com");
+        UserRecord user3 = new UserRecord("Frankkk", "someemail@hotmail.com");
         users.add(user3);
         
         ListView listView = (ListView) this.findViewById(R.id.list);
@@ -86,7 +85,7 @@ public class MyPlace extends Activity implements OnClickListener {
 				}
 
 				if(email != null) {
-					email.setText("Email: " + user.email );
+					email.setText("Autre: " + user.email );
 				}
 			}
 			return v;
