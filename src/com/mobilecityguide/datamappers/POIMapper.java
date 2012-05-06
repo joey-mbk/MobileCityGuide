@@ -41,6 +41,7 @@ public class POIMapper {
 		try {
 			if (rPoi.first()) {
 				poi = new POI();
+				poi.setId(id);
 				poi.setAddress(rPoi.getString("address"));
 				poi.setLatitude(rPoi.getDouble("latitude"));
 				poi.setLongitude(rPoi.getDouble("longitude"));

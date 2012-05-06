@@ -35,7 +35,7 @@ public class SQLPOIGateway implements POIGateway {
 	@Override
 	public RecordSet getPOICategories(int id) throws Exception {
 		this.db = this.gw.getReadableDatabase();
-		String query = "SELECT CT.title, CT.language FROM CategoryTitles CT, POICategory PC WHERE PC.poiID = '"+id+"' AND CT.categoryID = PC.categoryID";
+		String query = "SELECT PC.categoryID, CT.title, CT.language FROM CategoryTitles CT, POICategory PC WHERE PC.poiID = '"+id+"' AND CT.categoryID = PC.categoryID";
 		SQLSet results = null;
 		try {
 			results = new SQLSet(db.rawQuery(query, null));

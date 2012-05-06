@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class POI {
 	
+	private int id;
 	private String address;
 	private ArrayList<Category> categories;
 	private HashMap<String, String> name; // key is language, value is POI name
@@ -115,5 +116,13 @@ public class POI {
 	
 	public void delCategory(Category category) {
 		this.categories.remove(category);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
