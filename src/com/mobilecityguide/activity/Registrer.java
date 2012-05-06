@@ -17,7 +17,7 @@ public class Registrer extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View registerButton = findViewById(R.id.register_button);
+		View registerButton = findViewById(R.id.save_button);
 		registerButton.setOnClickListener(this);
 	}
 
