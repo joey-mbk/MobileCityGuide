@@ -2,10 +2,10 @@ package com.mobilecityguide.models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Itinerary  {
-		
+	
+	private int id;
 	private HashMap<String, String> title;
 	private ArrayList<POI> POIList;
 	private Category theme;
@@ -40,6 +40,14 @@ public class Itinerary  {
 	
 	public void delPOI(POI poi){
 		this.POIList.remove(poi);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

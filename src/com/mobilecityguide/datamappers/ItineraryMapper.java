@@ -34,6 +34,7 @@ public class ItineraryMapper {
 		try {
 			if (rIt.first()) {
 				itinerary = new Itinerary();
+				itinerary.setId(id);
 				itinerary.setTheme(CategoryController.getCategory(id));
 				while (rT.next()) // add titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));

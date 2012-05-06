@@ -3,11 +3,13 @@ package com.mobilecityguide.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.mobilecityguide.datamappers.ItineraryMapper;
 import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
 public class ItineraryController {
+	public static ItineraryMapper itineraryMapper;
 	public static HashMap<Integer, Itinerary> fetchedItineraries = new HashMap<Integer, Itinerary>();
 
 	/*
