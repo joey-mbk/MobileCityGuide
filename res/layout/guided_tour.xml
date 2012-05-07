@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainStyle"
-    android:baselineAligned="false" >
-
-    <LinearLayout
-        android:layout_width="225dp"
-        android:layout_height="186dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+	style="@style/MainStyle"
+	android:padding="20dip">
+	
+	<!-- Note built-in ids for the 'list' -->
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="Vertical">
         
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,33 +32,30 @@
                 android:text="City"/>
             </LinearLayout>
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25dip"
-            android:background="@drawable/direction" />
-
     </LinearLayout>
-
+    <ListView
+        android:id="@android:id/android:list"
+        android:layout_width="wrap_content"
+        android:layout_height="237dp"
+        android:background="@drawable/bg2" >
+        
+    </ListView>
+    
     <LinearLayout
         android:id="@+id/contentLayout3"
         style="@style/LinearLayout"
-        android:orientation="horizontal" >
-
-
+        android:orientation="horizontal" 
+        android:gravity="center">
+        
         <Button
-            android:id="@+id/free_walk_button"
-            android:layout_width="73dp"
-            android:layout_height="48dp"
-            android:background="@drawable/free_walk" />
-
-        <Button
-            android:id="@+id/guide_tour_button"
-            android:layout_width="75dp"
-            android:layout_height="47dp"
-            android:background="@drawable/guide_tour" />
+        android:id="@+id/create_itinerary_button"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonroundedcorners"
+        android:text="@string/select_profile_new"
+        android:textColor="#ffffff" 
+        />
     </LinearLayout>
-
+    
 </LinearLayout>
