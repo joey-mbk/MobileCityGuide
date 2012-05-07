@@ -12,5 +12,6 @@ public interface UserGateway {
 	boolean setUserName(User user, String previousName);
 	boolean addUser(User user);
 	RecordSet getAllUser();
+	RecordSet getAllLanguages();
 
 }

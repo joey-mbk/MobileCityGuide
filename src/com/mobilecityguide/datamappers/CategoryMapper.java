@@ -1,5 +1,6 @@
 package com.mobilecityguide.datamappers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -39,17 +40,32 @@ public class CategoryMapper {
 		return category;
 	}
 
-	public HashMap<String, String> getAllCategories(){
-		RecordSet r = categoryGateway.getAllCategories();
-		HashMap<String, String> category = new HashMap<String, String>();;
+	public ArrayList<Integer> getAllCategoriesID(){
+		RecordSet r = categoryGateway.getAllCategoriesID();
+		
+		ArrayList<Integer> categoriesID = new ArrayList<Integer>();;
 		try {
 			while (r.next())
-				category.put(r.getString("language"), r.getString("title"));
+				categoriesID.add(r.getInt("categoryID"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return category;
+		return categoriesID;
+	}
+	
+	public HashMap<String,String>getCategoryTitles(int id){
+		RecordSet r;
+		HashMap<String, String> titlesMap = new HashMap<String, String>();
+		try {
+			r = categoryGateway.getCategoryTitles(id);
+
+			while (r.next())
+				titlesMap.put(r.getString("language"), r.getString("title"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return titlesMap;
 	}
 }
 

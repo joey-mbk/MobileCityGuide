@@ -29,9 +29,9 @@ public class SQLCategoryGateway implements CategoryGateway{
 	}
 
 	@Override
-	public RecordSet getAllCategories() {
+	public RecordSet getAllCategoriesID() {
 		this.db = this.gw.getReadableDatabase();
-		String query = "SELECT language, title FROM CategoryTitles";
+		String query = "SELECT DISTINCT categoryID FROM CategoryTitles";
 		SQLSet results = null;
 		try {
 			results = new SQLSet(db.rawQuery(query, null));
@@ -40,5 +40,19 @@ public class SQLCategoryGateway implements CategoryGateway{
 		}
 		return results;
 	}
+
+	@Override
+	public RecordSet getCategoryTitles(int id){
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT language, title FROM CategoryTitles WHERE categoryID = '"+id+"'";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
 
 }

@@ -24,7 +24,7 @@ public class UserController {
 		userMapper.setUserName(activeUser,userName);
 	}
     
-	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories, ArrayList<Integer> userItineraryID){
+	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories){
 		newUser.setName(name);
 		newUser.setLanguage(languages);
 		newUser.setAge(age);
@@ -95,6 +95,10 @@ public class UserController {
 
 	public static void setCity(String city) {
 		UserController.city = city;
+	}
+	
+	public static ArrayList<String> getAllLanguages(){
+ 		return userMapper.getAllLanguages();
 	}
 
 }

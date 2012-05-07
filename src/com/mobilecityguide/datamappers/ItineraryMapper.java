@@ -38,6 +38,7 @@ public class ItineraryMapper {
 				itinerary.setTheme(getItineraryCategory(id));
 				while (rT.next()) // add titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));
+				rIt.first();
 				while (rIt.next()) { // add each POI of the itinerary
 					POI poi = POIController.getPOI(rIt.getInt("poiID"));
 					itinerary.addPOI(rIt.getInt("step"), poi); // add POI at the right place (step) in the POI list of itinerary

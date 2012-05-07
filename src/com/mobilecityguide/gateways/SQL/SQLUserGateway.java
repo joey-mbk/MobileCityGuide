@@ -1,5 +1,6 @@
 package com.mobilecityguide.gateways.SQL;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -29,7 +30,7 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return results;
 	}
-	
+
 	public RecordSet getUserCategories(String name) throws Exception {
 		this.db = this.gw.getReadableDatabase();
 		String query = "SELECT CT.categoryID, CT.title, CT.language FROM CategoryTitles CT, UserCategory U WHERE U.userName = '"+name+"' AND CT.categoryID = U.categoryID";
@@ -42,7 +43,7 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return results;
 	}
-	
+
 	public RecordSet getUserItinerariesID(String name) throws Exception {
 		this.db = this.gw.getReadableDatabase();
 		String query = "SELECT itineraryID FROM UserItinerary UI WHERE userName = '"+name+"'";
@@ -104,76 +105,98 @@ public class SQLUserGateway implements UserGateway {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		for(Category category : user.getUserCategories()) {
-		String query3 = "UPDATE UserCategory SET categoryID = '"+category.getId()+"' WHERE userName = '"+user.getName()+"'";
-		try {
-			db.rawQuery(query3, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		}
-		for(int itineraryID : user.getUserItinerariesID()) {
-		String query4 = "UPDATE UserItinerary SET itineraryID = '"+itineraryID+"' WHERE userName = '"+user.getName()+"'";
-		try {
-			db.rawQuery(query4, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-		return true;
-	}
-
-	public boolean addUser(User user){
-		if (this.db.isReadOnly())
-		this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
-		
-		String query1 = "INSERT INTO User VALUES ('"+user.getName()+"','"+user.getAge()+"')";
-		try {
-			db.rawQuery(query1, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error query1");
-			return false;
-		}
-
-		String [] languagesArray = user.getLanguage();
-		for(int i=0;i<languagesArray.length;i++){			
-			String query2 = "INSERT INTO Language VALUES ('"+user.getName()+"',"+i+",'"+languagesArray[i]+"')";
+			String query3 = "UPDATE UserCategory SET categoryID = '"+category.getId()+"' WHERE userName = '"+user.getName()+"'";
 			try {
-				db.rawQuery(query2, null);
+				db.rawQuery(query3, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}
 		}
-		for(Category category : user.getUserCategories()) {
-		    String query3 = "INSERT INTO UserCategory VALUES ('"+category.getId()+"','"+user.getName()+"')";
-					try {
-				db.rawQuery(query3, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}	
-		}
 		for(int itineraryID : user.getUserItinerariesID()) {
-		    String query3 = "INSERT INTO UserItinerary VALUES ('"+itineraryID+"','"+user.getName()+"')";
-					try {
-				db.rawQuery(query3, null);
+			String query4 = "UPDATE UserItinerary SET itineraryID = '"+itineraryID+"' WHERE userName = '"+user.getName()+"'";
+			try {
+				db.rawQuery(query4, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
-			}	
+			}
+		}
+		return true;
+	}
+
+	public boolean addUser(User user){
+		if (this.db.isReadOnly())
+			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+
+		ContentValues cv1 = new ContentValues();
+		cv1.put("userName", user.getName());
+		cv1.put("age", user.getAge());
+		try {
+			db.insert("User",null,cv1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error cv1");
+			return false;
+		}
+
+		String [] languagesArray = user.getLanguage();
+		for(int i=0;i<languagesArray.length;i++){
+			ContentValues cv2 = new ContentValues();
+			cv2.put("userName", user.getName());
+			cv2.put("priority", i);
+			cv2.put("language", languagesArray[i]);
+			try {
+				db.insert("Language",null,cv2);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error cv2");
+				return false;
+			}
 		}
 		
+		for(Category category : user.getUserCategories()) {
+			ContentValues cv3 = new ContentValues();
+			cv3.put("categoryID", category.getId());
+			cv3.put("userName", user.getName());
+			try {
+				db.insert("UserCategory",null,cv3);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error cv3");
+				return false;
+			}	
+		}
+		/*
+		for(int itineraryID : user.getUserItinerariesID()) {
+		    String query3 = "INSERT INTO UserItinerary (itineraryID, userName) VALUES ('"+itineraryID+"','"+user.getName()+"')";
+					try {
+				db.rawQuery(query3, null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}	
+		}*/
 		return true;
 	}
 
 	public RecordSet getAllUser(){
 		this.db = this.gw.getReadableDatabase();
 		String query = "SELECT userName FROM User";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
+
+	public RecordSet getAllLanguages(){
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT language FROM Language";
 		SQLSet results = null;
 		try {
 			results = new SQLSet(db.rawQuery(query, null));

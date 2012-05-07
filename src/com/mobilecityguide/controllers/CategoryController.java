@@ -10,6 +10,7 @@ import com.mobilecityguide.models.Category;
 public class CategoryController {
 	
 	public static HashMap<Integer, Category> fetchedCategories = new HashMap<Integer, Category>();
+	public static HashMap<String, Integer> titlesIDCategoriesMap = new HashMap<String, Integer>();
 	
 	public static CategoryMapper categoryMapper;	
 	
@@ -17,16 +18,9 @@ public class CategoryController {
 		return categoryMapper.getCategory(ID);
 	}
 	
-	public static ArrayList<String> getAllCategoriesNames(){
-		
-		ArrayList<String> categories = new ArrayList<String>(); // List of all categories in activeUser language
-		HashMap <String, String> allCategories = categoryMapper.getAllCategories();
-        String[]languages = UserController.activeUser.getLanguage();
-		for(Entry<String, String> entry : allCategories.entrySet()) {
-		    if (languages[0].equals(entry.getKey()))//TODO gestion langues
-		    	categories.add(entry.getValue());
-		}
-		return categories;
+	public static Category getCategory(String name) {
+		int id = titlesIDCategoriesMap.get(name);
+		return categoryMapper.getCategory(id);
 	}
 	
 	/*
@@ -35,10 +29,44 @@ public class CategoryController {
 	public static String getCategoryTitle(Category category){
 		String [] languages = UserController.activeUser.getLanguage();
 		for (String language : languages){
-		if(category.getCategory().containsKey(language))
+		if(category.getCategory().containsKey(language)){
 			return category.getCategory(language);
+		}
 		}
 		return null;
 	}
-
+	
+	public static String getCategoryTitle(int id){
+		String [] languages = UserController.activeUser.getLanguage();
+		HashMap<String,String> titles = categoryMapper.getCategoryTitles(id);
+		for (String language : languages){
+			if(titles.containsKey(language)){
+				String title = titles.get(language);
+				titlesIDCategoriesMap.put(title, id); //To keep the link between title and id
+				return title;
+			}
+		}
+		return null;
+	}
+	
+	/*
+	 * Return categories titles according to the active user language
+	 */ 
+	public static ArrayList<String> getCategoriesTitles(ArrayList<Integer>itinerariesID){
+		ArrayList<String>titles = new ArrayList<String>();		
+		for(Integer id: itinerariesID)
+			titles.add(getCategoryTitle(id));
+		return titles;
+	}
+	
+	/*
+	 * Return list of all categories titles according to the active user language
+	 */ 
+	public static ArrayList<String> getAllCategoriesTitles() throws Exception{
+		return getCategoriesTitles(getAllCategoriesID());
+	}
+	
+	public static ArrayList<Integer> getAllCategoriesID() throws Exception{
+		return categoryMapper.getAllCategoriesID();
+	}
 }

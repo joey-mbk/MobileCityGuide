@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 
+import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.UserGateway;
 import com.mobilecityguide.gateways.SQL.SQLUserGateway;
@@ -76,5 +77,17 @@ public class UserMapper {
 			e.printStackTrace();
 		}
 		return usersNames;
+	}
+
+	public ArrayList<String> getAllLanguages(){
+		RecordSet r = userGateway.getAllLanguages();
+		ArrayList<String> languages = new ArrayList<String>();
+		try {
+			while(r.next())
+				languages.add(r.getString("language"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return languages;
 	}
 }
