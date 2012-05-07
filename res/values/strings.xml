@@ -6,6 +6,8 @@
     <string name="select_profile_text">Select your profile</string>
     <string name="select_profile_new">New profile</string>
     
+    <string name="select_city_text">Select the city you wish to visit</string>
+    
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
     <string name="username">Username</string>
