@@ -11,7 +11,7 @@
         <Button
             android:id="@+id/slideButton"
             android:layout_width="165dp"
-            android:layout_height="58dp"
+            android:layout_height="83dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/start" />
