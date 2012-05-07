@@ -9,7 +9,7 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/logo"
+            android:id="@+id/slideButton"
             android:layout_width="165dp"
             android:layout_height="58dp"
             android:layout_gravity="center"
