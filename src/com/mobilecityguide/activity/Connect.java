@@ -18,17 +18,17 @@ public class Connect extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View loginButton = findViewById(R.id.login_button);
-		loginButton.setOnClickListener(this);
+		//View loginButton = findViewById(R.id.login_button);
+		//loginButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.login_button:
+		/*case R.id.login_button:
 			intent = new Intent(this, MainMenu.class);
 			startActivity(intent);
-			break;
+			break;*/
 		}
 	}
 }
