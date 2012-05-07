@@ -1,35 +1,35 @@
 package com.mobilecityguide.activity;
 
-import com.mobilecityguide.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class Connect extends Activity implements OnClickListener {
+import com.mobilecityguide.R;
+
+public class CreateProfile extends Activity implements OnClickListener {
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.connect);
+		setContentView(R.layout.create_profile);
 		setListeners();
 	}
 
 	private void setListeners() {
-		View createButton = findViewById(R.id.create_profile);
-		createButton.setOnClickListener(this);
+		//View saveButton = findViewById(R.id.save);
+		//saveButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.create_profile:
-			intent = new Intent(this, CreateProfile.class);
+		/*case R.id.save:
+			intent = new Intent(this, Connect.class);
 			startActivity(intent);
-			break;
+			break;*/
 		}
 	}
 }

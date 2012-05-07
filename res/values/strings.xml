@@ -32,7 +32,11 @@ For educational use only.</string>
 It will help you enhance your touristic experience
 in a city you are visiting for first time or
 you do not know well.</string>
- 
+ 	
+    <string name="save">Save</string>
+    
+    <string name="create_profile_text">Create new profile</string>
+    
     <string name="settings_title">Settings</string>
     <string name="check_for_updates_label">Download last database version</string>
         
