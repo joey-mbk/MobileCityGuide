@@ -19,17 +19,17 @@ public class CreateProfile extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		//View saveButton = findViewById(R.id.save);
-		//saveButton.setOnClickListener(this);
+		View saveButton = findViewById(R.id.save);
+		saveButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		/*case R.id.save:
+		case R.id.save:
 			intent = new Intent(this, Connect.class);
 			startActivity(intent);
-			break;*/
+			break;
 		}
 	}
 }
