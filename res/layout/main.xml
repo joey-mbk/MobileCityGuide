@@ -1,57 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainStyle" >
+    style="@style/MainStyle" 
+    android:id="@+id/contentLayout"
+    android:orientation="vertical" >
 
-    <SlidingDrawer
-        android:id="@+id/SlidingDrawer"
-        android:layout_width="fill_parent"
-        android:layout_height="297dp"
-        android:content="@+id/contentLayout"
-        android:handle="@+id/slideButton"
-        android:orientation="vertical"
-        android:padding="50dip" >
+		<Button
+		    android:id="@+id/slideButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+		    android:layout_marginTop="10dp"
+		    android:background="@drawable/start" >
 
-        <Button
-            android:id="@+id/slideButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/start" >
-        </Button>
+		</Button>
 
-        <LinearLayout
-            android:id="@+id/contentLayout"
-            style="@style/LinearLayout"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/connect_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bconnect" />
-
-            <Button
-                android:id="@+id/register_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bregistrer" />
-        </LinearLayout>
-    </SlidingDrawer>
-
-    <LinearLayout
-        style="@style/LinearLayout"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/help_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bhelp" />
-
-        <Button
-            android:id="@+id/about_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/babout" />
-    </LinearLayout>
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+		    android:layout_marginTop="20dp"
+		    android:text="Tap to start"
+		    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>
