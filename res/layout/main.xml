@@ -37,21 +37,4 @@
         </LinearLayout>
     </SlidingDrawer>
 
-    <LinearLayout
-        style="@style/LinearLayout"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/help_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bhelp" />
-
-        <Button
-            android:id="@+id/about_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/babout" />
-    </LinearLayout>
-
 </LinearLayout>

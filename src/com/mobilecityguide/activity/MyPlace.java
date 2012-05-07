@@ -85,7 +85,7 @@ public class MyPlace extends Activity implements OnClickListener {
 				}
 
 				if(email != null) {
-					email.setText("Autre: " + user.email );
+					email.setText("Autreeee: " + user.email );
 				}
 			}
 			return v;
