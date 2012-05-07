@@ -14,13 +14,13 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.poi_details);
 		setListeners();
 	}
 
 	private void setListeners() {
-		View enterButton = findViewById(R.id.contentLayout);
-		enterButton.setOnClickListener(this);
+		//View enterButton = findViewById(R.id.contentLayout);
+		//enterButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
