@@ -20,7 +20,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center"
 		    android:layout_marginTop="20dp"
-		    android:text="Tap to start"
+		    android:text="@string/splash_screen_text"
 		    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

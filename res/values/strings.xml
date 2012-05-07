@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="splash_screen_text">Tap to start</string>
+    
+    <string name="select_profile_text">Select your profile</string>
+    <string name="select_profile_new">New profile</string>
+    
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
     <string name="username">Username</string>
