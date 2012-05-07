@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class Connect extends Activity implements OnClickListener {
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -18,15 +19,15 @@ public class Connect extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		//View loginButton = findViewById(R.id.login_button);
-		//loginButton.setOnClickListener(this);
+		//View createButton = findViewById(R.id.create_user);
+		//createButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		/*case R.id.login_button:
-			intent = new Intent(this, MainMenu.class);
+		/*case R.id.create_user:
+			intent = new Intent(this, CreateUser.class);
 			startActivity(intent);
 			break;*/
 		}
