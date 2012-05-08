@@ -12,13 +12,13 @@ import android.view.View.OnClickListener;
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
-public class PoisList extends Activity implements OnClickListener {
+public class AddPoi extends Activity implements OnClickListener {
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pois_list);
+		setContentView(R.layout.add_poi);
 		setListeners();
 	}
 
@@ -51,22 +51,12 @@ public class PoisList extends Activity implements OnClickListener {
 		}
 		return false;
 	}
-	
-	private void setListeners() {
-		View addPoiButton = findViewById(R.id.add_poi);
-		addPoiButton.setOnClickListener(this);
 
-		/*View startButton = findViewById(R.id.start);
-		startButton.setOnClickListener(this);*/
+	private void setListeners() {
+
 	}
 
 	public void onClick(View v) {
-		Intent intent;
-		switch (v.getId()) {
-		case R.id.add_poi:
-			intent = new Intent(this, AddPoi.class);
-			startActivity(intent);
-			break;
-		}
+
 	}
 }

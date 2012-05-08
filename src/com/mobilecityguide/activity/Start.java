@@ -51,7 +51,6 @@ public class Start extends Activity implements OnClickListener {
 		return false;
 	}
 
-
 	private void setListeners() {
 		View freeWalkButton = findViewById(R.id.free_walk_button);
 		freeWalkButton.setOnClickListener(this);

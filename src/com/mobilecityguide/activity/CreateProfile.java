@@ -30,28 +30,20 @@ public class CreateProfile extends Activity implements OnClickListener {
 		setContentView(R.layout.create_profile);
 		setListeners();
 	}
-	
+
 	public boolean onCreateOptionsMenu(Menu menu) {
-
-		//Création d'un MenuInflater qui va permettre d'instancier un Menu XML en un objet Menu
 		MenuInflater inflater = getMenuInflater();
-		//Instanciation du menu XML spécifier en un objet Menu
 		inflater.inflate(R.layout.menu_2, menu);
-
 		return true;
-
 	}
 
-	//Méthode qui se déclenchera au clic sur un item
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
-		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
 		switch (item.getItemId()) {
 		case R.id.quit:
-				intent = new Intent(this, MobileCityGuideActivity.class);
-				startActivity(intent);
-				return true;
-		 
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
 		}
 		return false;
 	}
@@ -62,7 +54,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 		View chooseAgeButton = findViewById(R.id.ages);
 		chooseAgeButton.setOnClickListener(this);
-		
+
 		View chooseLanguagesButton = findViewById(R.id.choose_languages);
 		chooseLanguagesButton.setOnClickListener(this);
 
@@ -106,7 +98,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 			// TO DO
 		}
 	}
-	
+
 	public class DialogSingleSelectionClickHandler implements android.content.DialogInterface.OnClickListener {
 		public void onClick(DialogInterface dialog, int which) {
 			// TO DO
