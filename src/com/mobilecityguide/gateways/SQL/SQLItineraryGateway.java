@@ -104,5 +104,17 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		}
 		return results;
 	}
+	
+	public boolean deleteItinerary(String title) {
+		if (this.db.isReadOnly())
+			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+		try {
+			db.delete("ItineraryTitles","title = '"+title+"'", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

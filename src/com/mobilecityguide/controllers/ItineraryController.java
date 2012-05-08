@@ -89,6 +89,11 @@ public class ItineraryController {
 		return itinerariesOfCategory;
 	}
 	
+	public void deleteUserItinerary(String title) throws Exception{
+		if(!getCityItinerariesTitles().contains(title))
+			itineraryMapper.deleteItinerary(title);
+	}
+	
 	public static void saveItinerary(Itinerary itinerary){
 		try {
 			itineraryMapper.addItinerary(itinerary);
