@@ -99,7 +99,7 @@ public class POIController {
 		ArrayList<String> categoriesNames = new ArrayList<String>();
 		ArrayList<Category> categories= poi.getcategories();
 		for (Category category : categories){
-			categoriesNames.add(CategoryController.getCategoryTitle(category));
+			categoriesNames.add(CategoryController.getCategoryTitle(category.getId()));
 		}
 		return null;
 	}
