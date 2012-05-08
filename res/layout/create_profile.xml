@@ -21,22 +21,25 @@
         <Button
             android:id="@+id/ages"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/buttonroundedcorners2"
             android:text="@string/age_prompt" />
 
         <Button
             android:id="@+id/choose_languages"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/buttonroundedcorners2"
             android:text="@string/languages_prompt" />
 
         <Button
             android:id="@+id/choose_interests"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/buttonroundedcorners2"
             android:text="@string/interests_prompt" />
     </LinearLayout>
 

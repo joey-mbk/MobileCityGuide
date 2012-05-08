@@ -8,6 +8,8 @@
     
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
+    <string name="start_label">Start</string>
+    <string name="add_poi_label">Add POI</string>
     <string name="username">Username</string>
     <string name="disconnect">Disconnect</string>
     <string name="my_places_menu">My places</string>
