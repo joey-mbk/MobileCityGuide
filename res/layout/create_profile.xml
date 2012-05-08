@@ -8,30 +8,22 @@
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/text_username"
-            style="@style/TextFieldTitle"
-            android:text="@string/username_connect" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/username"
             android:inputType="textNoSuggestions" />
 
-        <TextView
-            android:id="@+id/text_age"
-            style="@style/TextFieldTitle"
-            android:text="@string/age_prompt" />
-
-        <Spinner
+        <Button
             android:id="@+id/ages"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/age_prompt" />
+            android:layout_marginTop="10dp"
+            android:text="@string/age_prompt" />
 
         <Button
             android:id="@+id/choose_languages"
