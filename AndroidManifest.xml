@@ -18,61 +18,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       
-        <activity android:name=".activity.Help"
-				android:label="Help" 
-				android:theme="@android:style/Theme.Dialog">
-		</activity>
-		
-        <activity android:name=".activity.About"
-				android:label="About" 
-				android:theme="@android:style/Theme.Dialog">
-		</activity>
-        
-        <activity android:name=".activity.Connect"
-				android:label="Connection">
-		</activity>
-		
-        <activity android:name=".activity.Registrer"
-				android:label="Registering">
-		</activity>
-		
-        <activity android:name=".activity.MainMenu"
-				android:label="Main Menu">
-		</activity>
-
-        <activity android:name=".activity.MyPlace"
-				android:label="Choose your mode">
-		</activity>
-
-        <activity android:name=".activity.Settings"
-				android:label="Settings">
-		</activity>
-		
-        <activity android:name=".activity.Itinerary"
-				android:label="Itinerary">
-		</activity>
-
-        <activity android:name=".activity.Start"
-				android:label="Let's go">
-		</activity>
-		
-        <activity android:name=".activity.AddItem"
-				android:label="Add Item">
-		</activity>
-		
-        <activity android:name=".activity.DellItem"
-				android:label="Delete Item">
-		</activity>
-		
-        <activity android:name=".activity.EditItem"
-				android:label="Edit Item">
-		</activity>
-        
-        <activity android:name=".activity.CreateProfile"
-				android:label="Create new profile">
-		</activity>
-        
+        <activity
+            android:name=".activity.Help"
+            android:label="Help"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".activity.About"
+            android:label="About"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".activity.Connect"
+            android:label="Connection" >
+        </activity>
+        <activity
+            android:name=".activity.Start"
+            android:label="Let&apos;s go" >
+        </activity>
+        <activity
+            android:name=".activity.CreateProfile"
+            android:label="Create new profile" >
+        </activity>
+        <activity
+            android:name=".activity.CreateItinerary"
+            android:label="Create new Itinerary" >
+        </activity>
+        <activity
+            android:name=".activity.CitiesList"
+            android:label="Choose a city" >
+        </activity>
+        <activity
+            android:name=".activity.ItinerariesList"
+            android:label="Choose an itinerary" >
+        </activity>
+        <activity
+            android:name=".activity.PoisList"
+            android:label="Start visiting" >
+        </activity>
+        <activity
+            android:name=".activity.FreeWalk"
+            android:label="Free walk" >
+        </activity>
     </application>
 
 </manifest>

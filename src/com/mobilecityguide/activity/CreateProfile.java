@@ -5,16 +5,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
 public class CreateProfile extends Activity implements OnClickListener {
 
 	protected CharSequence[] options_a = {"Kid", "Adult"};
 	protected int selections_a;
-	protected CharSequence[] options_l = {"Français", "English", "Nederlands"};
+	protected CharSequence[] options_l = {"Francais", "English", "Nederlands"};
 	protected boolean[] selections_l =  new boolean[ options_l.length ];
 	protected CharSequence[] options_i = {"Sport", "Cinema", "Opera", "Zoo"};
 	protected boolean[] selections_i =  new boolean[ options_i.length ];
@@ -27,13 +31,30 @@ public class CreateProfile extends Activity implements OnClickListener {
 		setListeners();
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.layout.menu_2, menu);
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.quit:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return false;
+	}
+
 	private void setListeners() {
 		View saveButton = findViewById(R.id.save);
 		saveButton.setOnClickListener(this);
 
 		View chooseAgeButton = findViewById(R.id.ages);
 		chooseAgeButton.setOnClickListener(this);
-		
+
 		View chooseLanguagesButton = findViewById(R.id.choose_languages);
 		chooseLanguagesButton.setOnClickListener(this);
 
@@ -77,7 +98,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 			// TO DO
 		}
 	}
-	
+
 	public class DialogSingleSelectionClickHandler implements android.content.DialogInterface.OnClickListener {
 		public void onClick(DialogInterface dialog, int which) {
 			// TO DO

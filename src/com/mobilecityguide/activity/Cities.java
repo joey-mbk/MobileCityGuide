@@ -1,5 +1,8 @@
 package com.mobilecityguide.activity;
 
+import com.mobilecityguide.MobileCityGuideActivity;
+import com.mobilecityguide.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.mobilecityguide.MobileCityGuideActivity;
-import com.mobilecityguide.R;
+public class Cities extends Activity implements OnClickListener {
 
-public class MainMenu extends Activity implements OnClickListener {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main_menu);
+		setContentView(R.layout.list_of_items);
 		setListeners();
 	}
 
@@ -28,7 +29,7 @@ public class MainMenu extends Activity implements OnClickListener {
 		MenuInflater inflater = getMenuInflater();
 		//Instanciation du menu XML spécifier en un objet Menu
 		inflater.inflate(R.layout.menu, menu);
-		
+
 		return true;
 
 	}
@@ -38,45 +39,39 @@ public class MainMenu extends Activity implements OnClickListener {
 		Intent intent;
 		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
 		switch (item.getItemId()) {
-		/*case R.id.main_menu:
-			intent = new Intent(this, MainMenu.class);
+		case R.id.quit:
+				intent = new Intent(this, MobileCityGuideActivity.class);
+				startActivity(intent);
+				return true;
+		case R.id.change_user:
+			intent = new Intent(this, Connect.class);
 			startActivity(intent);
 			return true;
-		*/
+		case R.id.change_city:
+			intent = new Intent(this, Cities.class);
+			startActivity(intent);
+			return true;
+		case R.id.edit_profile:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		 
 		}
 		return false;
 	}
-	
+
 	private void setListeners() {
-		View startButton = findViewById(R.id.start_button);
-		startButton.setOnClickListener(this);
-		View itineraryButton = findViewById(R.id.itinerary_button);
-		itineraryButton.setOnClickListener(this);
-		View settingsButton = findViewById(R.id.settings_button);
-		settingsButton.setOnClickListener(this);
-		View disconnectButton = findViewById(R.id.disconnect_button);
-		disconnectButton.setOnClickListener(this);
+		//View createButton = findViewById(R.id.create_profile);
+		//createButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
-		switch (v.getId()) {
-		case R.id.start_button:
-			intent = new Intent(this, Start.class);
-			startActivity(intent);
-			break;
-		case R.id.itinerary_button:
-			intent = new Intent(this, MyPlace.class);
-			startActivity(intent);
-			break;
-		case R.id.settings_button:
-			intent = new Intent(this, Settings.class);
-			startActivity(intent);
-			break;
-		case R.id.disconnect_button:
-			intent = new Intent(this, MobileCityGuideActivity.class);
-			startActivity(intent);
-			break;
-		}
+		//switch (v.getId()) {
+		//case R.id.create_profile:
+			//intent = new Intent(this, CreateProfile.class);
+			//startActivity(intent);
+			//break;
+		//}
 	}
 }
