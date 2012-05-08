@@ -14,7 +14,7 @@
     <string name="settings_menu">Settings</string>
     <string name="help_menu">Help</string>
     <string name="about_menu">About</string>
-    <string name="interests_prompt">Centre of interest</string>
+    <string name="interests_prompt">Centres of interest</string>
     <string name="age_prompt">Choose your age</string>
     <string name="itinerary_prompt">Choose your itinerary</string>
     <string name="languages_prompt">Choose your language(s)</string>
@@ -71,7 +71,6 @@ you do not know well.</string>
     
     <string name="itineraries_title">Itineraries in</string>
     <string name="empty_itineraries">No Itineraries found</string>
-    
     
     <string name="close_label">Close</string>
     
