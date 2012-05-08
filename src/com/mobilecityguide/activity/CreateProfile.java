@@ -5,9 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
 public class CreateProfile extends Activity implements OnClickListener {
@@ -25,6 +29,31 @@ public class CreateProfile extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_profile);
 		setListeners();
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		//Création d'un MenuInflater qui va permettre d'instancier un Menu XML en un objet Menu
+		MenuInflater inflater = getMenuInflater();
+		//Instanciation du menu XML spécifier en un objet Menu
+		inflater.inflate(R.layout.menu_2, menu);
+
+		return true;
+
+	}
+
+	//Méthode qui se déclenchera au clic sur un item
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
+		switch (item.getItemId()) {
+		case R.id.quit:
+				intent = new Intent(this, MobileCityGuideActivity.class);
+				startActivity(intent);
+				return true;
+		 
+		}
+		return false;
 	}
 
 	private void setListeners() {

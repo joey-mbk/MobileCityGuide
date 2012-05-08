@@ -36,13 +36,13 @@ public class Settings extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
-		switch (item.getItemId()) {
-		case R.id.main_menu:
-			intent = new Intent(this, MainMenu.class);
-			startActivity(intent);
-			return true;
+		//switch (item.getItemId()) {
+		//case R.id.main_menu:
+			//intent = new Intent(this, MainMenu.class);
+			//startActivity(intent);
+			//return true;
 		
-		}
+		//}
 		return false;
 	}
 	

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mobilecityguide.activity.Cities;
 import com.mobilecityguide.activity.Connect;
 
 public class MobileCityGuideActivity extends Activity implements OnClickListener {
@@ -27,7 +28,7 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.contentLayout:
-			intent = new Intent(this, Connect.class);
+			intent = new Intent(this, Cities.class);
 			startActivity(intent);
 			break;
 		}
