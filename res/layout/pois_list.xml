@@ -46,7 +46,8 @@
         android:id="@android:id/android:list"
         android:layout_width="wrap_content"
         android:layout_height="237dp"
-        android:background="@drawable/bg2" >
+        android:background="@drawable/listroundedcorners"
+        android:cacheColorHint="#00ffffff">
         
     </ListView>
     

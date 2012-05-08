@@ -34,18 +34,7 @@ public class Itinerary extends Activity {
 		Intent intent;
 		//On regarde quel item a été cliqué grâce à son id et on déclenche une action
 		switch (item.getItemId()) {
-		case R.id.main_menu:
-			intent = new Intent(this, MainMenu.class);
-			startActivity(intent);
-			return true;
-		case R.id.settings:
-			intent = new Intent(this, Settings.class);
-			startActivity(intent);
-			return true;
-		case R.id.disconnect:
-			intent = new Intent(this, MobileCityGuideActivity.class);
-			startActivity(intent);
-			return true;
+		
 		}
 		return false;
 	}

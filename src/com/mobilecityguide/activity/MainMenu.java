@@ -42,14 +42,7 @@ public class MainMenu extends Activity implements OnClickListener {
 			intent = new Intent(this, MainMenu.class);
 			startActivity(intent);
 			return true;
-		case R.id.settings:
-			intent = new Intent(this, Settings.class);
-			startActivity(intent);
-			return true;
-		case R.id.disconnect:
-			intent = new Intent(this, MobileCityGuideActivity.class);
-			startActivity(intent);
-			return true;
+		
 		}
 		return false;
 	}
