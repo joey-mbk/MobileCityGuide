@@ -13,6 +13,7 @@ import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 
 public class Start extends Activity implements OnClickListener {
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,44 +21,35 @@ public class Start extends Activity implements OnClickListener {
 		setContentView(R.layout.start_menu);
 		setListeners();
 	}
-	
-	//Méthode qui se déclenchera lorsque vous appuierez sur le bouton menu du téléphone
-		public boolean onCreateOptionsMenu(Menu menu) {
 
-			//Création d'un MenuInflater qui va permettre d'instancier un Menu XML en un objet Menu
-			MenuInflater inflater = getMenuInflater();
-			//Instanciation du menu XML spécifier en un objet Menu
-			inflater.inflate(R.layout.menu, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.layout.menu, menu);
+		return true;
+	}
 
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.quit:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
 			return true;
-
+		case R.id.change_user:
+			intent = new Intent(this, Connect.class);
+			startActivity(intent);
+			return true;
+		case R.id.change_city:
+			intent = new Intent(this, CitiesList.class);
+			startActivity(intent);
+			return true;
+		case R.id.edit_profile:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
 		}
-
-		//Méthode qui se déclenchera au clic sur un item
-		public boolean onOptionsItemSelected(MenuItem item) {
-			Intent intent;
-			//On regarde quel item a été cliqué grâce à son id et on déclenche une action
-			switch (item.getItemId()) {
-			case R.id.quit:
-					intent = new Intent(this, MobileCityGuideActivity.class);
-					startActivity(intent);
-					return true;
-			case R.id.change_user:
-				intent = new Intent(this, Connect.class);
-				startActivity(intent);
-				return true;
-			case R.id.change_city:
-				intent = new Intent(this, Cities.class);
-				startActivity(intent);
-				return true;
-			case R.id.edit_profile:
-				intent = new Intent(this, MobileCityGuideActivity.class);
-				startActivity(intent);
-				return true;
-			 
-			}
-			return false;
-		}
+		return false;
+	}
 
 
 	private void setListeners() {
@@ -71,11 +63,11 @@ public class Start extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.free_walk_button:
-			intent = new Intent(this, Free_walk.class);
+			intent = new Intent(this, FreeWalk.class);
 			startActivity(intent);
 			break;
 		case R.id.guide_tour_button:
-			intent = new Intent(this, Guided_tour.class);
+			intent = new Intent(this, ItinerariesList.class);
 			startActivity(intent);
 			break;
 		}

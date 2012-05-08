@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.mobilecityguide.activity.Cities;
 import com.mobilecityguide.activity.Connect;
 import com.mobilecityguide.activity.Free_walk;
 import com.mobilecityguide.activity.Guided_tour;
