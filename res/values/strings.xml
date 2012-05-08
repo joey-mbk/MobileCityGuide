@@ -55,6 +55,12 @@ you do not know well.</string>
     	
 	<string name="about_title">About MobileCity 0.0.1</string>
  
+	<string name="itinerary_name">Itinerary name</string>
+	
+	<string name="themes_prompt">Theme of the itinerary</string>
+	
+	<string name="add_pois">Add POIs</string>
+	
     <string name="poi_tab_info">Info</string>
     <string name="poi_tab_children">Sublocations</string>
     <string name="poi_tab_itineraries">Itineraries</string>
