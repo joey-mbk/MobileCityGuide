@@ -1,0 +1,33 @@
+Fichiers Java : 
+ - com.mobilecityguide :
+	MobileCityGuideActivity.java
+
+ - com.mobilecityguide.activity :
+	About.java
+	AddPoi.java
+	CitiesList.java
+	Connect.java
+	CreateItinerary.java
+	CreateProfile.java
+	FreeWalk.java
+	Help.java
+	ItinerariesList.java
+	PoisList.java
+	Start.java
+
+Fichiers XML :
+ - layout :
+	about.xml
+	add_poi.xml
+	cities_list.xml
+	connect.xml
+	create_itinerary.xml
+	create_profile.xml
+	free_walk.xml
+	help.xml
+	itineraries_list.xml
+	main.xml
+	menu_2.xml
+	menu.xml
+	pois_list.xml
+	start_menu.xml
