@@ -19,17 +19,17 @@ public class Connect extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		//View createButton = findViewById(R.id.create_user);
-		//createButton.setOnClickListener(this);
+		View createButton = findViewById(R.id.create_profile);
+		createButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		/*case R.id.create_user:
-			intent = new Intent(this, CreateUser.class);
+		case R.id.create_profile:
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
-			break;*/
+			break;
 		}
 	}
 }

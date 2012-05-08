@@ -14,13 +14,15 @@
     
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
+    <string name="start_label">Start</string>
+    <string name="add_poi_label">Add POI</string>
     <string name="username">Username</string>
     <string name="disconnect">Disconnect</string>
     <string name="my_places_menu">My places</string>
     <string name="settings_menu">Settings</string>
     <string name="help_menu">Help</string>
     <string name="about_menu">About</string>
-    <string name="interests_prompt">Centre of interest</string>
+    <string name="interests_prompt">Centres of interest</string>
     <string name="age_prompt">Choose your age</string>
     <string name="itinerary_prompt">Choose your itinerary</string>
     <string name="languages_prompt">Choose your language(s)</string>
@@ -38,7 +40,11 @@ For educational use only.</string>
 It will help you enhance your touristic experience
 in a city you are visiting for first time or
 you do not know well.</string>
- 
+ 	
+    <string name="save">Save</string>
+    
+    <string name="create_profile_text">Create new profile</string>
+    
     <string name="settings_title">Settings</string>
     <string name="check_for_updates_label">Download last database version</string>
         
@@ -73,7 +79,6 @@ you do not know well.</string>
     
     <string name="itineraries_title">Itineraries in</string>
     <string name="empty_itineraries">No Itineraries found</string>
-    
     
     <string name="close_label">Close</string>
     

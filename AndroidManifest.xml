@@ -69,6 +69,10 @@
 				android:label="Edit Item">
 		</activity>
         
+        <activity android:name=".activity.CreateProfile"
+				android:label="Create new profile">
+		</activity>
+        
     </application>
 
 </manifest>
