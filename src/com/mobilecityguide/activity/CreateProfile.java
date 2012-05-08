@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.mobilecityguide.R;
 
 public class CreateProfile extends Activity implements OnClickListener {
 
+	protected CharSequence[] options_a = {"Kid", "Adult"};
+	protected int selections_a;
 	protected CharSequence[] options_l = {"Français", "English", "Nederlands"};
 	protected boolean[] selections_l =  new boolean[ options_l.length ];
 	protected CharSequence[] options_i = {"Sport", "Cinema", "Opera", "Zoo"};
@@ -25,20 +25,15 @@ public class CreateProfile extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_profile);
 		setListeners();
-		setSpinners();
-	}
-
-	private void setSpinners() {
-	    Spinner s = (Spinner) findViewById(R.id.ages);
-	    ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.ages, android.R.layout.simple_spinner_item);
-	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    s.setAdapter(adapter);
 	}
 
 	private void setListeners() {
 		View saveButton = findViewById(R.id.save);
 		saveButton.setOnClickListener(this);
 
+		View chooseAgeButton = findViewById(R.id.ages);
+		chooseAgeButton.setOnClickListener(this);
+		
 		View chooseLanguagesButton = findViewById(R.id.choose_languages);
 		chooseLanguagesButton.setOnClickListener(this);
 
@@ -52,6 +47,13 @@ public class CreateProfile extends Activity implements OnClickListener {
 		case R.id.save:
 			intent = new Intent(this, Connect.class);
 			startActivity(intent);
+			break;
+		case R.id.ages:
+			AlertDialog.Builder ages = new AlertDialog.Builder(this);
+			ages.setTitle("Choose your age");
+			ages.setSingleChoiceItems(options_a, selections_a, new DialogSingleSelectionClickHandler());
+			ages.setPositiveButton("OK", new DialogButtonClickHandler());
+			ages.show();
 			break;
 		case R.id.choose_languages:
 			AlertDialog.Builder languages = new AlertDialog.Builder(this);
@@ -72,6 +74,12 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
 		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
+			// TO DO
+		}
+	}
+	
+	public class DialogSingleSelectionClickHandler implements android.content.DialogInterface.OnClickListener {
+		public void onClick(DialogInterface dialog, int which) {
 			// TO DO
 		}
 	}
