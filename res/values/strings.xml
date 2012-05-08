@@ -9,6 +9,10 @@
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
     <string name="start_label">Start</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_city">Change city</string>
+    <string name="quit_application">Quit application</string>
+    <string name="change_user">Change user</string>
     <string name="add_poi_label">Add POI</string>
     <string name="create_new_itinerary">Create new itinerary</string>
     <string name="username">Username</string>
