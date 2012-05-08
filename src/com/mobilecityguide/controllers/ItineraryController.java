@@ -27,7 +27,7 @@ public class ItineraryController {
 	 * Return itinerary category title according to the active user language
 	 */ 
 	public static String getItineraryCategoryName(Itinerary itinerary){		
-		return CategoryController.getCategoryTitle(itinerary.getTheme());
+		return CategoryController.getCategoryTitle(itinerary.getTheme().getId());
 	}
 
 	/*

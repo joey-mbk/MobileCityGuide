@@ -54,10 +54,10 @@ public class MobileCityGuideActivity extends Activity {
 		System.out.println("Langues:");
 		for(String language: UserController.activeUser.getLanguage())
 			System.out.println(language);
-	/*	System.out.println("*******Liste des categories de l'utilisateur*******");
+		System.out.println("*******Liste des categories de l'utilisateur*******");
 		for(String category: UserController.getActiveUserCategoriesNames())
 			System.out.println(category);
-*/
+
 
 
 
@@ -90,7 +90,7 @@ public class MobileCityGuideActivity extends Activity {
 
 			System.out.println("*******Choix de l'itinéraire*******");
 			System.out.println("Titre: "+ItineraryController.getItineraryTitle(itinerary));
-			System.out.println("Categorie: "+CategoryController.getCategoryTitle(itinerary.getTheme()));
+			System.out.println("Categorie: "+CategoryController.getCategoryTitle(itinerary.getTheme().getId()));
 
 
 			System.out.println("*******Liste des POI de l'itinéraire choisi*******");

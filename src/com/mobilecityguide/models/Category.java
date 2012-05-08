@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 public class Category {
 	
+	private int id;
+	private HashMap <String, String> category;
+	
 	public Category(int ID, HashMap <String, String> category){
 		id = ID;
 		this.category= category;
 	}
-	
-	private int id;
-	private HashMap <String, String> category;
 	
 	public int getId() {
 		return id;

@@ -79,9 +79,9 @@ public class UserController {
 		ArrayList<String> categoriesNames = new ArrayList<String>();
 		ArrayList<Category> categories= activeUser.getUserCategories();
 		for (Category category : categories){
-			categoriesNames.add(CategoryController.getCategoryTitle(category));
+			categoriesNames.add(CategoryController.getCategoryTitle(category.getId()));
 		}
-		return null;
+		return categoriesNames;
 	}
 	public static ArrayList<String> getAllUsersNames(){
 		return userMapper.getAllUsersNames();

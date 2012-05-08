@@ -33,12 +33,22 @@ public class UserMapper {
 				user.setLanguage(rU.getList("language", "priority"));
 			}
 			HashMap<String, String> categoriesMap = new HashMap<String,String>();
+			int id = 0;
 			while (rCat.next())
 			{
-				categoriesMap.put(rCat.getString("language"), rCat.getString("title"));
-				Category category = new Category(rCat.getInt("categoryID"), categoriesMap);
+				if(id==0)
+				id = rCat.getInt("categoryID");
+				if(id!=rCat.getInt("categoryID")){
+				Category category = new Category(id, categoriesMap);
 				user.addCategory(category);
+				categoriesMap = new HashMap<String, String>();
+				id = rCat.getInt("categoryID");
+				}
+				categoriesMap.put(rCat.getString("language"), rCat.getString("title"));
 			}
+			Category category = new Category(id, categoriesMap);
+			user.addCategory(category);
+			
 			while (rI.next())
 			{
 				user.getUserItinerariesID().add(rI.getInt("itineraryID"));
