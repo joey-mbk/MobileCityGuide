@@ -144,8 +144,14 @@ public class MobileCityGuideActivity extends Activity {
 		System.out.println("*******Liste des utilisateurs*******");
 		for(String userName: usersList2)
 			System.out.println(userName);
+		
+		UserController.delActiveUser();
 
-
+		ArrayList<String>usersList3 = UserController.getAllUsersNames();
+		System.out.println("*******Liste des utilisateurs*******");
+		for(String userName: usersList3)
+			System.out.println(userName);
+		
 		System.out.println("END");
 		setContentView(R.layout.main);
 	}

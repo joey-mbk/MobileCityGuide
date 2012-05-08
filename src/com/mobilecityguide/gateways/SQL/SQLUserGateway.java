@@ -61,9 +61,8 @@ public class SQLUserGateway implements UserGateway {
 	public boolean deleteUser(String name) {
 		if (this.db.isReadOnly())
 			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
-		String query = "DELETE FROM User WHERE userName = '"+name+"'";
 		try {
-			db.rawQuery(query, null);
+			db.delete("User","userName = '"+name+"'", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -73,19 +72,65 @@ public class SQLUserGateway implements UserGateway {
 	public boolean setUserName(User user, String previousName){
 		if (this.db.isReadOnly())
 			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
-		String query = "UPDATE User SET userName = '"+user.getName()+"' WHERE userName = '"+previousName+"'";
+		
+		ContentValues cv1 = new ContentValues();
+		cv1.put("userName", user.getName());
 		try {
-			db.rawQuery(query, null);
+			db.update("User",cv1,"userName = '"+previousName+"'",null);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Error setName cv1");
 			return false;
 		}
 		return true;
 	}
 
-	public boolean saveUser(User user){
-		if (this.db.isReadOnly())
+	public boolean saveUser(User user){		
+		try {
+			deleteUser(user.getName());
+			addUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		/*if (this.db.isReadOnly())
 			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
+
+
+		ContentValues cv1 = new ContentValues();
+		cv1.put("age", user.getAge());
+		try {
+			db.update("User",cv1,user.getName(),new String []{String.valueOf("userName = '"+user.getName()+"'")});
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error save cv1");
+			return false;
+		}
+
+		String [] languagesArray = user.getLanguage();
+		for(int i=0;i<languagesArray.length;i++){			
+			ContentValues cv2 = new ContentValues();
+			cv2.put("language", languagesArray[i]);
+			try {
+				db.update("User",cv2,user.getName(),new String []{"userName = '"+user.getName()+"'","priority = '"+i+"'"});
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error save cv2");
+				return false;
+			}
+		}
+
+		for(Category category : user.getUserCategories()) {
+			ContentValues cv3 = new ContentValues();
+			cv3.put("age", user.getAge());
+			try {
+				db.update("User",cv1,user.getName(),new String []{String.valueOf("userName = '"+user.getName()+"'")});
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error save cv1");
+				return false;
+			}
+		}
 
 		String [] languagesArray = user.getLanguage();
 		for(int i=0;i<languagesArray.length;i++){			
@@ -98,6 +143,9 @@ public class SQLUserGateway implements UserGateway {
 			}
 
 		}
+
+
+
 		String query2 = "UPDATE User SET age = '"+user.getAge()+"' WHERE userName = '"+user.getName()+"'";
 		try {
 			db.rawQuery(query2, null);
@@ -123,7 +171,7 @@ public class SQLUserGateway implements UserGateway {
 				e.printStackTrace();
 				return false;
 			}
-		}
+		}*/
 		return true;
 	}
 
@@ -156,7 +204,7 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}
 		}
-		
+
 		for(Category category : user.getUserCategories()) {
 			ContentValues cv3 = new ContentValues();
 			cv3.put("categoryID", category.getId());
@@ -169,16 +217,21 @@ public class SQLUserGateway implements UserGateway {
 				return false;
 			}	
 		}
-		/*
-		for(int itineraryID : user.getUserItinerariesID()) {
-		    String query3 = "INSERT INTO UserItinerary (itineraryID, userName) VALUES ('"+itineraryID+"','"+user.getName()+"')";
-					try {
-				db.rawQuery(query3, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}	
-		}*/
+
+		if(!user.getUserItinerariesID().isEmpty()){
+			for(int itineraryID : user.getUserItinerariesID()) {
+				ContentValues cv4 = new ContentValues();
+				cv4.put("itineraryID", itineraryID);
+				cv4.put("userName", user.getName());
+				try {
+					db.insert("UserItinerary",null,cv4);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Error cv4");
+					return false;
+				}	
+			}
+		}
 		return true;
 	}
 
