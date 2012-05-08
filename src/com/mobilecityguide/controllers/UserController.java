@@ -20,8 +20,7 @@ public class UserController {
 	}
 
 	public static void saveUser(){
-		userMapper.save(activeUser);
-		userMapper.setUserName(activeUser,userName);
+		userMapper.save(activeUser,userName);
 	}
     
 	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories){

@@ -1,6 +1,7 @@
 package com.mobilecityguide.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.mobilecityguide.datamappers.ItineraryMapper;
@@ -95,5 +96,4 @@ public class ItineraryController {
 			e.printStackTrace();
 		}
 	}
-	
 }

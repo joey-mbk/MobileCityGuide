@@ -69,109 +69,15 @@ public class SQLUserGateway implements UserGateway {
 		}
 		return true;
 	}
-	public boolean setUserName(User user, String previousName){
-		if (this.db.isReadOnly())
-			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
-		
-		ContentValues cv1 = new ContentValues();
-		cv1.put("userName", user.getName());
+	
+	public boolean saveUser(User user, String previousName){
 		try {
-			db.update("User",cv1,"userName = '"+previousName+"'",null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error setName cv1");
-			return false;
-		}
-		return true;
-	}
-
-	public boolean saveUser(User user){		
-		try {
-			deleteUser(user.getName());
+			deleteUser(previousName);
 			addUser(user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		/*if (this.db.isReadOnly())
-			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
-
-
-		ContentValues cv1 = new ContentValues();
-		cv1.put("age", user.getAge());
-		try {
-			db.update("User",cv1,user.getName(),new String []{String.valueOf("userName = '"+user.getName()+"'")});
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Error save cv1");
-			return false;
-		}
-
-		String [] languagesArray = user.getLanguage();
-		for(int i=0;i<languagesArray.length;i++){			
-			ContentValues cv2 = new ContentValues();
-			cv2.put("language", languagesArray[i]);
-			try {
-				db.update("User",cv2,user.getName(),new String []{"userName = '"+user.getName()+"'","priority = '"+i+"'"});
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Error save cv2");
-				return false;
-			}
-		}
-
-		for(Category category : user.getUserCategories()) {
-			ContentValues cv3 = new ContentValues();
-			cv3.put("age", user.getAge());
-			try {
-				db.update("User",cv1,user.getName(),new String []{String.valueOf("userName = '"+user.getName()+"'")});
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Error save cv1");
-				return false;
-			}
-		}
-
-		String [] languagesArray = user.getLanguage();
-		for(int i=0;i<languagesArray.length;i++){			
-			String query = "UPDATE Language SET language = '"+languagesArray[i]+"' WHERE userName = '"+user.getName()+"' AND priority = '"+i+"'";
-			try {
-				db.rawQuery(query, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-
-		}
-
-
-
-		String query2 = "UPDATE User SET age = '"+user.getAge()+"' WHERE userName = '"+user.getName()+"'";
-		try {
-			db.rawQuery(query2, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-
-		for(Category category : user.getUserCategories()) {
-			String query3 = "UPDATE UserCategory SET categoryID = '"+category.getId()+"' WHERE userName = '"+user.getName()+"'";
-			try {
-				db.rawQuery(query3, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}
-		for(int itineraryID : user.getUserItinerariesID()) {
-			String query4 = "UPDATE UserItinerary SET itineraryID = '"+itineraryID+"' WHERE userName = '"+user.getName()+"'";
-			try {
-				db.rawQuery(query4, null);
-			} catch (Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-		}*/
 		return true;
 	}
 

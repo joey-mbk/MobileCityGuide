@@ -25,7 +25,7 @@ public class MobileCityGuideActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		POIController.poiMapper = new POIMapper(this); // keep this
+		POIController.poiMapper = new POIMapper(this);
 		CategoryController.categoryMapper = new CategoryMapper(this);
 		ItineraryController.itineraryMapper = new ItineraryMapper(this);
 		UserController.userMapper = new UserMapper(this);
@@ -54,7 +54,10 @@ public class MobileCityGuideActivity extends Activity {
 		System.out.println("Langues:");
 		for(String language: UserController.activeUser.getLanguage())
 			System.out.println(language);
-
+	/*	System.out.println("*******Liste des categories de l'utilisateur*******");
+		for(String category: UserController.getActiveUserCategoriesNames())
+			System.out.println(category);
+*/
 
 
 
@@ -78,11 +81,12 @@ public class MobileCityGuideActivity extends Activity {
 		 */
 		try {
 			ArrayList<String>itinerariesList = UserController.getActiveUserItinerariesNames();
-			Itinerary itinerary = ItineraryController.getItinerary(itinerariesList.get(0));
 
 			System.out.println("*******Liste des itinéraires*******");
 			for(String itineraryName: itinerariesList)
 				System.out.println(itineraryName);
+
+			Itinerary itinerary = ItineraryController.getItinerary(itinerariesList.get(0));
 
 			System.out.println("*******Choix de l'itinéraire*******");
 			System.out.println("Titre: "+ItineraryController.getItineraryTitle(itinerary));
@@ -99,11 +103,11 @@ public class MobileCityGuideActivity extends Activity {
 			e2.printStackTrace();
 			System.out.println("Error get itinerary");
 		}		
-		
+
 		/*
 		 * Ajout d'un nouvel utilisateur
 		 */
-
+		/*
 		User newUser = new User();
 		newUser.setName("newUser");
 		newUser.setAge("adult");
@@ -111,7 +115,7 @@ public class MobileCityGuideActivity extends Activity {
 		System.out.println("*******Liste des langues*******");
 		for(String language: languages)
 			System.out.println(language);
-		
+
 		ArrayList<String> categoriesList = null;
 		try {
 			categoriesList = CategoryController.getAllCategoriesTitles();
@@ -120,38 +124,47 @@ public class MobileCityGuideActivity extends Activity {
 		}
 		String[] languagesArray = new String[3];
 		languages.toArray(languagesArray);
-		
+
 		System.out.println("*******Liste des categories*******");
 		for(String category: categoriesList)
 			System.out.println(category);
-		
+
 		ArrayList<Category> userCategoriesList = new ArrayList<Category>();
 		userCategoriesList.add(CategoryController.getCategory(categoriesList.get(0)));
-		
+
 		System.out.println("*******Creation d'un nouvel utilisateur*******");	
 		UserController.addNewUser(newUser, "newUser","adult", languagesArray, userCategoriesList);
-		
+		 */	
 		/*
 		 * Affichage des données de l'utilisateur
 		 */
-		System.out.println("Nom: "+UserController.activeUser.getName());
+		/*	System.out.println("Nom: "+UserController.activeUser.getName());
 		System.out.println("Age: "+UserController.activeUser.getAge());
 		System.out.println("Langues:");
 		for(String language: UserController.activeUser.getLanguage())
 			System.out.println(language);
-		
-		ArrayList<String>usersList2 = UserController.getAllUsersNames();
-		System.out.println("*******Liste des utilisateurs*******");
-		for(String userName: usersList2)
-			System.out.println(userName);
-		
-		UserController.delActiveUser();
+		 */
+		/*	
+	//	UserController.setActiveUserName("NewUser2");
+	//	UserController.saveUser();
+	//	UserController.delActiveUser();
 
 		ArrayList<String>usersList3 = UserController.getAllUsersNames();
 		System.out.println("*******Liste des utilisateurs*******");
 		for(String userName: usersList3)
 			System.out.println(userName);
-		
+		 */
+
+		/*
+		 * Affichage des POI en fonction des centres d'intérêt de l'utilisateur
+		 */
+		try {
+			for(String POIName: POIController.getPOIofUserCategories())
+				System.out.println(POIName);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		System.out.println("END");
 		setContentView(R.layout.main);
 	}

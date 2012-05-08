@@ -1,6 +1,7 @@
 package com.mobilecityguide.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import com.mobilecityguide.datamappers.POIMapper;
@@ -29,12 +30,29 @@ public class POIController {
 		return poiNames;
 	}
 	
+	public static void sortPOINamesByName(ArrayList<String>POINames){
+		Collections.sort(POINames);	
+	}
+	
+	public static void reversePOINames(ArrayList<String>POINames){
+		Collections.sort(POINames);
+		Collections.reverse(POINames);
+	}
+	
 	public static ArrayList<String> getPOIofCategory(Category category) throws Exception{
 		POI[] poiList = poiMapper.getPOIsOfCategory(UserController.city,category.getId());
 		ArrayList<String> poiNames = new ArrayList<String>();
 		for(POI poi : poiList)
 			poiNames.add(getPOIName(poi));
 		return poiNames;
+	}
+	
+	public static ArrayList<String> getPOIofUserCategories() throws Exception{
+		ArrayList<String> poiOfUserCategories = new ArrayList<String>();
+		for(Category category: UserController.activeUser.getUserCategories()){
+			poiOfUserCategories.addAll(POIController.getPOIofCategory(category));
+		}
+		return poiOfUserCategories;
 	}
 	
 	/*

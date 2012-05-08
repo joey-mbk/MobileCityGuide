@@ -55,12 +55,8 @@ public class UserMapper {
 		return this.userGateway.deleteUser(name);
 	}
 
-	public boolean save(User user) {
-		return this.userGateway.saveUser(user);
-	}
-
-	public boolean setUserName(User user, String previousName) {
-		return this.userGateway.setUserName(user, previousName);
+	public boolean save(User user, String previousName) {
+		return this.userGateway.saveUser(user, previousName);
 	}
 
 	public boolean addUser(User user) {

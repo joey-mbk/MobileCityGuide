@@ -8,8 +8,7 @@ public interface UserGateway {
 	RecordSet getUserCategories(String name) throws Exception;
 	RecordSet getUserItinerariesID(String name) throws Exception;
 	boolean deleteUser(String name);
-	boolean saveUser(User user);
-	boolean setUserName(User user, String previousName);
+	boolean saveUser(User user, String previousName);
 	boolean addUser(User user);
 	RecordSet getAllUser();
 	RecordSet getAllLanguages();
