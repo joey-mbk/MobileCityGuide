@@ -4,13 +4,16 @@
     <item
         android:id="@+id/main_menu"
         android:title="Main menu"/>
+    <item
+        android:id="@+id/edit_profile"
+        android:title="Edit profile"/>
 
     <item
-        android:id="@+id/settings"
-        android:title="Settings"/>
+        android:id="@+id/change_city"
+        android:title="Change city"/>
 
     <item
-        android:id="@+id/disconnect"
-        android:title="Disconnect"/>
+        android:id="@+id/quit"
+        android:title="Quit"/>
 
 </menu>
