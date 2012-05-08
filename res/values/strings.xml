@@ -5,6 +5,7 @@
     
     <string name="select_profile_text">Select your profile</string>
     <string name="select_city_text">Select a city</string>
+    <string name="select_poi_text">Select a POI</string>
     <string name="select_profile_new">New profile</string>
     
     <string name="hello">Hello World, MobileCityGuideActivity!</string>

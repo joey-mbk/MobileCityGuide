@@ -46,11 +46,9 @@ public class FreeWalk extends Activity implements OnClickListener {
 			intent = new Intent(this, MobileCityGuideActivity.class);
 			startActivity(intent);
 			return true;
-
 		}
 		return false;
 	}
-
 
 	private void setListeners() {
 		View guideTourButton = findViewById(R.id.start);
@@ -58,12 +56,12 @@ public class FreeWalk extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-		Intent intent;
+		/*Intent intent;
 		switch (v.getId()) {
 		case R.id.start:
-			//intent = new Intent(this, .class);
-			//startActivity(intent);
+			intent = new Intent(this, .class);
+			startActivity(intent);
 			break;
-		}
+		}*/
 	}
 }

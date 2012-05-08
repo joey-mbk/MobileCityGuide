@@ -51,7 +51,6 @@ public class ItinerariesList extends Activity implements OnClickListener {
 		return false;
 	}
 
-
 	private void setListeners() {
 		View addPoiButton = findViewById(R.id.create_itinerary);
 		addPoiButton.setOnClickListener(this);
