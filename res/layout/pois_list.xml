@@ -8,7 +8,7 @@
         android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="City"
+        android:text="@string/city"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
@@ -17,7 +17,7 @@
         android:id="@+id/textViewItinerary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intinerary"
+        android:text="@string/itinerary"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="POIs of the itinerary : "
+        android:text="@string/pois_of_itinerary"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#ffffff" />
 

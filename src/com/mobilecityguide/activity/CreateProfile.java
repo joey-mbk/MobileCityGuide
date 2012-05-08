@@ -18,7 +18,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 	protected CharSequence[] options_a = {"Kid", "Adult"};
 	protected int selections_a;
-	protected CharSequence[] options_l = {"Français", "English", "Nederlands"};
+	protected CharSequence[] options_l = {"Francais", "English", "Nederlands"};
 	protected boolean[] selections_l =  new boolean[ options_l.length ];
 	protected CharSequence[] options_i = {"Sport", "Cinema", "Opera", "Zoo"};
 	protected boolean[] selections_i =  new boolean[ options_i.length ];

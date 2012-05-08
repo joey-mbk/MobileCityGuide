@@ -8,7 +8,7 @@
         android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="City"
+        android:text="@string/city"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Choose your itinerary"
+        android:text="@string/itinerary_prompt"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#ffffff" />
 
