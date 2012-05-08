@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.CreateProfile.DialogButtonClickHandler;
-import com.mobilecityguide.activity.CreateProfile.DialogSingleSelectionClickHandler;
 
 public class CreateItinerary extends Activity implements OnClickListener {
 
@@ -38,14 +36,14 @@ public class CreateItinerary extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.themes:
 			AlertDialog.Builder ages = new AlertDialog.Builder(this);
-			ages.setTitle("Choose your age");
+			ages.setTitle("Choose the theme of the itinerary");
 			ages.setSingleChoiceItems(options_t, selections_t, new DialogSingleSelectionClickHandler());
 			ages.setPositiveButton("OK", new DialogButtonClickHandler());
 			ages.show();
 			break;
 		case R.id.add_pois:
-			/*intent = new Intent(this, PoiList.class);
-			startActivity(intent);*/
+			intent = new Intent(this, PoisList.class);
+			startActivity(intent);
 			break;
 		}
 	}
