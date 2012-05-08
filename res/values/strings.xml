@@ -44,6 +44,13 @@ you do not know well.</string>
  	
     <string name="save">Save</string>
     
+    <string name="city">City</string>
+    
+    <string name="itinerary">Itinerary</string>
+    
+    <string name="pois_of_city">POIs of the city : </string>
+    <string name="pois_of_itinerary">POIs of the itinerary : </string>
+    
     <string name="create_profile_text">Create new profile</string>
     
     <string name="create_itinerary_label">Create new itinerary</string>
