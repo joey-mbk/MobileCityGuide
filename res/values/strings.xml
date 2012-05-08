@@ -4,6 +4,7 @@
     <string name="splash_screen_text">Tap to start</string>
     
     <string name="select_profile_text">Select your profile</string>
+    <string name="select_city_text">Select a city</string>
     <string name="select_profile_new">New profile</string>
     
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
@@ -44,6 +45,8 @@ you do not know well.</string>
     
     <string name="create_profile_text">Create new profile</string>
     
+    <string name="create_itinerary_label">Create new itinerary</string>
+    
     <string name="settings_title">Settings</string>
     <string name="check_for_updates_label">Download last database version</string>
         
@@ -62,6 +65,12 @@ you do not know well.</string>
     	
 	<string name="about_title">About MobileCity 0.0.1</string>
  
+	<string name="itinerary_name">Itinerary name</string>
+	
+	<string name="themes_prompt">Theme of the itinerary</string>
+	
+	<string name="add_pois">Save and add POIs</string>
+	
     <string name="poi_tab_info">Info</string>
     <string name="poi_tab_children">Sublocations</string>
     <string name="poi_tab_itineraries">Itineraries</string>
