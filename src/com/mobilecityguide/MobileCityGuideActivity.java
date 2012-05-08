@@ -132,8 +132,10 @@ public class MobileCityGuideActivity extends Activity {
 		ArrayList<Category> userCategoriesList = new ArrayList<Category>();
 		userCategoriesList.add(CategoryController.getCategory(categoriesList.get(0)));
 
-		System.out.println("*******Creation d'un nouvel utilisateur*******");	
-		UserController.addNewUser(newUser, "newUser","adult", languagesArray, userCategoriesList);
+		System.out.println("*******Creation d'un nouvel utilisateur*******");
+		String name : "newUser"
+		if(!isUserNameAlreadyUsed(name))	
+		UserController.addNewUser(newUser, name,"adult", languagesArray, userCategoriesList);
 		 */	
 		/*
 		 * Affichage des données de l'utilisateur
