@@ -1,7 +1,13 @@
 package com.mobilecityguide.models;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+
+import android.text.format.DateFormat;
 
 public class POI {
 	
@@ -88,6 +94,15 @@ public class POI {
 
 	public String getImages(String timeOfDay) {
 		return this.images.get(timeOfDay);
+	}
+	
+	public String getImage() {
+		Calendar cal = new GregorianCalendar();
+		int hourOfDay = cal.get(Calendar.HOUR_OF_DAY);
+		if (hourOfDay >= 18)
+			return this.images.get("night");
+		else
+			return this.images.get("day");
 	}
 
 	public void addImage(String timeOfDay, String path) {
