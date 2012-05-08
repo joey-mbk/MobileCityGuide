@@ -61,20 +61,20 @@ public class Free_walk extends Activity implements OnClickListener {
 
 
 	private void setListeners() {
-		View freeWalkButton = findViewById(R.id.add_button);
+		View freeWalkButton = findViewById(R.id.add_poi);
 		freeWalkButton.setOnClickListener(this);
-		View guideTourButton = findViewById(R.id.start_button);
+		View guideTourButton = findViewById(R.id.start);
 		guideTourButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.add_button:
+		case R.id.add_poi:
 			//intent = new Intent(this, Free_walk.class);
 			//startActivity(intent);
 			break;
-		case R.id.start_button:
+		case R.id.start:
 			//intent = new Intent(this, .class);
 			//startActivity(intent);
 			break;

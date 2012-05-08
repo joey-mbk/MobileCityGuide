@@ -81,7 +81,7 @@
             android:label="Free walk" >
         </activity>
         <activity
-            android:name=".activity.Guided tour"
+            android:name=".activity.Guided_tour"
             android:label="Guided tour" >
         </activity>
     </application>

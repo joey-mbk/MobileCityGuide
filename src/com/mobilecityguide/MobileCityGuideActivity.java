@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 
 import com.mobilecityguide.activity.Cities;
 import com.mobilecityguide.activity.Connect;
+import com.mobilecityguide.activity.Free_walk;
+import com.mobilecityguide.activity.Guided_tour;
 
 public class MobileCityGuideActivity extends Activity implements OnClickListener {
 
@@ -28,7 +30,7 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.contentLayout:
-			intent = new Intent(this, Cities.class);
+			intent = new Intent(this, Connect.class);
 			startActivity(intent);
 			break;
 		}
