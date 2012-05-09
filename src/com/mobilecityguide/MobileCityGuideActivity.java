@@ -108,9 +108,9 @@ public class MobileCityGuideActivity extends Activity {
 				POI valeur = entry.getValue();
 				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
 			}
-			/*System.out.println("*******Création d'un nouvel itinéraire*******");
+			System.out.println("*******Création d'un nouvel itinéraire*******");
 			Itinerary itinerary2 = new Itinerary();
-			itinerary2.addTitle("english", "itinerary10");
+			itinerary2.addTitle("english", "itinerary23");
 			itinerary2.setTheme(UserController.activeUser.getUserCategories().get(0));
 			POI[]poiList = POIController.getPOIOfCity();
 			int i = 0;
@@ -136,7 +136,14 @@ public class MobileCityGuideActivity extends Activity {
 				int step = entry.getKey();
 				POI valeur = entry.getValue();
 				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
-			}*/
+			}
+			System.out.println("*******Suppresiion d'un itinéraires*******");
+			UserController.delUserItinerary(itinerary3);
+			ArrayList<String>itinerariesList3 = UserController.getActiveUserItinerariesNames();
+			System.out.println("*******Liste des itinéraires2*******");
+			for(String itineraryName: itinerariesList3)
+				System.out.println(itineraryName);
+
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			System.out.println("Error get itinerary");

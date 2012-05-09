@@ -110,5 +110,10 @@ public class UserController {
 		ItineraryController.addItinerary(itinerary);
 		setActiveUser(getUser(activeUser.getName()));
 	}
+	
+	public static void delUserItinerary(Itinerary itinerary) throws Exception{
+		ItineraryController.deleteItinerary(itinerary);
+		setActiveUser(getUser(activeUser.getName()));
+	}
 
 }
