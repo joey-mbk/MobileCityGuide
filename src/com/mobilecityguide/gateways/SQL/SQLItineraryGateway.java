@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.mobilecityguide.controllers.ItineraryController;
+import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.models.Itinerary;
@@ -80,6 +81,16 @@ public class SQLItineraryGateway implements ItineraryGateway {
 				e.printStackTrace();
 				return false;
 			}
+		}
+		// add to UserItinerary table
+		ContentValues cv = new ContentValues();
+		cv.put("itineraryID", lastKey);
+		cv.put("userName", UserController.activeUser.getName());
+		try {
+			db.insert("UserItinerary",null,cv);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
