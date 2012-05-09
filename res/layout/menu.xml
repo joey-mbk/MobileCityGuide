@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/change_user"
+        android:title="@string/change_user"/>
+    <item
+        android:id="@+id/edit_profile"
+        android:title="@string/edit_profile"/>
+
+    <item
+        android:id="@+id/change_city"
+        android:title="@string/change_city"/>
+
+    <item
+        android:id="@+id/quit"
+        android:title="@string/quit_application"/>
+
+</menu>

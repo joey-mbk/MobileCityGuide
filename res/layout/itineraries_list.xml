@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainStyle"
+    android:orientation="vertical"
+    android:padding="20dip" >
+
+    <TextView
+        android:id="@+id/textViewCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/itinerary_prompt"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ffffff" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/listroundedcorners"
+        android:cacheColorHint="#00ffffff" >
+    </ListView>
+
+    <Button
+        android:id="@+id/create_itinerary"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonroundedcorners"
+        android:text="@string/create_itinerary_label"
+        android:textColor="#ffffff" />
+
+</LinearLayout>

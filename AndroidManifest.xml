@@ -5,6 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.LOCATION"/>
@@ -20,6 +21,48 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.Help"
+            android:label="Help"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".activity.About"
+            android:label="About"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".activity.Connect"
+            android:label="Connection" >
+        </activity>
+        <activity
+            android:name=".activity.Start"
+            android:label="Let&apos;s go" >
+        </activity>
+        <activity
+            android:name=".activity.CreateProfile"
+            android:label="Create new profile" >
+        </activity>
+        <activity
+            android:name=".activity.CreateItinerary"
+            android:label="Create new Itinerary" >
+        </activity>
+        <activity
+            android:name=".activity.CitiesList"
+            android:label="Choose a city" >
+        </activity>
+        <activity
+            android:name=".activity.ItinerariesList"
+            android:label="Choose an itinerary" >
+        </activity>
+        <activity
+            android:name=".activity.PoisList"
+            android:label="Start visiting" >
+        </activity>
+        <activity
+            android:name=".activity.FreeWalk"
+            android:label="Free walk" >
         </activity>
     </application>
 

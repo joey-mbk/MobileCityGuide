@@ -1,7 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="splash_screen_text">Tap to start</string>
+    
+    <string name="select_profile_text">Select your profile</string>
+    <string name="select_poi_text">Select a POI</string>
+    <string name="select_profile_new">New profile</string>
+    
+    <string name="select_city_text">Select the city you wish to visit</string>
+    
+    <string name="poi_description_text">Description</string>
+    <string name="poi_openings_text">Opening hours</string>
+    <string name="poi_address_text">Address</string>
+    
     <string name="hello">Hello World, MobileCityGuideActivity!</string>
     <string name="app_name">MobileCityGuide</string>
-
+    <string name="start_label">Start</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="change_city">Change city</string>
+    <string name="quit_application">Quit application</string>
+    <string name="change_user">Change user</string>
+    <string name="add_poi_label">Add POI</string>
+    <string name="create_new_itinerary">Create new itinerary</string>
+    <string name="username">Username</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="my_places_menu">My places</string>
+    <string name="settings_menu">Settings</string>
+    <string name="help_menu">Help</string>
+    <string name="about_menu">About</string>
+    <string name="interests_prompt">Centres of interest</string>
+    <string name="age_prompt">Choose your age</string>
+    <string name="itinerary_prompt">Choose your itinerary</string>
+    <string name="languages_prompt">Choose your language(s)</string>
+    <string name="username_connect">Username</string>
+    <string name="password_connect">Password</string>
+    <string name="remember_connect"> Remember login</string>
+    <string name="auto_connect"> Automatically Login</string>
+    <string name="login_connect">Login</string>
+    <string name="back_connect">Back</string>
+    <string name="signup_register">Signup</string>
+    <string name="about_text">\
+All rights reserved.
+For educational use only.</string>
+    <string name="help_text">\<i>MobileCity</i>  is a traveling application.
+It will help you enhance your touristic experience
+in a city you are visiting for first time or
+you do not know well.</string>
+ 	
+    <string name="save">Save</string>
+    
+    <string name="city">City</string>
+    
+    <string name="itinerary">Itinerary</string>
+    
+    <string name="pois_of_city">POIs of the city : </string>
+    <string name="pois_of_itinerary">POIs of the itinerary : </string>
+    
+    <string name="create_profile_text">Create new profile</string>
+    
+    <string name="create_itinerary_label">Create new itinerary</string>
+    
+    <string name="settings_title">Settings</string>
+    <string name="check_for_updates_label">Download last database version</string>
+        
+    <string name="change_user_menu_item">Change User Profile</string>
+    <string name="registered_users_title">User Profiles</string>
+    
+    <string name="my_places_label">My Places</string>
+    <string name="settings_label">Settings</string>
+    <string name="help_label">Help</string>
+    <string name="about_label">About</string>
+    
+    <string name="locations_title">Available locations</string>
+    <string name="empty_location">No locations found</string>
+    
+    <string name="help_title">MobileCity Help</string>
+    	
+	<string name="about_title">About MobileCity 0.0.1</string>
+ 
+	<string name="itinerary_name">Itinerary name</string>
+	
+	<string name="themes_prompt">Theme of the itinerary</string>
+	
+	<string name="add_pois">Save and add POIs</string>
+	
+    <string name="poi_tab_info">Info</string>
+    <string name="poi_tab_children">Sublocations</string>
+    <string name="poi_tab_itineraries">Itineraries</string>
+    
+    <string name="location_info">Location Information</string>
+    <string name="location_latitude_label">Latitude: </string>
+    <string name="location_longitude_label">Longitude: </string>
+    
+    <!--images context menu -->
+    <string name="poi_image_cm_close">Hide image</string>
+    
+    <string name="sublocations_title">Locations in</string>
+    <string name="empty_sublocations">No sublocations found</string>
+    
+    <string name="itineraries_title">Itineraries in</string>
+    <string name="empty_itineraries">No Itineraries found</string>
+    
+    <string name="close_label">Close</string>
+    
+    <string name="downloading_db_title">Please wait &#8230;</string>
+    <string name="downloading_db_text">Downloading database from remote server</string>
+    <string name="download_db_error_title">Impossible to download file</string>
+    <string name="download_db_error_text">Please verify your internet connection</string>
+    
+    <string name="copying_db_title">Please wait &#8230;</string>
+    <string name="copying_db_text">Generating database</string>
+    <string name="copy_db_error_title">Impossible to generate database file</string>
+    <string name="copy_db_error_text">Please reinstall the application</string>
+    
+    <string name="loading_db_title">Please wait &#8230;</string>
+    <string name="loading_db_text">Loading database</string>
+    <string name="load_db_error_title">Impossible to load database file</string>
+    <string name="load_db_error_text">Please reinstall the application</string>
 </resources>
