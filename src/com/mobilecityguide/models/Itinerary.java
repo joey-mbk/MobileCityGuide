@@ -26,7 +26,7 @@ public class Itinerary  {
 	}
 
 	public void addNextPOI(POI poi) {
-		this.POIList.put(POIList.keySet().size()+1, poi);
+		this.POIList.put(POIList.size()+1, poi);
 	}
 	
 	public void addPOI(int step ,POI poi) {
@@ -43,7 +43,7 @@ public class Itinerary  {
 	
 	public void delPOI(int step){
 		this.POIList.remove(step);
-		for(int i = step+1;i<=POIList.keySet().size()+1;i++){
+		for(int i = step+1;i<=POIList.size()+1;i++){
 			POI poi = POIList.get(i);
 			this.POIList.remove(i);
 			this.POIList.put(i-1,poi);
@@ -59,16 +59,17 @@ public class Itinerary  {
 	}
 	
 	public void reOrder(int currentStep, int newStep) {
-
-		POI currentStepPOI = this.POIList.get(currentStep);
-		POI newStepPOI = this.POIList.get(newStep);
-		this.POIList.remove(currentStep);
-		this.POIList.remove(newStep);
-		this.POIList.put(currentStep, newStepPOI);
-		this.POIList.put(newStep, currentStepPOI);
-		
-		
-		/*	POI poi = this.POIList.get(currentStep); // get the poi we wish to reorder
+        
+		POI poiToMove = this.POIList.get(currentStep);
+		delPOI(currentStep);
+		for(int i = POIList.size();i>=newStep;i--){
+			POI poi = POIList.get(i);
+			POIList.remove(i);
+			POIList.put(i+1,poi);
+		}
+		POIList.put(newStep,poiToMove);
+		/*
+			POI poi = this.POIList.get(currentStep); // get the poi we wish to reorder
 		this.POIList.remove(currentStep); // remove the poi from the list
 		POI newStepPOI = this.POIList.get(newStep);
 		POI currentStepPOI = this.POIList.get(currentStep);

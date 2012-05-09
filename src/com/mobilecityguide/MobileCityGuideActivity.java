@@ -100,8 +100,8 @@ public class MobileCityGuideActivity extends Activity {
 				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
 			}
 			
-			itinerary.reOrder(1, 4);
-			itinerary.delPOI(1);
+			itinerary.reOrder(2, 5);
+			//itinerary.delPOI(1);
 			System.out.println("*******Liste modifiée des POI de l'itinéraire choisi*******");
 			for(Entry<Integer, POI> entry : itinerary.getPOIList().entrySet()) {
 				int step = entry.getKey();
