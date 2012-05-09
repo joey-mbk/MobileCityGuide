@@ -102,8 +102,12 @@ public class ItineraryMapper {
 		return itineraries;
 	}
 	
-	public void deleteItinerary(String title) {
-		itineraryGateway.deleteItinerary(title);
+	public void deleteItinerary(Itinerary itinerary) {
+		itineraryGateway.deleteItinerary(itinerary.getId());
+	}
+	
+	public void saveItinerary(Itinerary itinerary) {
+		itineraryGateway.saveItinerary(itinerary);
 	}
 
 }

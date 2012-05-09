@@ -99,5 +99,10 @@ public class UserController {
 	public static ArrayList<String> getAllLanguages(){
  		return userMapper.getAllLanguages();
 	}
+	
+	public static boolean isUserNameAlreadyUsed(String name){
+		return getAllUsersNames().contains(name);
+		
+	}
 
 }
