@@ -89,14 +89,14 @@ public class ItineraryController {
 		return itinerariesOfCategory;
 	}
 	
-	public void deleteUserItinerary(String title) throws Exception{
-		if(!getCityItinerariesTitles().contains(title))
-			itineraryMapper.deleteItinerary(title);
+	public void deleteUserItinerary(Itinerary itinerary) throws Exception{
+		if(!getCityItinerariesTitles().contains(ItineraryController.getItineraryTitle(itinerary)))
+			itineraryMapper.deleteItinerary(itinerary);
 	}
 	
 	public static void saveItinerary(Itinerary itinerary){
 		try {
-			itineraryMapper.addItinerary(itinerary);
+			itineraryMapper.saveItinerary(itinerary);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
