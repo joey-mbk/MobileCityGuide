@@ -101,4 +101,8 @@ public class ItineraryController {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void addItinerary(Itinerary itinerary) throws Exception{
+		itineraryMapper.addItinerary(itinerary);
+	}
 }
