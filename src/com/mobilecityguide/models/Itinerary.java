@@ -48,5 +48,38 @@ public class Itinerary  {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public void reOrder(int currentStep, int newStep) {
+		POI poi = this.POIList.get(new Integer(currentStep)); // get the poi we wish to reorder
+		this.POIList.remove(new Integer(currentStep)); // remove the poi from the list
+		POI newStepPOI = this.POIList.get(new Integer(newStep));
+		POI currentStepPOI = this.POIList.get(new Integer(currentStep));
+		this.POIList.remove(new Integer(currentStep));
+		POI tempPOI = null;
+		POI tempPOI2 = null;
+		
+		if (currentStep > newStep) {
+			tempPOI2 = currentStepPOI;
+			
+			for (int i = newStep; i <= this.POIList.size()+1; i++) {
+				if (i != this.POIList.size()+1) {
+					tempPOI = this.POIList.get(i);
+					this.POIList.remove(i);
+				}
+				this.POIList.put(new Integer(i), tempPOI2);
+				tempPOI2 = tempPOI;
+			}
+		}
+		
+		if (currentStep < newStep) {
+			for (int i = currentStep+1; i <= newStep; i++) {
+				tempPOI = this.POIList.get(new Integer(i));
+				this.POIList.remove(new Integer(i));
+				this.POIList.put(new Integer(i-1), tempPOI);
+			}
+			
+			this.POIList.put(new Integer(newStep), currentStepPOI);
+		}
+	}
 
 }

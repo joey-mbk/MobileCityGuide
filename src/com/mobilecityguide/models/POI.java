@@ -1,13 +1,9 @@
 package com.mobilecityguide.models;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
-import android.text.format.DateFormat;
 
 public class POI {
 	
