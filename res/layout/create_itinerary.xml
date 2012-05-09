@@ -12,14 +12,14 @@
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/itineraryname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="@string/itinerary_name"
             android:inputType="textNoSuggestions" />
 
         <Button
-            android:id="@+id/themes"
+            android:id="@+id/theme"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"

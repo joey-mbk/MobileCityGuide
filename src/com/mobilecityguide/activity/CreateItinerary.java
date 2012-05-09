@@ -1,5 +1,7 @@
 package com.mobilecityguide.activity;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,19 +12,34 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
+import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.UserController;
+import com.mobilecityguide.models.Itinerary;
 
 public class CreateItinerary extends Activity implements OnClickListener {
 
-	protected CharSequence[] options_t = {"Sport", "Culture", "Musique"};
+	protected CharSequence[] options_t;
 	protected int selections_t;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		try {
+			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
+			options_t = new CharSequence[titles.size()];
+			for (int i = 0; i < titles.size(); i++)
+				options_t[i] = titles.get(i);
+		} catch (Exception e) {
+			options_t = null;
+			e.printStackTrace();
+		}
 		setContentView(R.layout.create_itinerary);
 		setListeners();
 	}
@@ -59,7 +76,7 @@ public class CreateItinerary extends Activity implements OnClickListener {
 
 
 	private void setListeners() {
-		View chooseThemeButton = findViewById(R.id.themes);
+		View chooseThemeButton = findViewById(R.id.theme);
 		chooseThemeButton.setOnClickListener(this);
 
 		View saveButton = findViewById(R.id.add_pois);
@@ -69,31 +86,36 @@ public class CreateItinerary extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.themes:
-			AlertDialog.Builder ages = new AlertDialog.Builder(this);
-			ages.setTitle("Choose the theme of the itinerary");
-			ages.setSingleChoiceItems(options_t, selections_t, new DialogSingleSelectionClickHandler());
-			ages.setPositiveButton("OK", new DialogButtonClickHandler());
-			ages.show();
-			break;
-		case R.id.add_pois:
-			intent = new Intent(this, PoisList.class);
-			startActivity(intent);
-			break;
+			case R.id.theme:
+				AlertDialog.Builder theme = new AlertDialog.Builder(this);
+				theme.setTitle(R.string.createitinerary_theme_text);
+				theme.setSingleChoiceItems(options_t, selections_t, new DialogSingleSelectionClickHandler());
+				theme.setPositiveButton("OK", new DialogButtonClickHandler());
+				theme.show();
+				break;
+			case R.id.add_pois:
+				Itinerary itinerary = new Itinerary();
+				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.create_itinerary)).getText().toString());
+				itinerary.setTheme(CategoryController.getCategory( ((Button) findViewById(R.id.theme)).getText().toString() ));
+				intent = new Intent(this, PoisList.class);
+				startActivity(intent);
+				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
+				break;
 		}
 	}
 
 	public class DialogSingleSelectionClickHandler implements android.content.DialogInterface.OnClickListener {
 		public void onClick(DialogInterface dialog, int which) {
-			// TO DO
+			selections_t = which;
 		}
 	}
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
 		public void onClick(DialogInterface dialog, int clicked) {
 			switch(clicked)	{
-			case DialogInterface.BUTTON_POSITIVE:
-				// TO DO
+				case DialogInterface.BUTTON_POSITIVE:
+					Button button = (Button) findViewById(R.id.theme);
+					button.setText(options_t[selections_t]);
 				break;
 			}
 		}
