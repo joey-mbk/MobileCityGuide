@@ -43,7 +43,7 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.contentLayout:
-			intent = new Intent(this, CreateItinerary.class);
+			intent = new Intent(this, Connect.class);
 			startActivity(intent);
 			break;
 		}
