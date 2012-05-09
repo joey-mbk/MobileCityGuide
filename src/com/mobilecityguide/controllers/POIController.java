@@ -21,6 +21,10 @@ public class POIController {
 		return poiMapper.getCitiesNames();
 	}
 	
+	public static POI[] getPOIOfCity() throws Exception{		
+		return poiMapper.getPOIsOfCity(UserController.city);
+	}
+	
 	public static ArrayList<String> getPOINamesOfCity() throws Exception{
 		POI[] poiList = poiMapper.getPOIsOfCity(UserController.city);
 		ArrayList<String> poiNames = new ArrayList<String>();
@@ -39,7 +43,11 @@ public class POIController {
 		Collections.reverse(POINames);
 	}
 	
-	public static ArrayList<String> getPOIofCategory(Category category) throws Exception{
+	public static POI[] getPOIofCategory(Category category) throws Exception{
+		return poiMapper.getPOIsOfCategory(UserController.city,category.getId());
+		}
+	
+	public static ArrayList<String> getPOINamesofCategory(Category category) throws Exception{
 		POI[] poiList = poiMapper.getPOIsOfCategory(UserController.city,category.getId());
 		ArrayList<String> poiNames = new ArrayList<String>();
 		for(POI poi : poiList)
@@ -47,10 +55,10 @@ public class POIController {
 		return poiNames;
 	}
 	
-	public static ArrayList<String> getPOIofUserCategories() throws Exception{
+	public static ArrayList<String> getPOINamesofUserCategories() throws Exception{
 		ArrayList<String> poiOfUserCategories = new ArrayList<String>();
 		for(Category category: UserController.activeUser.getUserCategories()){
-			poiOfUserCategories.addAll(POIController.getPOIofCategory(category));
+			poiOfUserCategories.addAll(POIController.getPOINamesofCategory(category));
 		}
 		return poiOfUserCategories;
 	}

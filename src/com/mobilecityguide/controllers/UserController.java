@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mobilecityguide.datamappers.UserMapper;
 import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.User;
 
 public class UserController {
@@ -103,6 +104,11 @@ public class UserController {
 	public static boolean isUserNameAlreadyUsed(String name){
 		return getAllUsersNames().contains(name);
 		
+	}
+	
+	public static void addUserItinerary(Itinerary itinerary) throws Exception{
+		ItineraryController.addItinerary(itinerary);
+		setActiveUser(getUser(activeUser.getName()));
 	}
 
 }

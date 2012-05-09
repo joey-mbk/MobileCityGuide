@@ -98,16 +98,54 @@ public class MobileCityGuideActivity extends Activity {
 				int step = entry.getKey();
 				POI valeur = entry.getValue();
 				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
-			}						
+			}
+			
+			itinerary.reOrder(1, 4);
+			itinerary.delPOI(1);
+			System.out.println("*******Liste modifiée des POI de l'itinéraire choisi*******");
+			for(Entry<Integer, POI> entry : itinerary.getPOIList().entrySet()) {
+				int step = entry.getKey();
+				POI valeur = entry.getValue();
+				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
+			}
+			/*System.out.println("*******Création d'un nouvel itinéraire*******");
+			Itinerary itinerary2 = new Itinerary();
+			itinerary2.addTitle("english", "itinerary10");
+			itinerary2.setTheme(UserController.activeUser.getUserCategories().get(0));
+			POI[]poiList = POIController.getPOIOfCity();
+			int i = 0;
+			for(POI poi: poiList){
+				itinerary2.addPOI(i, poi);
+				i++;
+			}
+			UserController.addUserItinerary(itinerary2);
+			
+			ArrayList<String>itinerariesList2 = UserController.getActiveUserItinerariesNames();
+			System.out.println("*******Liste des itinéraires2*******");
+			for(String itineraryName: itinerariesList2)
+				System.out.println(itineraryName);
+
+			System.out.println("*******Choix de l'itinéraire2*******");
+			Itinerary itinerary3 = ItineraryController.getItinerary(itinerariesList2.get(itinerariesList2.size()-1));
+			System.out.println("Titre: "+ItineraryController.getItineraryTitle(itinerary3));
+			System.out.println("Categorie: "+CategoryController.getCategoryTitle(itinerary3.getTheme().getId()));
+
+
+			System.out.println("*******Liste 2 des POI de l'itinéraire choisi*******");
+			for(Entry<Integer, POI> entry : itinerary3.getPOIList().entrySet()) {
+				int step = entry.getKey();
+				POI valeur = entry.getValue();
+				System.out.println("Step: "+step+" "+ POIController.getPOIName(valeur));
+			}*/
 		} catch (Exception e2) {
 			e2.printStackTrace();
 			System.out.println("Error get itinerary");
-		}		
-
-		/*
-		 * Ajout d'un nouvel utilisateur
-		 */
-		/*
+		}
+	
+			/*
+			 * Ajout d'un nouvel utilisateur
+			 */
+			/*
 		User newUser = new User();
 		newUser.setName("newUser");
 		newUser.setAge("adult");
@@ -136,17 +174,17 @@ public class MobileCityGuideActivity extends Activity {
 		String name : "newUser"
 		if(!isUserNameAlreadyUsed(name))	
 		UserController.addNewUser(newUser, name,"adult", languagesArray, userCategoriesList);
-		 */	
-		/*
-		 * Affichage des données de l'utilisateur
-		 */
-		/*	System.out.println("Nom: "+UserController.activeUser.getName());
+			 */	
+			/*
+			 * Affichage des données de l'utilisateur
+			 */
+			/*	System.out.println("Nom: "+UserController.activeUser.getName());
 		System.out.println("Age: "+UserController.activeUser.getAge());
 		System.out.println("Langues:");
 		for(String language: UserController.activeUser.getLanguage())
 			System.out.println(language);
-		 */
-		/*	
+			 */
+			/*	
 	//	UserController.setActiveUserName("NewUser2");
 	//	UserController.saveUser();
 	//	UserController.delActiveUser();
@@ -155,19 +193,35 @@ public class MobileCityGuideActivity extends Activity {
 		System.out.println("*******Liste des utilisateurs*******");
 		for(String userName: usersList3)
 			System.out.println(userName);
-		 */
+			 */
 
-		/*
-		 * Affichage des POI en fonction des centres d'intérêt de l'utilisateur
-		 */
+			/*
+			 * Affichage des POI en fonction des centres d'intérêt de l'utilisateur
+			 */
+			/*	System.out.println("*******Liste des POI en fonction des centres d'intérêt de l'utilisateur*******");
 		try {
-			for(String POIName: POIController.getPOIofUserCategories())
+			for(String POIName: POIController.getPOINamesofUserCategories())
 				System.out.println(POIName);
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}*/
+			/*	
+		System.out.println("*******Liste des fetched POI*******");
+		for(Entry<Integer, POI> entry : POIController.fetchedPOI.entrySet()) {
+			int step = entry.getKey();
+			POI valeur = entry.getValue();
+			System.out.println("ID: "+step+" "+ POIController.getPOIName(valeur));
 		}
-		System.out.println("END");
-		setContentView(R.layout.main);
+		System.out.println("*******Liste des fetched itineraries*******");
+		for(Entry<Integer, Itinerary> entry : ItineraryController.fetchedItineraries.entrySet()) {
+			int step = entry.getKey();
+			Itinerary valeur = entry.getValue();
+			System.out.println("ID: "+step+" "+ ItineraryController.getItineraryTitle(valeur));
+		}
+			 */
+			System.out.println("END");
+			setContentView(R.layout.main);
+		}
 	}
-}
+	

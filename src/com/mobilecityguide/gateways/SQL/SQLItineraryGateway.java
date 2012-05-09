@@ -1,16 +1,20 @@
 package com.mobilecityguide.gateways.SQL;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.mobilecityguide.controllers.ItineraryController;
+import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
@@ -59,21 +63,26 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		/* Retrieve the id of the last added itinerary first
 		 * so we can attach the POIs to it in the database */
 		RecordSet results = null;
-		String getLastKey = "SELECT last_insert_rowid() as last_key";
+		//String getLastKey = "SELECT last_insert_rowid() as last_key";
+		String getLastKey = "SELECT DISTINCT itineraryID from POIItinerary";
 		try {
 			results = new SQLSet(db.rawQuery(getLastKey, null));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-
-		int lastKey = results.getInt("last_key");
-
+		ArrayList<Integer> idList = new ArrayList<Integer>();
+        while(results.next()){
+        	idList.add(results.getInt("itineraryID"));
+        }
+        Collections.sort(idList);
+		//int lastKey = results.getInt("last_key");
+        int lastKey = idList.get(idList.size()-1);
 		HashMap<Integer,POI> poiList = itinerary.getPOIList();
 		for (int i = 1; i <= poiList.size(); i++) {
 			ContentValues cv1 = new ContentValues();
-			cv1.put("itineraryID", lastKey);
-			cv1.put("poiID", poiList.get(i).getId());
+			cv1.put("itineraryID", lastKey+1);
+			cv1.put("poiID", poiList.get(i-1).getId());
 			cv1.put("step",i);
 			try {
 				db.insert("POIItinerary",null,cv1);
@@ -82,9 +91,32 @@ public class SQLItineraryGateway implements ItineraryGateway {
 				return false;
 			}
 		}
+		
+		ContentValues cv2 = new ContentValues();
+		cv2.put("itineraryID", lastKey+1);
+		cv2.put("categoryID", itinerary.getTheme().getId());
+		try {
+			db.insert("ItineraryCategory",null,cv2);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		for(Entry<String, String> entry : itinerary.getTitle().entrySet()) {
+			ContentValues cv3 = new ContentValues();
+			cv3.put("itineraryID", lastKey+1);
+			cv3.put("language", entry.getKey());
+			cv3.put("title", entry.getValue());
+			try {
+				db.insert("ItineraryTitles",null,cv3);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}	
+		}
 		// add to UserItinerary table
 		ContentValues cv = new ContentValues();
-		cv.put("itineraryID", lastKey);
+		cv.put("itineraryID", lastKey+1);
 		cv.put("userName", UserController.activeUser.getName());
 		try {
 			db.insert("UserItinerary",null,cv);
