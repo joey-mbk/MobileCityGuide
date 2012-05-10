@@ -16,7 +16,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 import com.mobilecityguide.controllers.POIController;
-import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
 
 public class AddPoi extends Activity implements OnClickListener , OnItemClickListener {

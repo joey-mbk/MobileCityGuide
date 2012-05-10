@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
@@ -42,12 +43,12 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Remplissage menu filtres
+		/* Fill the filter window menu */
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
 			options_f = new CharSequence[titles.size()+2];
 			options_f[0]= "Personnal itineraries";
-			options_f[1]= "Predefined itineraries";			
+			options_f[1]= "Predefined itineraries";
 			for (int i = 2; i < titles.size()+2; i++)
 				options_f[i] = titles.get(i-2);
 		} catch (Exception e) {
@@ -56,7 +57,7 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		}
 		selections_f = new boolean[ options_f.length ];
 
-		//Remplissage de la liste de nom des itinéraires
+		/* Retrieve itineraries and fill the list */
 		ArrayList<String> itinerariesArrayList;
 		try {
 			itinerariesArrayList = ItineraryController.getCityItinerariesTitles();
@@ -64,9 +65,13 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			itinerariesArrayList.toArray(itinerariesList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Error while retrieving itineraries.");
 		}
 
 		setContentView(R.layout.itineraries_list);
+		
+		((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
+		
 		setListeners();
 	}
 
