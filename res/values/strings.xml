@@ -20,6 +20,8 @@
     <string name="free_walk">Free walk</string>
     <string name="guided_tour">Guided tour</string>
     
+    <string name="add_poi_title">Select the POIs in the order that suits you</string>
+    
     <string name="app_name">MobileCityGuide</string>
     <string name="start_label">Start</string>
     <string name="edit_profile">Edit profile</string>
