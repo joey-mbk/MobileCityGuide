@@ -31,7 +31,6 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle b = getIntent().getExtras();
 		setContentView(R.layout.pois_list);
 		setListeners();
 	}

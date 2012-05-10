@@ -82,7 +82,7 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		startActivity(new Intent(this, ItinerariesList.class));
+		startActivity(new Intent(this, FreeWalk.class));
 	}
 
 	public void onClick(View v) {
