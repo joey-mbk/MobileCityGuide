@@ -4,59 +4,27 @@ import java.util.ArrayList;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.MyPlace.Item_Adapter;
-import com.mobilecityguide.activity.MyPlace.UserRecord;
+
+import com.mobilecityguide.controllers.UserController;
+
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class Connect extends Activity implements OnClickListener {
-	
-	ListView myList;
-	 
+
+public class Connect extends Activity implements OnClickListener, OnItemClickListener {
     
-	 
-    String[] listContent = {
- 
-            "January",
- 
-            "February",
- 
-            "March",
- 
-            "April",
- 
-            "May",
- 
-            "June",
- 
-            "July",
- 
-            "August",
- 
-            "September",
- 
-            "October",
- 
-            "November",
- 
-            "December"
- 
-    };
+	private String[]userNamesList;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -64,24 +32,13 @@ public class Connect extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.connect);
 
-		myList = (ListView)findViewById(R.id.list);
-
-
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-
-				android.R.layout.simple_list_item_1,
-
-				listContent);
-
-		myList.setAdapter(adapter);
-
 		setListeners();
 	}
 
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.layout.menu_2, menu);
+		inflater.inflate(R.layout.menu, menu);
 		return true;
 	}
 
@@ -102,23 +59,27 @@ public class Connect extends Activity implements OnClickListener {
 	private void setListeners() {
 		View createButton = findViewById(R.id.create_profile);
 		createButton.setOnClickListener(this);
-		((ListView)findViewById(R.id.list)).setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView arg0, View v, int position, long id) {
-			// Nous définissons notre intent en lui disant quelle classe il faut utiliser
-			Intent viewEntry= new Intent(getApplicationContext(),MobileCityGuideActivity.class);
-			// On lui transmet des paramètres, ici la position de l'entry du  feed que l'on voudra ouvrir
-			// On peut passer tous les types primitifs (long, int , boolean)
-			viewEntry.putExtra("idEntry", position);
-			// On démarre l'activity
-			startActivity(viewEntry);
-			// On ferme l'activity en cours
-			finish();
-			}
-			});
+
+		ListView userListView = (ListView)findViewById(R.id.list);
+		//Remplissage de la liste de nom d'utilisateur
+		ArrayList<String>userNamesArrayList = UserController.getAllUsersNames();
+		userNamesList = new String[userNamesArrayList.size()];
+		userNamesArrayList.toArray(userNamesList);
+		
+		userListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,userNamesList));
+		userListView.setOnItemClickListener(this);
 
 	}
 
+	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
+		try {
+			UserController.setActiveUser(UserController.getUser(userNamesList[(int) id]));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		startActivity(new Intent(this, CitiesList.class));
+	}
+	
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {

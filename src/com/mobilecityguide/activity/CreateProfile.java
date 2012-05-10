@@ -33,7 +33,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.layout.menu_2, menu);
+		inflater.inflate(R.layout.menu, menu);
 		return true;
 	}
 

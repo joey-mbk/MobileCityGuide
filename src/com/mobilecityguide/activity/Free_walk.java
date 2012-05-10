@@ -47,7 +47,7 @@ public class Free_walk extends Activity implements OnClickListener {
 				startActivity(intent);
 				return true;
 			case R.id.change_city:
-				intent = new Intent(this, Cities.class);
+				intent = new Intent(this, CitiesList.class);
 				startActivity(intent);
 				return true;
 			case R.id.edit_profile:
