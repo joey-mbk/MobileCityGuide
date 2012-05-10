@@ -129,14 +129,7 @@ public class FreeWalk extends MapActivity{
 		setContentView(R.layout.free_map);
 
 		mapView = (MapView) findViewById(R.id.myMapView1);
-	    LinearLayout zoomLayout = (LinearLayout)findViewById(R.id.zoom);  
-		View zoomView = mapView.getZoomControls(); 
-
-		zoomLayout.addView(zoomView, 
-		new LinearLayout.LayoutParams(
-		LayoutParams.WRAP_CONTENT, 
-		LayoutParams.WRAP_CONTENT)); 
-		mapView.displayZoomControls(true);
+	    
 
 		mc = mapView.getController();
 		String coordinates[] = {"1.352566007", "103.78921587"};
@@ -148,7 +141,6 @@ public class FreeWalk extends MapActivity{
 				(int) (lng * 1E6));
 
 
-
 		mc.animateTo(p);
 		mc.setZoom(17); 
 
@@ -156,7 +148,9 @@ public class FreeWalk extends MapActivity{
 		MapOverlay mapOverlay = new MapOverlay();
 		List<Overlay> listOfOverlays = mapView.getOverlays();
 		listOfOverlays.clear();
-		listOfOverlays.add(mapOverlay);        
+		listOfOverlays.add(mapOverlay); 
+		
+		//mapView.getOverlays().add(new MyOverLay(gp1,gp2,3,color)); 
 
 		mapView.setTraffic(true);
 		//mapView.setSatellite(true);
