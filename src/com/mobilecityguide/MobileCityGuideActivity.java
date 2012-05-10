@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.mobilecityguide.activity.FreeWalk;
 import com.mobilecityguide.activity.RoutePath;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
@@ -41,7 +43,7 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.contentLayout:
-			intent = new Intent(this, RoutePath.class);
+			intent = new Intent(this, FreeWalk.class);
 			startActivity(intent);
 			break;
 		}

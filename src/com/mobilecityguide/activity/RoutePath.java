@@ -43,7 +43,9 @@ public class RoutePath extends MapActivity{
 
 		MapView myMapView = (MapView) findViewById(R.id.myMapView1);
 		GeoPoint geoPoint = null;
-		myMapView.setSatellite(false);
+		myMapView.setSatellite(true);
+        //myMapView.setStreetView(true);
+
 
 		/*String pairs[] = getDirectionData("trichy", "thanjavur");
 		String[] lngLat = pairs[0].split(",");
@@ -192,12 +194,10 @@ public class RoutePath extends MapActivity{
 					NodeList configItems = rootNode.getChildNodes();
 					for (int x = 0; x < configItems.getLength(); x++) {
 						Node lineStringNode = configItems.item(x);
+						textView = (TextView) findViewById(R.id.textView3);
+						textView.setText(configItems.item(x).getChildNodes().item(x).getNodeName());
 						NodeList path3 = lineStringNode.getChildNodes();
 						pathConent = path3.item(0).getNodeValue();
-						
-						textView = (TextView) findViewById(R.id.textView3);
-						textView.setText(path3.item(0).getNodeName().intern());
-						
 						//System.out.print(pathConent);
 					}
 				}
