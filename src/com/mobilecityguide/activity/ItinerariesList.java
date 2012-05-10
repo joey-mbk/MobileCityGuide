@@ -32,8 +32,9 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	AlertDialog.Builder filters = null;
 	ArrayList<String> filtersList = new ArrayList<String>(); // list of filters chosen by the user
 	private String[]itinerariesList;
+	ListView itinerariesListView;
 	ArrayAdapter<String> adapter; 
-	ArrayList<String> tempItinerariesArrayList = new ArrayList<String>();
+	ArrayList<String> tempItinerariesList;
 	Context context;
 
 	/* Error dialog */
@@ -73,9 +74,9 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		}
 
 		setContentView(R.layout.itineraries_list);
-		
+
 		((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
-		
+
 		setListeners();
 	}
 
@@ -115,11 +116,12 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		View chooseFiltersButton = findViewById(R.id.filtersbutton);
 		chooseFiltersButton.setOnClickListener(this);
 
-		ListView itinerariesListView = (ListView)findViewById(R.id.list);
+		itinerariesListView = (ListView)findViewById(R.id.list);
 		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
 		itinerariesListView.setAdapter(adapter);
 		itinerariesListView.setOnItemClickListener(this);
 	}
+
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
@@ -140,11 +142,11 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			startActivity(intent);
 			break;
 		case R.id.filtersbutton:
-			AlertDialog.Builder interests = new AlertDialog.Builder(this);
-			interests.setTitle("Select filter(s)");
-			interests.setMultiChoiceItems(options_f, selections_f, new DialogSelectionClickHandler("filters"));
-			interests.setPositiveButton("OK", new DialogButtonClickHandler("filters"));
-			interests.show();
+			AlertDialog.Builder filters = new AlertDialog.Builder(this);
+			filters.setTitle("Select filter(s)");
+			filters.setMultiChoiceItems(options_f, selections_f, new DialogSelectionClickHandler("filters"));
+			filters.setPositiveButton("OK", new DialogButtonClickHandler("filters"));
+			filters.show();
 			break;
 		}
 	}
@@ -188,8 +190,7 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 					for (int i = 2; i < options_f.length; i++) {
 						if (!selections_f[i]) {
 							try {
-								System.out.println(CategoryController.getCategoryTitle(CategoryController.getCategory(options_f[i].toString()).getId()));
-								for(int id: ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())))
+								for(Integer id: ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())))
 									itinerariesIDList.remove(id);
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -197,17 +198,20 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 						}	
 					}
 					ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
-
+					for(String s: itinerariesNamesList)
+						System.out.println(s);
 					if (itinerariesNamesList.isEmpty()) {
 						error = new AlertDialog.Builder(context);
-						error.setTitle("");
 						error.setMessage("No itinerary matches to your request");
 						error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
 						error.show();
 					}
 					else{
+						itinerariesList = new String[itinerariesNamesList.size()];
 						itinerariesNamesList.toArray(itinerariesList);
-						adapter.notifyDataSetChanged();
+						adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,itinerariesList);
+						itinerariesListView.setAdapter(adapter);
+						//adapter.notifyDataSetChanged();
 					}
 
 				}

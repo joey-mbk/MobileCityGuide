@@ -79,9 +79,10 @@ public class ItineraryMapper {
 		try {
 			if (r.first()) {
 				int catID = r.getInt("categoryID");
-				while (r.next())
+				do{
 					categoryMap.put(r.getString("language"), r.getString("title"));
-
+				}
+				while (r.next());
 				category = new Category(catID, categoryMap);
 			}
 		} catch (Exception e) {
