@@ -6,15 +6,22 @@ import java.util.HashMap;
 
 import com.mobilecityguide.datamappers.POIMapper;
 import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.Itinerary;
 import com.mobilecityguide.models.POI;
 
 public class POIController {
 	
 	public static HashMap<Integer, POI> fetchedPOI = new HashMap<Integer, POI>();
 	public static POIMapper poiMapper;
+	public static HashMap<String, Integer> titlesIDPOIMap = new HashMap<String, Integer>();
 
 	public static POI getPOI(int id) throws Exception {
 		return poiMapper.getPOI(id);
+	}
+	
+	public static POI getPOI(String name) throws Exception{
+        int id = titlesIDPOIMap.get(name);
+		return getPOI(id);
 	}
 	
 	public static ArrayList<String> getCitiesNames() throws Exception{		
@@ -70,6 +77,7 @@ public class POIController {
 		String [] languages = UserController.activeUser.getLanguage();
 		for (String language : languages){
 		if(poi.getName().containsKey(language))
+			titlesIDPOIMap.put(poi.getName(language), poi.getId());
 			return poi.getName(language);
 		}
 		return null;
