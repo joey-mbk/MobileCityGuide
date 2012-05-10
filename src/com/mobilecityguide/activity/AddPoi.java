@@ -19,14 +19,14 @@ import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
 
-public class AddPoi extends Activity implements OnClickListener, OnItemClickListener {
-    
+public class AddPoi extends Activity implements OnClickListener , OnItemClickListener {
+
 	private String[]poiNamesList;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_poi);
+		setContentView(R.layout.free_walk);
 		setListeners();
 	}
 
@@ -55,12 +55,14 @@ public class AddPoi extends Activity implements OnClickListener, OnItemClickList
 			intent = new Intent(this, MobileCityGuideActivity.class);
 			startActivity(intent);
 			return true;
-
 		}
 		return false;
 	}
 
 	private void setListeners() {
+		View guideTourButton = findViewById(R.id.start);
+		guideTourButton.setOnClickListener(this);
+
 		ListView poiListView = (ListView)findViewById(R.id.list);
 		//Remplissage de la liste de nom des poi
 		POI[] poiList =null;
@@ -78,7 +80,6 @@ public class AddPoi extends Activity implements OnClickListener, OnItemClickList
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
-			UserController.selectedItinerary.addNextPOI(POIController.getPOI(poiNamesList[(int) id]));
 			System.out.println((poiNamesList[(int) id]));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -87,6 +88,12 @@ public class AddPoi extends Activity implements OnClickListener, OnItemClickList
 	}
 
 	public void onClick(View v) {
-
+		/*Intent intent;
+		switch (v.getId()) {
+		case R.id.start:
+			intent = new Intent(this, .class);
+			startActivity(intent);
+			break;
+		}*/
 	}
 }

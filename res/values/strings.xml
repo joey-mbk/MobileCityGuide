@@ -41,6 +41,7 @@
     <string name="login_connect">Login</string>
     <string name="back_connect">Back</string>
     <string name="signup_register">Signup</string>
+    <string name="filters">Filters</string>
     <string name="about_text">\
 All rights reserved.
 For educational use only.</string>

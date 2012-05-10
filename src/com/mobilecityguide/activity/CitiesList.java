@@ -68,12 +68,13 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 			citiesArrayList = POIController.getCitiesNames();
 			citiesList = new String[citiesArrayList.size()];
 			citiesArrayList.toArray(citiesList);
+			citiesListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,citiesList));
+			citiesListView.setOnItemClickListener(this);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		citiesListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,citiesList));
-		citiesListView.setOnItemClickListener(this);
-	}
+			}
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {

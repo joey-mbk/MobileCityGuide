@@ -102,6 +102,18 @@ public class ItineraryMapper {
 
 		return itineraries;
 	}
+	public ArrayList<Integer> getPredefCityItineraries(String city)throws Exception {
+		ArrayList<Integer> itineraries = new ArrayList<Integer>();
+		RecordSet r = itineraryGateway.getPredefCityItineraries(city);
+		try {
+			while (r.next())
+				itineraries.add(new Integer(r.getInt("itineraryID")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return itineraries;
+	}
 	
 	public void deleteItinerary(Itinerary itinerary) {
 		itineraryGateway.deleteItinerary(itinerary.getId());
