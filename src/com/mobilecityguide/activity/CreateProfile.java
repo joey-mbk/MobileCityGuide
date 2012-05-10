@@ -29,6 +29,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 	protected CharSequence[] options_i;
 	protected boolean[] selections_i;
 	ArrayList<String> lang = new ArrayList<String>(); // list of languages chosen by the user
+	ArrayList<String> langTemp = new ArrayList<String>(); // buffer list of languages chosen by the user
 	ArrayList<Category> cat = new ArrayList<Category>(); // list of interests chosen by the user
 
 	/* Error dialog */
@@ -172,7 +173,10 @@ public class CreateProfile extends Activity implements OnClickListener {
 		
 		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
 			if (window.equals("languages"))
-				selections_l[clicked] = selected;
+				if (selected)
+					langTemp.add(options_l[clicked].toString());
+				else
+					langTemp.remove(options_l[clicked].toString());
 			if (window.equals("interests"))
 				selections_i[clicked] = selected;
 		}
@@ -196,12 +200,8 @@ public class CreateProfile extends Activity implements OnClickListener {
 			switch(clicked)	{
 				case DialogInterface.BUTTON_POSITIVE:
 					if (window.equals("languages")) {
-						lang.clear(); // if the user had previously selected languages, cat is not empty so we clear it
-						for (int i = 0; i < options_l.length; i++) {
-							if (selections_l[i]) {
-								lang.add(options_l[i].toString());
-							}
-						}
+						lang.addAll(langTemp); // if the user had previously selected languages, lang is outdated so we change it
+						langTemp.clear(); // we flush the buffer, in case of future use
 					}
 					
 					if (window.equals("interests")) {

@@ -66,7 +66,7 @@ you do not know well.</string>
     <string name="create_profile_error_usernameformat_text">Sorry, user name must contain only alphanumerical characters and no space.</string>
     <string name="create_profile_age_title">Choose your age</string>
     <string name="create_profile_interests_title">Choose your interests</string>
-    <string name="create_profile_languages_title">Choose your languages</string>
+    <string name="create_profile_languages_title">Select your languages in the order that suits you</string>
     
     <string name="create_itinerary_label">Create new itinerary</string>
     
