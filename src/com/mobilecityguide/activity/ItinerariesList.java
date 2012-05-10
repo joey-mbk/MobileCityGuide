@@ -35,19 +35,19 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	AlertDialog.Builder filters = null;
 	ArrayList<String> filtersList = new ArrayList<String>(); // list of filters chosen by the user
 	private String[]itinerariesList;
-	
+
 	ArrayList<String> tempItinerariesArrayList = new ArrayList<String>();
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//Remplissage menu filtres
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
 			options_f = new CharSequence[titles.size()+2];
 			options_f[0]= "Personnal itineraries";
 			options_f[1]= "Predefined itineraries";			
-			options_f = new CharSequence[titles.size()+2];
 			for (int i = 2; i < titles.size()+2; i++)
 				options_f[i] = titles.get(i-2);
 		} catch (Exception e) {
@@ -55,6 +55,17 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			e.printStackTrace();
 		}
 		selections_f = new boolean[ options_f.length ];
+
+		//Remplissage de la liste de nom des itinéraires
+		ArrayList<String> itinerariesArrayList;
+		try {
+			itinerariesArrayList = ItineraryController.getCityItinerariesTitles();
+			itinerariesList = new String[itinerariesArrayList.size()];
+			itinerariesArrayList.toArray(itinerariesList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		setContentView(R.layout.itineraries_list);
 		setListeners();
 	}
@@ -96,15 +107,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		chooseFiltersButton.setOnClickListener(this);
 
 		ListView itinerariesListView = (ListView)findViewById(R.id.list);
-		//Remplissage de la liste de nom des itinéraires
-		ArrayList<String> itinerariesArrayList;
-		try {
-			itinerariesArrayList = ItineraryController.getCityItinerariesTitles();
-			itinerariesList = new String[itinerariesArrayList.size()];
-			itinerariesArrayList.toArray(itinerariesList);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		itinerariesListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList));
 		itinerariesListView.setOnItemClickListener(this);
 	}
@@ -137,13 +139,13 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		}
 	}
 	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
-		
+
 		private String window;
-		
+
 		public DialogSelectionClickHandler(String window) {
 			this.window = window;
 		}
-		
+
 		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
 			if (window.equals("filters"))
 				selections_f[clicked] = selected;
@@ -151,42 +153,40 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	}
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
-		
+
 		private String window;
-		
+
 		public DialogButtonClickHandler(String window) {
 			this.window = window;
 		}
-		
+
 		public void onClick(DialogInterface dialog, int clicked) {
 			switch(clicked)	{
-				case DialogInterface.BUTTON_POSITIVE:
-					
-					if (window.equals("filters")) {
-						ArrayList<Integer> itinerariesIDList = new ArrayList<Integer>();
-						if (selections_f[0])
-							itinerariesIDList.addAll(UserController.activeUser.getUserItinerariesID());
-						if(selections_f[1]){
+			case DialogInterface.BUTTON_POSITIVE:
+
+				if (window.equals("filters")) {
+					ArrayList<Integer> itinerariesIDList = new ArrayList<Integer>();
+					if (selections_f[0])
+						itinerariesIDList.addAll(UserController.activeUser.getUserItinerariesID());
+					if(selections_f[1]){
+						try {
+							itinerariesIDList.addAll(ItineraryController.getPredefCityItinerariesID());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					for (int i = 2; i < options_f.length; i++) {
+						if (!selections_f[i]) {
 							try {
-								itinerariesIDList.addAll(ItineraryController.getPredefCityItinerariesID());
+								itinerariesIDList.removeAll(ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())));
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
-						}
-						
-						
-						for (int i = 2; i < options_f.length; i++) {
-							if (!selections_f[i]) {
-								try {
-									itinerariesIDList.removeAll(ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())));
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}	
-						}
-						ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
-						itinerariesNamesList.toArray(itinerariesList);
+						}	
 					}
+					ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
+					itinerariesNamesList.toArray(itinerariesList);
+				}
 				break;
 			}
 		}
