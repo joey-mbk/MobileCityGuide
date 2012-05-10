@@ -12,6 +12,7 @@ public class UserController {
 	public static User activeUser = null;
 	public static String userName = null; 
 	public static String city; // city which the user is currently in
+	public static Itinerary selectedItinerary;
 	
 	public static UserMapper userMapper;
 

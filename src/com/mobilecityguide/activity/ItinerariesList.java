@@ -85,8 +85,14 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			System.out.println((itinerariesList[(int) id]));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		startActivity(new Intent(this, PoisList.class));
+		}
+		Intent intent = new Intent(this, PoisList.class);
+		try {
+			UserController.selectedItinerary = ItineraryController.getItinerary(itinerariesList[(int) id]);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		startActivity(intent);
 	}
 
 	public void onClick(View v) {
