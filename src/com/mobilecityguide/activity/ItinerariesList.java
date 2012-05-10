@@ -17,17 +17,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.CreateProfile.DialogButtonClickHandler;
-import com.mobilecityguide.activity.CreateProfile.DialogSelectionClickHandler;
-import com.mobilecityguide.activity.CreateProfile.DialogSingleSelectionClickHandler;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
-import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
-import com.mobilecityguide.models.Category;
 
 public class ItinerariesList extends Activity implements OnClickListener, OnItemClickListener {
 
@@ -50,11 +46,12 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		context = this;
 
 		//Remplissage menu filtres
+		/* Fill the filter window menu */
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
 			options_f = new CharSequence[titles.size()+2];
 			options_f[0]= "Personnal itineraries";
-			options_f[1]= "Predefined itineraries";			
+			options_f[1]= "Predefined itineraries";
 			for (int i = 2; i < titles.size()+2; i++)
 				options_f[i] = titles.get(i-2);
 		} catch (Exception e) {
@@ -63,7 +60,7 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		}
 		selections_f = new boolean[ options_f.length ];
 
-		//Remplissage de la liste de nom des itinéraires
+		/* Retrieve itineraries and fill the list */
 		ArrayList<String> itinerariesArrayList;
 		try {
 			itinerariesArrayList = UserController.getActiveUserItinerariesNames();
@@ -72,9 +69,13 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			itinerariesArrayList.toArray(itinerariesList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Error while retrieving itineraries.");
 		}
 
 		setContentView(R.layout.itineraries_list);
+		
+		((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
+		
 		setListeners();
 	}
 

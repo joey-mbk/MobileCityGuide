@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
@@ -26,12 +27,25 @@ import com.mobilecityguide.models.POI;
 
 public class PoisList extends Activity implements OnClickListener, OnItemClickListener {
 
-	private String[]poiList;
+	private String[] poiList;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pois_list);
+		
+		/* Set window titles */
+		((TextView) findViewById(R.id.city_title)).setText(UserController.city);
+		String[] languages = UserController.activeUser.getLanguage();
+		String itineraryTitle = null;
+		for (String lang : languages) {
+			itineraryTitle = UserController.selectedItinerary.getTitle(lang);
+			if (itineraryTitle != null)
+				break;
+		}
+		((TextView) findViewById(R.id.itinerary_title)).setText(itineraryTitle);
+		
 		setListeners();
 	}
 
@@ -78,9 +92,8 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		try {
 			poiHashMap = UserController.selectedItinerary.getPOIList();
 			poiList = new String[poiHashMap.size()];
-			for(Entry<Integer, POI> entry :poiHashMap.entrySet()) {
+			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
 				poiList[entry.getKey()-1] = POIController.getPOIName(entry.getValue());
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,13 +102,9 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 	}
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
-		try {
-			//TODO Afficher la description du POI
-			System.out.println((poiList[(int) id]));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-		//startActivity(new Intent(this, PoisList.class));
+		Intent intent = new Intent(this, PoiDetails.class);
+		intent.putExtra("poi", poiList[(int) id]);
+		startActivity(intent);
 	}
 
 	public void onClick(View v) {
