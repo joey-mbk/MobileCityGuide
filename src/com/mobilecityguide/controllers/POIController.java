@@ -19,7 +19,7 @@ public class POIController {
 		return poiMapper.getPOI(id);
 	}
 	
-	public static POI getItinerary(String name) throws Exception{
+	public static POI getPOI(String name) throws Exception{
         int id = titlesIDPOIMap.get(name);
 		return getPOI(id);
 	}

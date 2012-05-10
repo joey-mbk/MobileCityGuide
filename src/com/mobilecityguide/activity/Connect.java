@@ -66,6 +66,7 @@ public class Connect extends Activity implements OnClickListener, OnItemClickLis
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
 			UserController.setActiveUser(UserController.getUser(userNamesList[(int) id]));
+			System.out.println(UserController.activeUser.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
