@@ -68,6 +68,10 @@
             android:name=".activity.Guided_tour"
             android:label="Guided tour" >
         </activity>
+        <activity
+            android:name=".activity.RoutePath"
+            android:label="Map" >
+        </activity>
 
         <uses-library android:name="com.google.android.maps" />
     </application>
