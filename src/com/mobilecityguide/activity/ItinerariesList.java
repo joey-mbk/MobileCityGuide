@@ -46,7 +46,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		super.onCreate(savedInstanceState);
 		context = this;
 
-		//Remplissage menu filtres
 		/* Fill the filter window menu */
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
@@ -198,8 +197,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 						}	
 					}
 					ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
-					for(String s: itinerariesNamesList)
-						System.out.println(s);
 					if (itinerariesNamesList.isEmpty()) {
 						error = new AlertDialog.Builder(context);
 						error.setMessage("No itinerary matches to your request");
