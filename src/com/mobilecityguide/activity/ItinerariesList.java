@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,13 +36,19 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	AlertDialog.Builder filters = null;
 	ArrayList<String> filtersList = new ArrayList<String>(); // list of filters chosen by the user
 	private String[]itinerariesList;
-
+	ArrayAdapter<String> adapter; 
 	ArrayList<String> tempItinerariesArrayList = new ArrayList<String>();
+	Context context;
+
+	/* Error dialog */
+	AlertDialog.Builder error;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
+
 		//Remplissage menu filtres
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
@@ -108,7 +115,8 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		chooseFiltersButton.setOnClickListener(this);
 
 		ListView itinerariesListView = (ListView)findViewById(R.id.list);
-		itinerariesListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList));
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
+		itinerariesListView.setAdapter(adapter);
 		itinerariesListView.setOnItemClickListener(this);
 	}
 
@@ -179,14 +187,28 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 					for (int i = 2; i < options_f.length; i++) {
 						if (!selections_f[i]) {
 							try {
-								itinerariesIDList.removeAll(ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())));
+								System.out.println(CategoryController.getCategoryTitle(CategoryController.getCategory(options_f[i].toString()).getId()));
+								for(int id: ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())))
+									itinerariesIDList.remove(id);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}	
 					}
 					ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
-					itinerariesNamesList.toArray(itinerariesList);
+
+					if (itinerariesNamesList.isEmpty()) {
+						error = new AlertDialog.Builder(context);
+						error.setTitle("");
+						error.setMessage("No itinerary matches to your request");
+						error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+						error.show();
+					}
+					else{
+						itinerariesNamesList.toArray(itinerariesList);
+						adapter.notifyDataSetChanged();
+					}
+
 				}
 				break;
 			}
