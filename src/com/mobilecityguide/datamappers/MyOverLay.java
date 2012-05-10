@@ -1,4 +1,6 @@
 package com.mobilecityguide.datamappers;
+import java.util.ArrayList;
+
 import android.graphics.Bitmap; 
 import android.graphics.Canvas; 
 import android.graphics.Color; 
@@ -8,6 +10,7 @@ import android.graphics.RectF;
 import com.google.android.maps.GeoPoint; 
 import com.google.android.maps.MapView; 
 import com.google.android.maps.Overlay; 
+import com.google.android.maps.OverlayItem;
 import com.google.android.maps.Projection; 
 
 
@@ -20,6 +23,7 @@ public class MyOverLay extends Overlay
 	private int defaultColor; 
 	private String text=""; 
 	private Bitmap img = null; 
+	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 
 	public MyOverLay(GeoPoint gp1,GeoPoint gp2,int mode) // GeoPoint is a int. (6E) 
 	{ 
@@ -50,6 +54,14 @@ public class MyOverLay extends Overlay
 		return mode; 
 	} 
 
+	public void addOverlay(OverlayItem overlay) {
+		mOverlays.add(overlay);
+		//populate();
+	}
+
+	protected OverlayItem createItem(int i) {
+		return mOverlays.get(i);
+	}
 	@Override 
 	public boolean draw 
 	(Canvas canvas, MapView mapView, boolean shadow, long when) 
