@@ -100,7 +100,7 @@ public class SQLUserGateway implements UserGateway {
 		for(int i=0;i<languagesArray.length;i++){
 			ContentValues cv2 = new ContentValues();
 			cv2.put("userName", user.getName());
-			cv2.put("priority", i);
+			cv2.put("priority", i+1);
 			cv2.put("language", languagesArray[i]);
 			try {
 				db.insert("Language",null,cv2);
