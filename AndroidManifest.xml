@@ -5,7 +5,6 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="8" />
-    <uses-sdk android:minSdkVersion="8" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.LOCATION"/>
@@ -63,6 +62,10 @@
         <activity
             android:name=".activity.FreeWalk"
             android:label="Free walk" >
+        </activity>
+        <activity
+            android:name=".activity.AddPoi"
+            android:label="Add POI" >
         </activity>
     </application>
 

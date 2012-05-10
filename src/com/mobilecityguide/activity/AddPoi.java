@@ -26,7 +26,7 @@ public class AddPoi extends Activity implements OnClickListener , OnItemClickLis
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.free_walk);
+		setContentView(R.layout.add_poi);
 		setListeners();
 	}
 
@@ -60,9 +60,6 @@ public class AddPoi extends Activity implements OnClickListener , OnItemClickLis
 	}
 
 	private void setListeners() {
-		View guideTourButton = findViewById(R.id.start);
-		guideTourButton.setOnClickListener(this);
-
 		ListView poiListView = (ListView)findViewById(R.id.list);
 		//Remplissage de la liste de nom des poi
 		POI[] poiList =null;
