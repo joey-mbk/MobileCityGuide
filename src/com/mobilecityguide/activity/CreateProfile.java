@@ -30,12 +30,10 @@ public class CreateProfile extends Activity implements OnClickListener {
 	protected boolean[] selections_i;
 	ArrayList<String> lang = new ArrayList<String>(); // list of languages chosen by the user
 	ArrayList<Category> cat = new ArrayList<Category>(); // list of interests chosen by the user
-	
-	/* Alert dialogs */
-	AlertDialog.Builder languages = null;
-	AlertDialog.Builder interests = null;
-	AlertDialog.Builder error = null;
 
+	/* Error dialog */
+	AlertDialog.Builder error;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,51 +98,82 @@ public class CreateProfile extends Activity implements OnClickListener {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.save:
+			String userName = ((EditText)findViewById(R.id.username)).getText().toString();
 			/* if specified username is already used, alert the user */
-			if (UserController.isUserNameAlreadyUsed(((EditText)findViewById(R.id.username)).getText().toString())) {
+			if (UserController.isUserNameAlreadyUsed(userName)) {
 				error = new AlertDialog.Builder(this);
-				error.setTitle(R.string.create_profile_error_alreadyused_title);
+				error.setTitle(R.string.create_profile_error_title);
 				error.setMessage(R.string.create_profile_error_alreadyused_text);
-				error.setPositiveButton("OK", new DialogButtonClickHandler());
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
 				error.show();
 			}
+			/* check if at least one language was selected */
+			else if (lang.isEmpty()) {
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.create_profile_error_nolang_text);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			/* check if at least one interest was selected */
+			else if (cat.isEmpty()) {
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.create_profile_error_nointerest_text);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			/* check user name formatting */
+			else if (userName == null || userName.equals("") || !userName.matches("[a-zA-Z0-9]+")) {
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.create_profile_error_usernameformat_text);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			/* if everything check was ok, add the user */
 			else {
-				System.out.println(lang.toArray(new String[lang.size()]));
-				System.out.println(cat.get(2));
-				UserController.addNewUser(((EditText)findViewById(R.id.username)).getText().toString(), options_a[selections_a].toString().toLowerCase(), lang.toArray(new String[lang.size()]), cat);
+				UserController.addNewUser(userName, options_a[selections_a].toString().toLowerCase(), lang.toArray(new String[lang.size()]), cat);
 				intent = new Intent(this, Connect.class);
 				startActivity(intent);
 			}
 			break;
 		case R.id.ages:
-			AlertDialog.Builder ages = new AlertDialog.Builder(this);
-			ages.setTitle(R.string.create_profile_age_title);
-			ages.setSingleChoiceItems(options_a, selections_a, new DialogSingleSelectionClickHandler());
-			ages.setPositiveButton("OK", new DialogButtonClickHandler());
-			ages.show();
+			AlertDialog.Builder age = new AlertDialog.Builder(this);
+			age.setTitle(R.string.create_profile_age_title);
+			age.setSingleChoiceItems(options_a, selections_a, new DialogSingleSelectionClickHandler());
+			age.setPositiveButton("OK", new DialogButtonClickHandler("age"));
+			age.show();
 			break;
 		case R.id.choose_languages:
-			languages = new AlertDialog.Builder(this);
+			AlertDialog.Builder languages = new AlertDialog.Builder(this);
 			languages.setTitle(R.string.create_profile_languages_title);
-			languages.setMultiChoiceItems(options_l, selections_l, new DialogSelectionClickHandler());
-			languages.setPositiveButton("OK", new DialogButtonClickHandler());
+			languages.setMultiChoiceItems(options_l, selections_l, new DialogSelectionClickHandler("languages"));
+			languages.setPositiveButton("OK", new DialogButtonClickHandler("languages"));
 			languages.show();
 			break;
 		case R.id.choose_interests:
-			interests = new AlertDialog.Builder(this);
+			AlertDialog.Builder interests = new AlertDialog.Builder(this);
 			interests.setTitle(R.string.create_profile_interests_title);
-			interests.setMultiChoiceItems(options_i, selections_i, new DialogSelectionClickHandler());
-			interests.setPositiveButton("OK", new DialogButtonClickHandler());
+			interests.setMultiChoiceItems(options_i, selections_i, new DialogSelectionClickHandler("interests"));
+			interests.setPositiveButton("OK", new DialogButtonClickHandler("interests"));
 			interests.show();
 			break;
 		}
 	}
 
 	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
+		
+		private String window;
+		
+		public DialogSelectionClickHandler(String window) {
+			this.window = window;
+		}
+		
 		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
-			if (dialog == languages)
+			if (window.equals("languages"))
 				selections_l[clicked] = selected;
-			if (dialog == interests)
+			if (window.equals("interests"))
 				selections_i[clicked] = selected;
 		}
 	}
@@ -156,11 +185,18 @@ public class CreateProfile extends Activity implements OnClickListener {
 	}
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
+		
+		private String window;
+		
+		public DialogButtonClickHandler(String window) {
+			this.window = window;
+		}
+		
 		public void onClick(DialogInterface dialog, int clicked) {
 			switch(clicked)	{
 				case DialogInterface.BUTTON_POSITIVE:
-					if (dialog == languages) {
-						System.out.println("lolo");
+					if (window.equals("languages")) {
+						lang.clear(); // if the user had previously selected languages, cat is not empty so we clear it
 						for (int i = 0; i < options_l.length; i++) {
 							if (selections_l[i]) {
 								lang.add(options_l[i].toString());
@@ -168,12 +204,11 @@ public class CreateProfile extends Activity implements OnClickListener {
 						}
 					}
 					
-					if (dialog == interests) {
+					if (window.equals("interests")) {
 						Category category = null;
-						System.out.println("ok");
+						cat.clear(); // if the user had previously selected interests, cat is not empty so we clear it
 						for (int i = 0; i < options_i.length; i++) {
 							if (selections_i[i]) {
-								System.out.println(options_i[i]);
 								category = CategoryController.getCategory(options_i[i].toString());
 								cat.add(category);
 							}	
