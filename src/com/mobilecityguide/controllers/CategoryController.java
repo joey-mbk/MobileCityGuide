@@ -27,8 +27,10 @@ public class CategoryController {
 	 * Return category name according to the active user language
 	 */ 
 
-	public static String getCategoryTitle(int id){
-		String [] languages = UserController.activeUser.getLanguage();
+	public static String getCategoryTitle(int id) {
+		String[] languages = {"english"};
+		if (UserController.activeUser != null)
+			languages = UserController.activeUser.getLanguage();
 		HashMap<String,String> titles = categoryMapper.getCategoryTitles(id);
 		for (String language : languages){
 			if(titles.containsKey(language)){

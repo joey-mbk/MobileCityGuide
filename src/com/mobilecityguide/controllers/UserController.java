@@ -24,7 +24,8 @@ public class UserController {
 		userMapper.save(activeUser,userName);
 	}
     
-	public static void addNewUser(User newUser,String name ,String age,String[]languages, ArrayList<Category> userCategories){
+	public static void addNewUser(String name ,String age,String[]languages, ArrayList<Category> userCategories) {
+		User newUser = new User();
 		newUser.setName(name);
 		newUser.setLanguage(languages);
 		newUser.setAge(age);

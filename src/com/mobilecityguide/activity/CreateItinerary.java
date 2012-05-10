@@ -32,6 +32,7 @@ public class CreateItinerary extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		try {
+			/* Retrieve all category titles */
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
 			options_t = new CharSequence[titles.size()];
 			for (int i = 0; i < titles.size(); i++)

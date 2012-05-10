@@ -59,6 +59,11 @@ you do not know well.</string>
     <string name="pois_of_itinerary">POIs of the itinerary : </string>
     
     <string name="create_profile_text">Create new profile</string>
+    <string name="create_profile_error_alreadyused_title">Error</string>
+    <string name="create_profile_error_alreadyused_text">Sorry, this username is already used. Please, choose another one.</string>
+    <string name="create_profile_age_title">Choose your age</string>
+    <string name="create_profile_interests_title">Choose your interests</string>
+    <string name="create_profile_languages_title">Choose your languages</string>
     
     <string name="create_itinerary_label">Create new itinerary</string>
     
