@@ -59,7 +59,8 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		//Remplissage de la liste de nom des itinéraires
 		ArrayList<String> itinerariesArrayList;
 		try {
-			itinerariesArrayList = ItineraryController.getCityItinerariesTitles();
+			itinerariesArrayList = UserController.getActiveUserItinerariesNames();
+			itinerariesArrayList.addAll(ItineraryController.getPredefCityItinerariesTitles());
 			itinerariesList = new String[itinerariesArrayList.size()];
 			itinerariesArrayList.toArray(itinerariesList);
 		} catch (Exception e) {
