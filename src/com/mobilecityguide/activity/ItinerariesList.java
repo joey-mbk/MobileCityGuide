@@ -60,7 +60,8 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		/* Retrieve itineraries and fill the list */
 		ArrayList<String> itinerariesArrayList;
 		try {
-			itinerariesArrayList = ItineraryController.getCityItinerariesTitles();
+			itinerariesArrayList = UserController.getActiveUserItinerariesNames();
+			itinerariesArrayList.addAll(ItineraryController.getPredefCityItinerariesTitles());
 			itinerariesList = new String[itinerariesArrayList.size()];
 			itinerariesArrayList.toArray(itinerariesList);
 		} catch (Exception e) {

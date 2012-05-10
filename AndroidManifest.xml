@@ -70,6 +70,10 @@
         <activity
             android:name=".activity.PoiDetails"
             android:label="POI infos" >
+	</activity>
+	<activity
+            android:name=".activity.Mode"
+            android:label="Make a choice" >
         </activity>
     </application>
 

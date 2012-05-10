@@ -16,6 +16,10 @@
     <string name="createitinerary_theme_text">Choose the theme of the itinerary</string>
     <string name="createitinerary_added_text">Your itinerary was successfully created.</string>
     
+    <string name="choose_mode_text">What do you want to do ?</string>
+    <string name="free_walk">Free walk</string>
+    <string name="guided_tour">Guided tour</string>
+    
     <string name="app_name">MobileCityGuide</string>
     <string name="start_label">Start</string>
     <string name="edit_profile">Edit profile</string>
