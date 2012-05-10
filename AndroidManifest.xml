@@ -67,6 +67,10 @@
             android:name=".activity.AddPoi"
             android:label="Add POI" >
         </activity>
+        <activity
+            android:name=".activity.Mode"
+            android:label="Make a choice" >
+        </activity>
     </application>
 
 </manifest>

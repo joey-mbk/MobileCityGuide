@@ -1,7 +1,5 @@
 package com.mobilecityguide.activity;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,24 +10,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.controllers.POIController;
-import com.mobilecityguide.controllers.UserController;
 
-public class CitiesList extends Activity implements OnClickListener, OnItemClickListener {
+public class Mode extends Activity implements OnClickListener, OnItemClickListener {
 
-	private String[]citiesList;
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.city);
+		setContentView(R.layout.mode);
 		setListeners();
 	}
+
 
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -61,32 +55,30 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 	}
 
 	private void setListeners() {
-		ListView citiesListView = (ListView)findViewById(R.id.listView1);
-		//Remplissage de la liste de nom des villes 
-		ArrayList<String> citiesArrayList;
-		try {
-			citiesArrayList = POIController.getCitiesNames();
-			citiesList = new String[citiesArrayList.size()];
-			citiesArrayList.toArray(citiesList);
-			citiesListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,citiesList));
-			citiesListView.setOnItemClickListener(this);
+		View freeWalkButton = findViewById(R.id.free_walk);
+		freeWalkButton.setOnClickListener(this);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		View guidedTourButton = findViewById(R.id.guided_tour);
+		guidedTourButton.setOnClickListener(this);
+	}
+	
+	public void onClick(View v) {
+		Intent intent;
+		switch (v.getId()) {
+		case R.id.free_walk:
+			intent = new Intent(this, FreeWalk.class);
+			startActivity(intent);
+			break;
+		case R.id.guided_tour:
+			intent = new Intent(this, ItinerariesList.class);
+			startActivity(intent);
+			break;
 		}
-			}
-
-	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
-		try {
-			UserController.setCity((citiesList[(int) id]));
-			System.out.println(UserController.getCity());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
-		startActivity(new Intent(this, Mode.class));
 	}
 
-	public void onClick(View v) {
-
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+		// TODO Auto-generated method stub
+		
 	}
 }
