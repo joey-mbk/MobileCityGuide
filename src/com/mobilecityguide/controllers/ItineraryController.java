@@ -72,6 +72,14 @@ public class ItineraryController {
 	public static ArrayList<Integer> getCityItinerariesID() throws Exception{
 		return itineraryMapper.getCityItineraries(UserController.city);
 	}
+	
+	public static ArrayList<Integer> getPredefCityItinerariesID() throws Exception{
+		return itineraryMapper.getPredefCityItineraries(UserController.city);
+	}
+	public static ArrayList<String> getPredefCityItinerariesTitles() throws Exception{
+		return getItinerariesTitles(getPredefCityItinerariesID());
+	}
+	
 
 	/*
 	 * Return city itineraries titles according to the active user language

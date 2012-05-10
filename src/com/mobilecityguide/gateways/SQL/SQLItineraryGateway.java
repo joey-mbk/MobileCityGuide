@@ -151,6 +151,19 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		}
 		return results;
 	}
+	
+	@Override
+	public RecordSet getPredefCityItineraries(String city) throws Exception {
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT itineraryID FROM POIItinerary WHERE itineraryID NOT IN (SELECT itineraryID FROM UserItinerary) AND poiID IN (SELECT poiID FROM POI WHERE city = '"+city+"')";
+		SQLSet results = null;
+		try {
+			results = new SQLSet(db.rawQuery(query, null));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return results;
+	}
 
 	public boolean deleteItinerary(int id) {
 		if (this.db.isReadOnly())

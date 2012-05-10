@@ -8,19 +8,34 @@
         android:id="@+id/textViewCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/city"
         android:layout_marginLeft="10dp"
+        android:text="@string/city"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 
-    <TextView
-        android:id="@+id/textDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/itinerary_prompt"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#ffffff" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.52"
+            android:text="@string/itinerary_prompt"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/filtersbutton"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.49"
+            android:background="@drawable/buttonroundedcorners"
+            android:text="@string/filters"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list"

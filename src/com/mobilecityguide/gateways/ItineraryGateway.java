@@ -11,5 +11,6 @@ public interface ItineraryGateway {
 	RecordSet getCityItineraries(String city) throws Exception;
 	boolean deleteItinerary(int id);
 	public boolean saveItinerary(Itinerary itinerary);
+	public RecordSet getPredefCityItineraries(String city) throws Exception;
 	
 }
