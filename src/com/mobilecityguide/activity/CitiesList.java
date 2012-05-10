@@ -62,7 +62,7 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 
 	private void setListeners() {
 		ListView citiesListView = (ListView)findViewById(R.id.listView1);
-		//Remplissage de la liste de nom d'utilisateur
+		//Remplissage de la liste de nom des villes 
 		ArrayList<String> citiesArrayList;
 		try {
 			citiesArrayList = POIController.getCitiesNames();
@@ -82,7 +82,7 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
-		startActivity(new Intent(this, CitiesList.class));
+		startActivity(new Intent(this, ItinerariesList.class));
 	}
 
 	public void onClick(View v) {
