@@ -46,7 +46,8 @@ public class Itinerary  {
 
 
 	public void delPOI(POI poi){
-		for (Entry<Integer, POI> entry : POIList.entrySet()){
+		HashMap<Integer,POI> tempPOIList = (HashMap<Integer, POI>) POIList.clone();
+		for (Entry<Integer, POI> entry : tempPOIList.entrySet()){
 			if(entry.getValue().equals(poi))
 				delPOI(entry.getKey());
 		}
