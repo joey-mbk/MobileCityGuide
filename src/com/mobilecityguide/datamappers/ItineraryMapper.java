@@ -34,19 +34,18 @@ public class ItineraryMapper {
 		RecordSet rIt = itineraryGateway.getItinerary(id);
 		RecordSet rT = itineraryGateway.getItineraryTitles(id);
 		try {
-			if (rIt.first()) {
+			if (rIt != null) {
 				itinerary = new Itinerary();
 				itinerary.setId(id);
 				itinerary.setTheme(getItineraryCategory(id));
-				while (rT.next()) // add titles of itinerary in different languages
+				while (rT.next()) // retrieve titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));
-				if(!rIt.equals(null)){
-				do { // add each POI of the itinerary
+				while (rIt.next()) { // retrieve each POI of the itinerary
 					POI poi = POIController.getPOI(rIt.getInt("poiID"));
 					itinerary.addPOI(rIt.getInt("step"), poi); // add POI at the right place (step) in the POI list of itinerary
-
-				} while (rIt.next());
 				}
+			} else {
+				System.out.println("No itinerary was returned from the database.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,6 +59,7 @@ public class ItineraryMapper {
 
 	public boolean addItinerary(Itinerary itinerary) throws Exception {
 		if (this.itineraryGateway.addItinerary(itinerary)) {
+			ItineraryController.titlesIDItinerariesMap.put(ItineraryController.getItineraryTitle(itinerary), new Integer(itinerary.getId()));
 			UserController.activeUser.getUserItinerariesID().add(new Integer(itinerary.getId()));
 			return true;
 		}
@@ -72,8 +72,6 @@ public class ItineraryMapper {
 		HashMap<String, String> titlesMap = new HashMap<String, String>();
 		try {
 			r = itineraryGateway.getItineraryTitles(id);
-
-
 			while (r.next())
 				titlesMap.put(r.getString("language"), r.getString("title"));
 		} catch (Exception e) {
@@ -87,12 +85,11 @@ public class ItineraryMapper {
 		RecordSet r = itineraryGateway.getItineraryCategory(id);
 		Category category = null;
 		try {
-			if (r.first()) {
+			if (r != null) {
 				int catID = r.getInt("categoryID");
-				do{
+				while (r.next()) {
 					categoryMap.put(r.getString("language"), r.getString("title"));
 				}
-				while (r.next());
 				category = new Category(catID, categoryMap);
 			}
 		} catch (Exception e) {
@@ -142,6 +139,7 @@ public class ItineraryMapper {
 		else {
 			try {
 				ids.first();
+				System.out.println(ids.getInt("itineraryID"));
 				return ids.getInt("itineraryID");
 			} catch (Exception e) {
 				e.printStackTrace();

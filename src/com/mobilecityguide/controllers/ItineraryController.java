@@ -35,8 +35,8 @@ public class ItineraryController {
 	 */ 
 	public static String getItineraryTitle(Itinerary itinerary){
 		String [] languages = UserController.activeUser.getLanguage();
-		for (String language : languages){
-			if(itinerary.getTitle().containsKey(language))
+		for (String language : languages) {
+			if (itinerary.getTitle().containsKey(language))
 				return itinerary.getTitle(language);
 		}
 		return null;
