@@ -120,6 +120,7 @@ public class DeleteItinerary extends Activity implements OnClickListener, OnItem
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
+			ItineraryController.getCityItinerariesTitles();
 			UserController.delUserItinerary((ItineraryController.getItinerary(itinerariesList[(int) id])));
 			System.out.println(ItineraryController.getItineraryTitle(ItineraryController.getItinerary(itinerariesList[(int) id])));
 		} catch (Exception e) {
