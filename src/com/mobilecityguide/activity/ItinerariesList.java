@@ -44,7 +44,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		options_f = null;
 		selections_f = null;
 		filters = null;
@@ -128,8 +127,8 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		View chooseFiltersButton = findViewById(R.id.filtersbutton);
 		chooseFiltersButton.setOnClickListener(this);
 
-		itinerariesListView = (ListView)findViewById(R.id.list);
-		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
+		itinerariesListView = (ListView) findViewById(R.id.list);
+		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itinerariesList);
 		itinerariesListView.setAdapter(adapter);
 		itinerariesListView.setOnItemClickListener(this);
 	}

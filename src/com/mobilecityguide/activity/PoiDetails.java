@@ -7,6 +7,7 @@ import com.mobilecityguide.models.POI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -70,6 +71,7 @@ public class PoiDetails extends Activity implements OnClickListener {
 		    		LinearLayout.LayoutParams.FILL_PARENT,
 		    		LinearLayout.LayoutParams.WRAP_CONTENT));
 			container.setOnClickListener(this);
+			container.setBackgroundResource(R.drawable.buttonroundedcorners);
 			LinearLayout layout = (LinearLayout) findViewById(R.id.info_list);
 			layout.addView(container);
 		}
