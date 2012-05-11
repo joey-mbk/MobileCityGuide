@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.exceptions.RecordSetException;
@@ -61,25 +62,7 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		if (this.db.isReadOnly())
 			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
 
-		/* Retrieve the id of the last added itinerary first
-		 * so we can attach the POIs to it in the database */
-		RecordSet results = null;
-		//String getLastKey = "SELECT last_insert_rowid() as last_key";
-		String getLastKey = "SELECT DISTINCT itineraryID from POIItinerary";
-		try {
-			results = new SQLSet(db.rawQuery(getLastKey, null));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		ArrayList<Integer> idList = new ArrayList<Integer>();
-		while(results.next()){
-			idList.add(results.getInt("itineraryID"));
-		}
-		results.close();
-		Collections.sort(idList);
-		//int lastKey = results.getInt("last_key");
-		int lastKey = idList.get(idList.size()-1);
+		int lastKey = ItineraryController.itineraryMapper.getLastItineraryID();
 		HashMap<Integer,POI> poiList = itinerary.getPOIList();
 		if(!poiList.isEmpty()){
 			for (int i = 1; i <= poiList.size(); i++) {
@@ -190,29 +173,17 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		}
 		return true;
 	}
-	public int getLastItineraryID(){
+	public RecordSet getLastItineraryID() {
 		/* Retrieve the id of the last added itinerary first
 		 * so we can attach the POIs to it in the database */
-		RecordSet results = null;
-		//String getLastKey = "SELECT last_insert_rowid() as last_key";
-		String getLastKey = "SELECT DISTINCT itineraryID from POIItinerary";
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT itineraryID from POIItinerary ORDER BY itineraryID DESC";
+		SQLSet results = null;
 		try {
-			results = new SQLSet(db.rawQuery(getLastKey, null));
+			results = new SQLSet(db.rawQuery(query, null));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ArrayList<Integer> idList = new ArrayList<Integer>();
-		try {
-			while(results.next()){
-				idList.add(results.getInt("itineraryID"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		results.close();
-		Collections.sort(idList);
-		//int lastKey = results.getInt("last_key");
-		return idList.get(idList.size()-1);
+		return results;
 	}
 }
