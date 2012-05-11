@@ -62,7 +62,7 @@ public class FreeWalk extends Activity implements LocationListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // retrieve this step POI
-		
+
 		/* Get user's location */
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
@@ -78,14 +78,14 @@ public class FreeWalk extends Activity implements LocationListener {
 		GeoPoint points = null;
 
 		for (POI currentPoi : poi) {
-			
+
 			poiLocation = new Location(LocationManager.GPS_PROVIDER);
 			poiLocation.setLatitude(currentPoi.getLatitude());
 			poiLocation.setLongitude(currentPoi.getLongitude());
-			
-			String url = GPSController.getUrl(userLocation, currentPoi);
-			InputStream is = getConnection(url);
-			mRoad = GPSController.getRoute(is);
+
+			//String url = GPSController.getUrl(userLocation, currentPoi);
+			//InputStream is = getConnection(url);
+			//mRoad = GPSController.getRoute(is);
 
 			points = new GeoPoint(
 					(int) (currentPoi.getLatitude() * 1E6), 
@@ -123,7 +123,7 @@ public class FreeWalk extends Activity implements LocationListener {
 			layout.addView(container);
 		}
 	}
-/*
+	/*
 	private void moveToNextPoi() {
 		this.step++;
 		this.previousPoi;
@@ -132,7 +132,7 @@ public class FreeWalk extends Activity implements LocationListener {
 		this.poiLocation.setLatitude(poi.getLatitude());
 		this.poiLocation.setLongitude(poi.getLongitude());
 	}
-*/
+	 */
 	@Override
 	public void onLocationChanged(Location arg0) {
 		System.out.println("Location changed");
@@ -142,7 +142,7 @@ public class FreeWalk extends Activity implements LocationListener {
 
 		/* if we're less than 50 meters away from the POI, show its informations */
 		for (POI poi2 : poi) {
-			
+
 			if (arg0.distanceTo(poiLocation) <= 50) {
 				Intent intent = new Intent(this, PoiDetails.class);
 				intent.putExtra("id", true);
@@ -192,6 +192,18 @@ public class FreeWalk extends Activity implements LocationListener {
 		switch (item.getItemId()) {
 		case R.id.quit:
 			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.change_user:
+			intent = new Intent(this, Connect.class);
+			startActivity(intent);
+			return true;
+		case R.id.change_city:
+			intent = new Intent(this, CitiesList.class);
+			startActivity(intent);
+			return true;
+		case R.id.edit_profile:
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}

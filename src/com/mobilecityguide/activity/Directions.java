@@ -31,24 +31,24 @@ import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 
 public class Directions extends Activity implements LocationListener {
-	
+
 	private Road mRoad;
 	private int step;
 	private POI poi;
 	private Location poiLocation;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle extras = getIntent().getExtras(); // retrieve the variables from previous intent
 		if (extras != null)
 			this.step = extras.getInt("step");
-		
+
 		poi = UserController.selectedItinerary.getPOIList().get(new Integer(step)); // retrieve this step POI
 		poiLocation = new Location(LocationManager.GPS_PROVIDER);
 		poiLocation.setLatitude(poi.getLatitude());
 		poiLocation.setLongitude(poi.getLongitude());
-		
+
 		/* Get user's location */
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
@@ -58,9 +58,9 @@ public class Directions extends Activity implements LocationListener {
 		/* Monitor position changes */
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-		
+
 		setContentView(R.layout.directions);
-		
+
 		if (userLocation != null) {
 			String url = GPSController.getUrl(userLocation, poiLocation);
 			InputStream is = getConnection(url);
@@ -87,7 +87,7 @@ public class Directions extends Activity implements LocationListener {
 		poiTitle.setTextAppearance(this, android.R.style.TextAppearance_Large);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
 		layout.addView(poiTitle);
-		
+
 		for (int i = 0; i < mRoad.mPoints.length-1; i++) {
 			TextView container = new TextView(this);
 			if (i == mRoad.mPoints.length-2) // if it's the last direction, no need to show distance
@@ -96,8 +96,8 @@ public class Directions extends Activity implements LocationListener {
 				container.setText(mRoad.mPoints[i].mName+" "+mRoad.mPoints[i].mDescription);
 			container.setId(i);
 			container.setLayoutParams(new LinearLayout.LayoutParams(
-		    		LinearLayout.LayoutParams.FILL_PARENT,
-		    		LinearLayout.LayoutParams.WRAP_CONTENT));
+					LinearLayout.LayoutParams.FILL_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT));
 			layout.addView(container);
 		}
 	}
@@ -108,7 +108,7 @@ public class Directions extends Activity implements LocationListener {
 		System.out.println(arg0.getLatitude());
 		System.out.println(arg0.getLongitude());
 		System.out.println("Distance from POI: "+arg0.distanceTo(poiLocation));
-		
+
 		/* if we're less than 50 meters away from the POI, show its informations */
 		if (arg0.distanceTo(poiLocation) <= 50) {
 			Intent intent = new Intent(this, PoiDetails.class);
@@ -133,7 +133,7 @@ public class Directions extends Activity implements LocationListener {
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		System.out.println("Status changed: "+arg0);
 	}
-	
+
 	private InputStream getConnection(String url) {
 		InputStream is = null;
 		try {
@@ -158,6 +158,18 @@ public class Directions extends Activity implements LocationListener {
 		switch (item.getItemId()) {
 		case R.id.quit:
 			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		case R.id.change_user:
+			intent = new Intent(this, Connect.class);
+			startActivity(intent);
+			return true;
+		case R.id.change_city:
+			intent = new Intent(this, CitiesList.class);
+			startActivity(intent);
+			return true;
+		case R.id.edit_profile:
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}
