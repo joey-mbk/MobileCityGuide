@@ -83,9 +83,10 @@ public class PoiDetails extends Activity implements OnClickListener {
 		}
 		
 		/* Set the details in corresponding text fields */
-		setContentView(R.layout.poi_details);
+		setContentView(R.layout.pois_details);
 		((TextView) findViewById(R.id.description)).setText(desc);
 		((TextView) findViewById(R.id.address)).setText(poi.getAddress());
+		((TextView) findViewById(R.id.poi_title)).setText(POIController.getPOIName(poi));
 		image = (ImageView) findViewById(R.id.imageView);
 		
 		String path = ((poi.getImages("day")).split("\\."))[0];
