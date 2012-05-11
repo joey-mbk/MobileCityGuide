@@ -34,11 +34,17 @@ public class Directions extends Activity implements LocationListener {
 	
 	private Road mRoad;
 	private int step;
+	private POI poi;
+	private Location poiLocation;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		step = 1;
+		poi = UserController.selectedItinerary.getPOIList().get(new Integer(step)); // retrieve this step POI
+		poiLocation = new Location(LocationManager.GPS_PROVIDER);
+		poiLocation.setLatitude(poi.getLatitude());
+		poiLocation.setLongitude(poi.getLongitude());
 		
 		/* Get user's location */
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -50,7 +56,7 @@ public class Directions extends Activity implements LocationListener {
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
-		String url = GPSController.getUrl(userLocation, UserController.selectedItinerary.getPOIList().get(new Integer(step)));
+		String url = GPSController.getUrl(userLocation, poiLocation);
 		InputStream is = getConnection(url);
 		mRoad = GPSController.getRoute(is);
 		
@@ -75,11 +81,30 @@ public class Directions extends Activity implements LocationListener {
 		}
 	}
 
+	private void moveToNextPoi() {
+		this.step++;
+		this.previousPoi
+		this.poi = UserController.selectedItinerary.getPOIList().get(new Integer(this.step));
+		this.poiLocation = new Location(LocationManager.GPS_PROVIDER);
+		this.poiLocation.setLatitude(poi.getLatitude());
+		this.poiLocation.setLongitude(poi.getLongitude());
+	}
+	
 	@Override
 	public void onLocationChanged(Location arg0) {
 		System.out.println("Location changed");
 		System.out.println(arg0.getLatitude());
 		System.out.println(arg0.getLongitude());
+		System.out.println("Distance from POI: "+arg0.distanceTo(poiLocation));
+		
+		/* if we're less than 50 meters away from the POI, show its informations */
+		if (arg0.distanceTo(poiLocation) <= 50) {
+			Intent intent = new Intent(this, PoiDetails.class);
+			intent.putExtra("id", true);
+			intent.putExtra("poi", poi.getId());
+			startActivity(intent);
+			
+		}
 	}
 
 	@Override
