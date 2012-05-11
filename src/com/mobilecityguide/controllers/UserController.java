@@ -26,6 +26,8 @@ public class UserController {
 	}
     
 	public static void addNewUser(String name ,String age,String[]languages, ArrayList<Category> userCategories) {
+		selectedItinerary = null;
+		city = null;
 		User newUser = new User();
 		newUser.setName(name);
 		newUser.setLanguage(languages);
