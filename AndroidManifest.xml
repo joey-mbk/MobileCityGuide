@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -70,11 +71,15 @@
         <activity
             android:name=".activity.PoiDetails"
             android:label="POI infos" >
-	</activity>
-	<activity
+		</activity>
+		<activity
             android:name=".activity.Mode"
-            android:label="Make a choice" >
-        </activity>
+            android:label="Visit mode" >
+       	</activity>
+       	<activity
+            android:name=".activity.Directions"
+            android:label="Guided tour directions" >
+       	</activity>
     </application>
 
 </manifest>
