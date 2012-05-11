@@ -13,6 +13,11 @@
     <string name="poi_openings_text">Opening hours</string>
     <string name="poi_address_text">Address</string>
     
+    <string name="user_name_text">Your name</string>
+    <string name="user_age_text">Your age</string>
+    <string name="user_language_text">Your language(s)</string>
+    <string name="user_interests_text">Your interest(s)</string>
+    
     <string name="createitinerary_theme_text">Choose the theme of the itinerary</string>
     <string name="createitinerary_added_text">Your itinerary was successfully created.</string>
     
