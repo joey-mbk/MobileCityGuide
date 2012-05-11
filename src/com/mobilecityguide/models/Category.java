@@ -29,5 +29,8 @@ public class Category {
 	public void setCategory(HashMap<String, String> category) {
 		this.category = category;
 	}
-
+	
+	public String toString() {
+		return this.getCategory("english");
+	}
 }

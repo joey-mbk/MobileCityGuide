@@ -10,6 +10,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.exceptions.RecordSetException;
@@ -61,31 +62,15 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		if (this.db.isReadOnly())
 			this.db = this.gw.getWritableDatabase(); // re-open DB in write mode
 
-		/* Retrieve the id of the last added itinerary first
-		 * so we can attach the POIs to it in the database */
-		RecordSet results = null;
-		//String getLastKey = "SELECT last_insert_rowid() as last_key";
-		String getLastKey = "SELECT DISTINCT itineraryID from POIItinerary";
-		try {
-			results = new SQLSet(db.rawQuery(getLastKey, null));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		ArrayList<Integer> idList = new ArrayList<Integer>();
-		while(results.next()){
-			idList.add(results.getInt("itineraryID"));
-		}
-		results.close();
-		Collections.sort(idList);
-		//int lastKey = results.getInt("last_key");
-		int lastKey = idList.get(idList.size()-1);
+		int lastKey = ItineraryController.itineraryMapper.getLastItineraryID(); // get ID of last itinerary
+		
+		/* add POIs of the itinerary in the database */
 		HashMap<Integer,POI> poiList = itinerary.getPOIList();
-		if(!poiList.isEmpty()){
+		if (!poiList.isEmpty()){
 			for (int i = 1; i <= poiList.size(); i++) {
 				ContentValues cv1 = new ContentValues();
 				cv1.put("itineraryID", lastKey+1);
-				cv1.put("poiID", poiList.get(i).getId()); //cv1.put("poiID", poiList.get(i-1).getId());
+				cv1.put("poiID", poiList.get(i).getId());
 				cv1.put("step",i);
 				try {
 					db.insert("POIItinerary",null,cv1);
@@ -95,6 +80,8 @@ public class SQLItineraryGateway implements ItineraryGateway {
 				}
 			}
 		}
+		
+		/* add category of the itinerary in the database */
 		ContentValues cv2 = new ContentValues();
 		cv2.put("itineraryID", lastKey+1);
 		cv2.put("categoryID", itinerary.getTheme().getId());
@@ -105,7 +92,8 @@ public class SQLItineraryGateway implements ItineraryGateway {
 			return false;
 		}
 
-		for(Entry<String, String> entry : itinerary.getTitle().entrySet()) {
+		/* add titles of the itinerary in the database */
+		for (Entry<String, String> entry : itinerary.getTitle().entrySet()) {
 			ContentValues cv3 = new ContentValues();
 			cv3.put("itineraryID", lastKey+1);
 			cv3.put("language", entry.getKey());
@@ -117,7 +105,8 @@ public class SQLItineraryGateway implements ItineraryGateway {
 				return false;
 			}	
 		}
-		// add to UserItinerary table
+		
+		/* assign this itinerary to the current user in the database */
 		ContentValues cv = new ContentValues();
 		cv.put("itineraryID", lastKey+1);
 		cv.put("userName", UserController.activeUser.getName());
@@ -190,29 +179,17 @@ public class SQLItineraryGateway implements ItineraryGateway {
 		}
 		return true;
 	}
-	public int getLastItineraryID(){
+	public RecordSet getLastItineraryID() {
 		/* Retrieve the id of the last added itinerary first
 		 * so we can attach the POIs to it in the database */
-		RecordSet results = null;
-		//String getLastKey = "SELECT last_insert_rowid() as last_key";
-		String getLastKey = "SELECT DISTINCT itineraryID from POIItinerary";
+		this.db = this.gw.getReadableDatabase();
+		String query = "SELECT DISTINCT itineraryID from UserItinerary ORDER BY itineraryID DESC";
+		SQLSet results = null;
 		try {
-			results = new SQLSet(db.rawQuery(getLastKey, null));
+			results = new SQLSet(db.rawQuery(query, null));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		ArrayList<Integer> idList = new ArrayList<Integer>();
-		try {
-			while(results.next()){
-				idList.add(results.getInt("itineraryID"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		results.close();
-		Collections.sort(idList);
-		//int lastKey = results.getInt("last_key");
-		return idList.get(idList.size()-1);
+		return results;
 	}
 }

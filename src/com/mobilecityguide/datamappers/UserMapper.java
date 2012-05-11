@@ -83,6 +83,7 @@ public class UserMapper {
 				usersNames.add(r.getString("userName"));
 		} catch (Exception e) {
 			e.printStackTrace();
+			r.close();
 		}
 		r.close();
 		return usersNames;

@@ -7,6 +7,8 @@ import android.content.Context;
 
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
+import com.mobilecityguide.controllers.UserController;
+import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLItineraryGateway;
@@ -32,19 +34,18 @@ public class ItineraryMapper {
 		RecordSet rIt = itineraryGateway.getItinerary(id);
 		RecordSet rT = itineraryGateway.getItineraryTitles(id);
 		try {
-			if (rIt.first()) {
+			if (rIt != null) {
 				itinerary = new Itinerary();
 				itinerary.setId(id);
 				itinerary.setTheme(getItineraryCategory(id));
-				while (rT.next()) // add titles of itinerary in different languages
+				while (rT.next()) // retrieve titles of itinerary in different languages
 					itinerary.addTitle(rT.getString("language"), rT.getString("title"));
-				if(!rIt.equals(null)){
-				do { // add each POI of the itinerary
+				while (rIt.next()) { // retrieve each POI of the itinerary
 					POI poi = POIController.getPOI(rIt.getInt("poiID"));
 					itinerary.addPOI(rIt.getInt("step"), poi); // add POI at the right place (step) in the POI list of itinerary
-
-				} while (rIt.next());
 				}
+			} else {
+				System.out.println("No itinerary was returned from the database.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,7 +58,13 @@ public class ItineraryMapper {
 	}
 
 	public boolean addItinerary(Itinerary itinerary) throws Exception {
-		return this.itineraryGateway.addItinerary(itinerary);
+		if (this.itineraryGateway.addItinerary(itinerary)) {
+			ItineraryController.titlesIDItinerariesMap.put(ItineraryController.getItineraryTitle(itinerary), new Integer(itinerary.getId()));
+			UserController.activeUser.getUserItinerariesID().add(new Integer(itinerary.getId()));
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public HashMap<String,String>getItineraryTitles(int id){
@@ -65,8 +72,6 @@ public class ItineraryMapper {
 		HashMap<String, String> titlesMap = new HashMap<String, String>();
 		try {
 			r = itineraryGateway.getItineraryTitles(id);
-
-
 			while (r.next())
 				titlesMap.put(r.getString("language"), r.getString("title"));
 		} catch (Exception e) {
@@ -82,10 +87,9 @@ public class ItineraryMapper {
 		try {
 			if (r.first()) {
 				int catID = r.getInt("categoryID");
-				do{
+				while (r.next()) {
 					categoryMap.put(r.getString("language"), r.getString("title"));
 				}
-				while (r.next());
 				category = new Category(catID, categoryMap);
 			}
 		} catch (Exception e) {
@@ -129,8 +133,22 @@ public class ItineraryMapper {
 	}
 	
 	public int getLastItineraryID() {
-		System.out.println(itineraryGateway.getLastItineraryID());
-		return itineraryGateway.getLastItineraryID();
+		RecordSet ids = itineraryGateway.getLastItineraryID();
+		if (ids == null) // if there is no itinerary in the database
+			return 0;
+		else {
+			try {
+				ids.first();
+				System.out.println(ids.getInt("itineraryID"));
+		        int result = ids.getInt("itineraryID");
+		        ids.close();
+				return result;
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error while retrieving last itinerary ID.");
+			}
+			return 0;
+		}
 	}
 
 }

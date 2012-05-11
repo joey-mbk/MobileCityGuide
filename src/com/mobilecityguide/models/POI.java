@@ -16,12 +16,11 @@ public class POI {
 	private double latitude;
 	private double longitude;
 	private HashMap<String, String> images = new HashMap<String, String>(); // key is time of day, value is image path
-	private String openingsHours; // missing in the DB !!!
-	
 	
 	public HashMap<String, String> getName() {
-		return name;
+		return this.name;
 	}
+	
 	public String getName(String language) {
 		return this.name.get(language);
 	}
@@ -95,14 +94,6 @@ public class POI {
 
 	public void addImage(String timeOfDay, String path) {
 		this.images.put(timeOfDay, path);
-	}
-
-	public String getOpeningsHours() {
-		return openingsHours;
-	}
-
-	public void setOpeningsHours(String openingsHours) {
-		this.openingsHours = openingsHours;
 	}
 
 	public ArrayList<Category> getcategories() {

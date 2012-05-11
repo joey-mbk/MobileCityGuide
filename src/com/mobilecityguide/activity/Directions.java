@@ -40,7 +40,10 @@ public class Directions extends Activity implements LocationListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		step = 1;
+		Bundle extras = getIntent().getExtras(); // retrieve the variables from previous intent
+		if (extras != null)
+			this.step = extras.getInt("step");
+		
 		poi = UserController.selectedItinerary.getPOIList().get(new Integer(step)); // retrieve this step POI
 		poiLocation = new Location(LocationManager.GPS_PROVIDER);
 		poiLocation.setLatitude(poi.getLatitude());
@@ -66,6 +69,13 @@ public class Directions extends Activity implements LocationListener {
 	}
 
 	private void addDirections() {
+		TextView poiTitle = new TextView(this);
+		String poiName = POIController.getPOIName(poi);
+		poiTitle.setText(poiName);
+		poiTitle.setTextAppearance(this, android.R.style.TextAppearance_Large);
+		LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
+		layout.addView(poiTitle);
+		
 		for (int i = 0; i < mRoad.mPoints.length-1; i++) {
 			TextView container = new TextView(this);
 			if (i == mRoad.mPoints.length-2) // if it's the last direction, no need to show distance
@@ -76,10 +86,10 @@ public class Directions extends Activity implements LocationListener {
 			container.setLayoutParams(new LinearLayout.LayoutParams(
 		    		LinearLayout.LayoutParams.FILL_PARENT,
 		    		LinearLayout.LayoutParams.WRAP_CONTENT));
-			LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
 			layout.addView(container);
 		}
 	}
+
 
 	private void moveToNextPoi() {
 		this.step++;
@@ -100,10 +110,10 @@ public class Directions extends Activity implements LocationListener {
 		/* if we're less than 50 meters away from the POI, show its informations */
 		if (arg0.distanceTo(poiLocation) <= 50) {
 			Intent intent = new Intent(this, PoiDetails.class);
-			intent.putExtra("id", true);
+			intent.putExtra("itinerary", true);
+			intent.putExtra("step", this.step);
 			intent.putExtra("poi", poi.getId());
 			startActivity(intent);
-			
 		}
 	}
 
