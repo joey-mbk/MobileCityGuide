@@ -1,9 +1,12 @@
 package com.mobilecityguide.models;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
+
+import com.mobilecityguide.controllers.POIController;
 
 public class Itinerary  {
-	
+
 	private int id;
 	private HashMap<String, String> title = new HashMap<String,String>();
 	private HashMap<Integer,POI> POIList= new HashMap<Integer,POI>();
@@ -12,7 +15,7 @@ public class Itinerary  {
 	public HashMap<String, String> getTitle() {
 		return this.title;
 	}
-	
+
 	public String getTitle(String language) {
 		return this.title.get(language);
 	}
@@ -28,7 +31,7 @@ public class Itinerary  {
 	public void addNextPOI(POI poi) {
 		this.POIList.put(POIList.size()+1, poi);
 	}
-	
+
 	public void addPOI(int step ,POI poi) {
 		this.POIList.put(step, poi);
 	}
@@ -40,7 +43,14 @@ public class Itinerary  {
 	public void setTheme(Category theme) {
 		this.theme = theme;
 	}
-	
+
+
+	public void delPOI(POI poi){
+		for (Entry<Integer, POI> entry : POIList.entrySet()){
+			if(entry.getValue().equals(poi))
+				delPOI(entry.getKey());
+		}
+	}
 	public void delPOI(int step){
 		this.POIList.remove(step);
 		for(int i = step+1;i<=POIList.size()+1;i++){
@@ -57,13 +67,13 @@ public class Itinerary  {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public void clear() {
 		this.POIList.clear();
 	}
-	
+
 	public void reOrder(int currentStep, int newStep) {
-        
+
 		POI poiToMove = this.POIList.get(currentStep);
 		delPOI(currentStep);
 		for(int i = POIList.size();i>=newStep;i--){
@@ -80,10 +90,10 @@ public class Itinerary  {
 		this.POIList.remove(currentStep);
 		POI tempPOI = null;
 		POI tempPOI2 = null;
-		
+
 		if (currentStep > newStep) {
 			tempPOI2 = currentStepPOI;
-			
+
 			for (int i = newStep; i <= this.POIList.size()+1; i++) {
 				if (i != this.POIList.size()+1) {
 					tempPOI = this.POIList.get(i);
@@ -93,14 +103,14 @@ public class Itinerary  {
 				tempPOI2 = tempPOI;
 			}
 		}
-		
+
 		if (currentStep < newStep) {
 			for (int i = currentStep+1; i <= newStep; i++) {
 				tempPOI = this.POIList.get(i);
 				this.POIList.remove(i);
 				this.POIList.put(i-1, tempPOI);
 			}
-			
+
 			this.POIList.put(new Integer(newStep), currentStepPOI);
 		}*/
 	}

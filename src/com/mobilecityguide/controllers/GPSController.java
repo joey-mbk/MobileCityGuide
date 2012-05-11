@@ -14,12 +14,14 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
 
 import com.mobilecityguide.models.POI;
 import com.mobilecityguide.models.Point;
 import com.mobilecityguide.models.Road;
 
-public class GPSController {//implements LocationListener{
+public class GPSController {
 	public static Road getRoute(InputStream is) {
 		KMLHandler handler = new KMLHandler();
 		try {
