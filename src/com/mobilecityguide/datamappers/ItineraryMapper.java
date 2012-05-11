@@ -51,6 +51,8 @@ public class ItineraryMapper {
 			throw new Exception("Error in the RecordSet while getting POI '"+id+"' from the database.");
 		}
 		ItineraryController.fetchedItineraries.put(new Integer(id), itinerary);
+		rIt.close();
+		rT.close();
 		return itinerary;
 	}
 
@@ -59,7 +61,7 @@ public class ItineraryMapper {
 	}
 
 	public HashMap<String,String>getItineraryTitles(int id){
-		RecordSet r;
+		RecordSet r = null;
 		HashMap<String, String> titlesMap = new HashMap<String, String>();
 		try {
 			r = itineraryGateway.getItineraryTitles(id);
@@ -70,6 +72,7 @@ public class ItineraryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		r.close();
 		return titlesMap;
 	}
 	public Category getItineraryCategory(int id) throws Exception{
@@ -88,6 +91,7 @@ public class ItineraryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		r.close();
 		return category;
 	}
 
@@ -100,7 +104,7 @@ public class ItineraryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		r.close();
 		return itineraries;
 	}
 	public ArrayList<Integer> getPredefCityItineraries(String city)throws Exception {
@@ -112,7 +116,7 @@ public class ItineraryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		r.close();
 		return itineraries;
 	}
 	

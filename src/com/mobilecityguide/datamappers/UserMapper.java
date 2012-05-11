@@ -57,7 +57,9 @@ public class UserMapper {
 			e.printStackTrace();
 			throw new Exception("Error in the RecordSet while getting user '"+name+"' from the database.");
 		}
-
+		rU.close();
+		rCat.close();
+		rI.close();
 		return user;
 	}
 
@@ -82,6 +84,7 @@ public class UserMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		r.close();
 		return usersNames;
 	}
 
@@ -94,6 +97,7 @@ public class UserMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		r.close();
 		return languages;
 	}
 }

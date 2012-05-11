@@ -20,4 +20,5 @@ public interface RecordSet {
 	public double getDouble(String column) throws RecordSetException, Exception;
 	public String[] getList(String valCol, String orderCol) throws RecordSetException, Exception;
 	public int size();
+	public void close();
 }
