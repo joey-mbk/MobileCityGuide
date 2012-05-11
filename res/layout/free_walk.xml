@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MainStyleNoBg" >
 
+
     <com.google.android.maps.MapView
         android:id="@+id/myMapView1"
+
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_x="0px"

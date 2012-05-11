@@ -22,9 +22,12 @@
             android:id="@+id/theme"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/buttonroundedcorners2"
-            android:text="@string/themes_prompt" />
+            android:text="@string/themes_prompt"
+            android:textColor="#FFFFFF" 
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -38,7 +41,7 @@
             android:id="@+id/add_pois"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/buttonroundedcorners"
             android:text="@string/add_pois"
             android:textColor="#ffffff" />

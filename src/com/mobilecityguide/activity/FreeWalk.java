@@ -16,7 +16,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,7 +40,7 @@ import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.models.POI;
 
-public class FreeWalk extends Activity implements OnClickListener , OnItemClickListener, LocationListener {
+public abstract class FreeWalk extends Activity implements OnClickListener , OnItemClickListener, LocationListener {
 
 	protected CharSequence[] options_f;
 	protected boolean[] selections_f;
@@ -57,10 +56,87 @@ public class FreeWalk extends Activity implements OnClickListener , OnItemClickL
 	/* Error dialog */
 	AlertDialog.Builder error;
 
+	public class MapOverlay extends Overlay {
+		private GeoPoint data;  
+
+		public MapOverlay( GeoPoint item) {
+			data = item;
+		}
+
+		/* (non-Javadoc)
+		 * @see com.google.android.maps.Overlay#draw(android.graphics.Canvas, com.google.android.maps.MapView, boolean, long)
+		 */
+
+		@Override
+		public boolean draw(Canvas canvas, MapView mapView, boolean shadow,long when) {
+			Projection projection = mapView.getProjection();
+			if (shadow == false) {
+				Paint paint = new Paint();
+				paint.setAntiAlias(true);
+				Point point = new Point();
+				projection.toPixels(data, point);
+				paint.setColor(Color.GREEN);
+				paint.setStrokeWidth(10);
+				canvas.drawPoint((float) point.x, (float) point.y, paint);
+				/*---add the marker---
+			Bitmap bmp = BitmapFactory.decodeResource(
+					getResources(), R.drawable.star);            
+			canvas.drawBitmap(bmp, point.x, point.y-50, null);        
+			return true;*/
+			}
+			return super.draw(canvas, mapView, shadow, when);
+		}
+
+		/* (non-Javadoc)
+		 * @see com.google.android.maps.Overlay#draw(android.graphics.Canvas, com.google.android.maps.MapView, boolean)
+		 */
+		@Override
+		public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+
+			super.draw(canvas, mapView, shadow);
+		}       
+
+		@Override
+		public boolean onTouchEvent(MotionEvent event, MapView mapView) 
+		{  
+			//---when user lifts his finger---
+			if (event.getAction() == 1) {                
+				GeoPoint p = mapView.getProjection().fromPixels(
+						(int) event.getX(),
+						(int) event.getY());
+
+				Geocoder geoCoder = new Geocoder(
+						getBaseContext(), Locale.getDefault());
+				try {
+					List<Address> addresses = geoCoder.getFromLocation(
+							p.getLatitudeE6()  / 1E6, 
+							p.getLongitudeE6() / 1E6, 1);
+
+					String add = "";
+					if (addresses.size() > 0) 
+					{
+						for (int i=0; i<addresses.get(0).getMaxAddressLineIndex(); 
+								i++)
+							add += addresses.get(0).getAddressLine(i) + "\n";
+					}
+
+					Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
+				}
+				catch (IOException e) {                
+					e.printStackTrace();
+				}   
+				return true;
+			}
+			else                
+				return false;
+		}        
+	} 
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mapView = (MapView) findViewById(R.id.myMapView1);
 
 		context = this;
 
@@ -95,7 +171,7 @@ public class FreeWalk extends Activity implements OnClickListener , OnItemClickL
 					(int) (poi2.getLongitude() * 1E6));
 
 			MapOverlay mapOverlay = new MapOverlay(points);
-			 listOfOverlays = mapView.getOverlays();
+			listOfOverlays = mapView.getOverlays();
 			listOfOverlays.add(mapOverlay);
 
 		}
@@ -228,108 +304,6 @@ public class FreeWalk extends Activity implements OnClickListener , OnItemClickL
 		}
 	}
 
-	public class MapOverlay extends Overlay {
-		private GeoPoint data;  
-
-		public MapOverlay( GeoPoint item) {
-			data = item;
-		}
-
-		/* (non-Javadoc)
-		 * @see com.google.android.maps.Overlay#draw(android.graphics.Canvas, com.google.android.maps.MapView, boolean, long)
-		 */
-
-		@Override
-		public boolean draw(Canvas canvas, MapView mapView, boolean shadow,long when) {
-			Projection projection = mapView.getProjection();
-			if (shadow == false) {
-				Paint paint = new Paint();
-				paint.setAntiAlias(true);
-				Point point = new Point();
-				projection.toPixels(data, point);
-				paint.setColor(Color.GREEN);
-				paint.setStrokeWidth(10);
-				canvas.drawPoint((float) point.x, (float) point.y, paint);
-				/*---add the marker---
-			Bitmap bmp = BitmapFactory.decodeResource(
-					getResources(), R.drawable.star);            
-			canvas.drawBitmap(bmp, point.x, point.y-50, null);        
-			return true;*/
-			}
-			return super.draw(canvas, mapView, shadow, when);
-		}
-
-		/* (non-Javadoc)
-		 * @see com.google.android.maps.Overlay#draw(android.graphics.Canvas, com.google.android.maps.MapView, boolean)
-		 */
-		@Override
-		public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-
-			super.draw(canvas, mapView, shadow);
-		}       
-
-		@Override
-		public boolean onTouchEvent(MotionEvent event, MapView mapView) 
-		{  
-			//---when user lifts his finger---
-			if (event.getAction() == 1) {                
-				GeoPoint p = mapView.getProjection().fromPixels(
-						(int) event.getX(),
-						(int) event.getY());
-
-				Geocoder geoCoder = new Geocoder(
-						getBaseContext(), Locale.getDefault());
-				try {
-					List<Address> addresses = geoCoder.getFromLocation(
-							p.getLatitudeE6()  / 1E6, 
-							p.getLongitudeE6() / 1E6, 1);
-
-					String add = "";
-					if (addresses.size() > 0) 
-					{
-						for (int i=0; i<addresses.get(0).getMaxAddressLineIndex(); 
-								i++)
-							add += addresses.get(0).getAddressLine(i) + "\n";
-					}
-
-					Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
-				}
-				catch (IOException e) {                
-					e.printStackTrace();
-				}   
-				return true;
-			}
-			else                
-				return false;
-		}        
-	} 
-
-
-
-
-	@Override
-	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }
 

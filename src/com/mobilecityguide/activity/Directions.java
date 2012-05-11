@@ -83,7 +83,7 @@ public class Directions extends Activity implements LocationListener {
 
 	private void moveToNextPoi() {
 		this.step++;
-		//this.previousPoi
+		//this.previousPoi;
 		this.poi = UserController.selectedItinerary.getPOIList().get(new Integer(this.step));
 		this.poiLocation = new Location(LocationManager.GPS_PROVIDER);
 		this.poiLocation.setLatitude(poi.getLatitude());
