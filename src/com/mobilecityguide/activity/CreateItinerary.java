@@ -112,7 +112,7 @@ public class CreateItinerary extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-				intent = new Intent(this, PoisList.class);
+				intent = new Intent(this, ItinerariesList.class);
 				startActivity(intent);
 				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
 				break;

@@ -50,6 +50,7 @@
     <string name="filters">Filters</string>
     <string name="itinerary_delete">Select an itinerary to delete it</string>
     <string name="itinerary_deleteButton">Delete itinerary</string>
+    <string name="select_poiToDelete_text">Select a poi to delete it</string>
     <string name="about_text">\
 All rights reserved.
 For educational use only.</string>
