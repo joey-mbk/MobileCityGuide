@@ -96,17 +96,20 @@ public class CreateItinerary extends Activity implements OnClickListener {
 				theme.show();
 				break;
 			case R.id.add_pois:
+				/* we create the itinerary object */
 				Itinerary itinerary = new Itinerary();
 				itinerary.setId(ItineraryController.itineraryMapper.getLastItineraryID()+1);
 				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.itineraryname)).getText().toString());
 				itinerary.setTheme(CategoryController.getCategory( ((Button) findViewById(R.id.theme)).getText().toString() ));
+				
+				/* add it to the database */
 				try {
 					ItineraryController.addItinerary(itinerary);
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.out.println("Error while creating a new itinerary.");
 				}
-				UserController.selectedItinerary = itinerary;
+				
 				intent = new Intent(this, ItinerariesList.class);
 				startActivity(intent);
 				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
