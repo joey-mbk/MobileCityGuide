@@ -18,15 +18,20 @@ import android.widget.Toast;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
+import com.mobilecityguide.activity.CreateProfile.DialogButtonClickHandler;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.UserController;
+import com.mobilecityguide.models.Category;
 import com.mobilecityguide.models.Itinerary;
 
 public class CreateItinerary extends Activity implements OnClickListener {
 
 	protected CharSequence[] options_t;
 	protected int selections_t;
+
+	/* Error dialog */
+	AlertDialog.Builder error;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -88,20 +93,48 @@ public class CreateItinerary extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-			case R.id.theme:
-				AlertDialog.Builder theme = new AlertDialog.Builder(this);
-				theme.setTitle(R.string.createitinerary_theme_text);
-				theme.setSingleChoiceItems(options_t, selections_t, new DialogSingleSelectionClickHandler());
-				theme.setPositiveButton("OK", new DialogButtonClickHandler());
-				theme.show();
-				break;
-			case R.id.add_pois:
+		case R.id.theme:
+			AlertDialog.Builder theme = new AlertDialog.Builder(this);
+			theme.setTitle(R.string.createitinerary_theme_text);
+			theme.setSingleChoiceItems(options_t, selections_t, new DialogSingleSelectionClickHandler());
+			theme.setPositiveButton("OK", new DialogButtonClickHandler("theme"));
+			theme.show();
+			break;
+		case R.id.add_pois:
+			String name =((EditText)findViewById(R.id.itineraryname)).getText().toString();
+			String selectedTheme = ((Button) findViewById(R.id.theme)).getText().toString();
+			
+			if(selectedTheme.equals("Theme of the itinerary")){
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.no_theme);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			else if(name == null || name.equals("") || !name.matches("[a-zA-Z0-9]+")){
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.create_itinerary_error_itineraryNameformat_text);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			else if(ItineraryController.isItineraryNameAlreadyUsed(name)){
+				error = new AlertDialog.Builder(this);
+				error.setTitle(R.string.create_profile_error_title);
+				error.setMessage(R.string.create_itinerary_error_alreadyused_text);
+				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
+				error.show();
+			}
+			else
+			{
+				System.out.println("Itinerary create");
 				/* we create the itinerary object */
 				Itinerary itinerary = new Itinerary();
 				itinerary.setId(ItineraryController.itineraryMapper.getLastItineraryID()+1);
-				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.itineraryname)).getText().toString());
+				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.itineraryname)).getText().toString());				
 				itinerary.setTheme(CategoryController.getCategory( ((Button) findViewById(R.id.theme)).getText().toString() ));
-				
+
+
 				/* add it to the database */
 				try {
 					ItineraryController.addItinerary(itinerary);
@@ -109,11 +142,12 @@ public class CreateItinerary extends Activity implements OnClickListener {
 					e.printStackTrace();
 					System.out.println("Error while creating a new itinerary.");
 				}
-				
+
 				intent = new Intent(this, ItinerariesList.class);
 				startActivity(intent);
 				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
-				break;
+			}
+			break;
 		}
 	}
 
@@ -124,12 +158,21 @@ public class CreateItinerary extends Activity implements OnClickListener {
 	}
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
+
+		private String window;
+
+		public DialogButtonClickHandler(String window) {
+			this.window = window;
+		}
 		public void onClick(DialogInterface dialog, int clicked) {
 			switch(clicked)	{
-				case DialogInterface.BUTTON_POSITIVE:
+			case DialogInterface.BUTTON_POSITIVE:
+				if (window.equals("theme")) {
 					Button button = (Button) findViewById(R.id.theme);
 					button.setText(options_t[selections_t]);
+				}
 				break;
+
 			}
 		}
 	}

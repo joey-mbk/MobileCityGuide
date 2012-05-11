@@ -118,4 +118,18 @@ public class ItineraryController {
 	public static Itinerary getLastAddedItinerary() throws Exception{
 		return getItinerary(itineraryMapper.getLastItineraryID());
 	}
+	
+	public static boolean isItineraryNameAlreadyUsed(String name){
+		boolean bool = true;
+		try {
+			bool = getCityItinerariesTitles().contains(name);
+			if(!bool){
+				bool = UserController.getActiveUserItinerariesNames().contains(name);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return bool;
+		
+	}
 }

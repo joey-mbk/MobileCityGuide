@@ -57,6 +57,10 @@
     <string name="itinerary_delete">Delete an itinerary</string>
     <string name="itinerary_deleteButton">Delete itinerary</string>
     <string name="select_poiToDelete_text">Select a poi to delete it</string>
+    <string name="no_theme">You must select a theme</string>
+    <string name="no_ItineraryName">You must select a theme</string>
+    <string name="create_itinerary_error_alreadyused_text">Sorry, this itinerary name is already used. Please, choose another one.</string>
+    <string name="create_itinerary_error_itineraryNameformat_text">Sorry, itinerary name must contain only alphanumerical characters and no space.</string>
     <string name="about_text">\
 All rights reserved.
 For educational use only.
