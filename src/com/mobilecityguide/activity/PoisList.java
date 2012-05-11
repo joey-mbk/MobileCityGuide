@@ -93,7 +93,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		try {
 			poiHashMap = UserController.selectedItinerary.getPOIList();
 			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
-				pois.add(entry.getKey(), POIController.getPOIName(entry.getValue()));
+				pois.add(entry.getKey()-1, POIController.getPOIName(entry.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -105,6 +105,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		Intent intent = new Intent(this, PoiDetails.class);
+		intent.putExtra("id", false);
 		intent.putExtra("poi", pois.get((int) id));
 		startActivity(intent);
 	}
@@ -113,7 +114,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.add_poi:
-			startActivity(new Intent(this, AddPoi.class));
+			startActivity(new Intent(this, DeletePoi.class));
 			break;
 		case R.id.start:
 			startActivity(new Intent(this, Directions.class));

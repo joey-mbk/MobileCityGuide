@@ -4,7 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_GPS"/>
     <uses-permission android:name="android.permission.LOCATION"/>
@@ -68,6 +68,10 @@
             android:name=".activity.AddPoi"
             android:label="Add POI" >
         </activity>
+         <activity
+            android:name=".activity.DeletePoi"
+            android:label="Delete POI" >
+        </activity>
         <activity
             android:name=".activity.PoiDetails"
             android:label="POI infos" >
@@ -80,6 +84,10 @@
             android:name=".activity.Directions"
             android:label="Guided tour directions" >
        	</activity>
+       	<activity
+            android:name=".activity.DeleteItinerary"
+            android:label="Delete itinerary" >
+        </activity>
     </application>
 
 </manifest>

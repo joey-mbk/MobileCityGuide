@@ -1,6 +1,8 @@
 package com.mobilecityguide.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,25 +19,25 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
+import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
+import com.mobilecityguide.models.POI;
 
-public class ItinerariesList extends Activity implements OnClickListener, OnItemClickListener {
+public class DeletePoi extends Activity implements OnClickListener , OnItemClickListener {
 
 	protected CharSequence[] options_f;
 	protected boolean[] selections_f;
 	AlertDialog.Builder filters = null;
-	ArrayList<String> filtersList = new ArrayList<String>(); // list of filters chosen by the user
-	private String[]itinerariesList;
-	ListView itinerariesListView;
-	ArrayAdapter<String> adapter; 
-	ArrayList<String> tempItinerariesList;
+	ArrayList<String> filtersList = new ArrayList<String>();
+	ListView poiListView;
+	ArrayAdapter<String> adapter;
 	Context context;
+	private String[]poiNamesList;
 
 	/* Error dialog */
 	AlertDialog.Builder error;
@@ -45,47 +47,36 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		options_f = null;
-		selections_f = null;
-		filters = null;
-		filtersList = new ArrayList<String>(); 
-		itinerariesList = null;
-		itinerariesListView = null;
-		adapter = null; 
-		tempItinerariesList = null;
-
 		context = this;
 
 		/* Fill the filter window menu */
 		try {
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
-			options_f = new CharSequence[titles.size()+2];
-			options_f[0]= "Personnal itineraries";
-			options_f[1]= "Predefined itineraries";
-			for (int i = 2; i < titles.size()+2; i++)
-				options_f[i] = titles.get(i-2);
+			options_f = new CharSequence[titles.size()];
+			for (int i = 0; i < titles.size(); i++)
+				options_f[i] = titles.get(i);
 		} catch (Exception e) {
 			options_f = null;
 			e.printStackTrace();
 		}
 		selections_f = new boolean[ options_f.length ];
 
-		/* Retrieve itineraries and fill the list */
-		ArrayList<String> itinerariesArrayList;
+		// Retrieve all pois of the itinerary
 		try {
-			itinerariesArrayList = UserController.getActiveUserItinerariesNames();
-			itinerariesArrayList.addAll(ItineraryController.getPredefCityItinerariesTitles());
-			itinerariesList = new String[itinerariesArrayList.size()];
-			itinerariesArrayList.toArray(itinerariesList);
+			HashMap<Integer, POI> pois = UserController.selectedItinerary.getPOIList();
+
+			poiNamesList = new String[pois.size()];
+			int i = 0;
+			for (Entry<Integer, POI> entry : pois.entrySet()){
+				poiNamesList[i] = POIController.getPOIName(entry.getValue());
+				i++;
+			}
 		} catch (Exception e) {
+			poiNamesList = null;
 			e.printStackTrace();
-			System.out.println("Error while retrieving itineraries.");
 		}
 
-		setContentView(R.layout.itineraries_list);
-
-		((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
-
+		setContentView(R.layout.delete_poi);
 		setListeners();
 	}
 
@@ -118,45 +109,29 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		return false;
 	}
 
-	private void setListeners() {
-		View createButton = findViewById(R.id.create_itinerary);
-		createButton.setOnClickListener(this);
-		
-		View deleteButton2 = findViewById(R.id.delete_itinerary);
-		deleteButton2.setOnClickListener(this);
-
+	private void setListeners() {	
 		View chooseFiltersButton = findViewById(R.id.filtersbutton);
 		chooseFiltersButton.setOnClickListener(this);
 
-		itinerariesListView = (ListView)findViewById(R.id.list);
-		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
-		itinerariesListView.setAdapter(adapter);
-		itinerariesListView.setOnItemClickListener(this);
+		poiListView = (ListView)findViewById(R.id.list);
+		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,poiNamesList);
+		poiListView.setAdapter(adapter);
+		poiListView.setOnItemClickListener(this);
 	}
-
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
-			UserController.selectedItinerary = ItineraryController.getItinerary(itinerariesList[(int) id]);
+			UserController.selectedItinerary.delPOI((POIController.getPOI(poiNamesList[(int) id])));
+			ItineraryController.saveItinerary(UserController.selectedItinerary);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Error while setting the selected itinerary");
-		}
-		Intent intent = new Intent(this, PoisList.class);
-		startActivity(intent);
+		}	
+		startActivity(new Intent(this, PoisList.class));
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
-		case R.id.create_itinerary:
-			intent = new Intent(this, CreateItinerary.class);
-			startActivity(intent);
-			break;
-		case R.id.delete_itinerary:
-			intent = new Intent(this, DeleteItinerary.class);
-			startActivity(intent);
-			break;
 		case R.id.filtersbutton:
 			AlertDialog.Builder filters = new AlertDialog.Builder(this);
 			filters.setTitle("Select filter(s)");
@@ -193,39 +168,30 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 			case DialogInterface.BUTTON_POSITIVE:
 
 				if (window.equals("filters")) {
-					ArrayList<Integer> itinerariesIDList = new ArrayList<Integer>();
-					if (selections_f[0])
-						itinerariesIDList.addAll(UserController.activeUser.getUserItinerariesID());
-					if(selections_f[1]){
-						try {
-							itinerariesIDList.addAll(ItineraryController.getPredefCityItinerariesID());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					for (int i = 2; i < options_f.length; i++) {
-						if (!selections_f[i]) {
+					ArrayList<String> poiArrayList = new ArrayList<String>();
+					for (int i = 0; i < options_f.length; i++) {
+						if (selections_f[i]) {
 							try {
-								for(Integer id: ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString())))
-									itinerariesIDList.remove(id);
+								for(String poi: POIController.getPOINamesofCategory(((CategoryController.getCategory(options_f[i].toString()))))){
+									if(!poiArrayList.contains(poi))
+										poiArrayList.add(poi);
+								}
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
 						}	
 					}
-					ArrayList<String> itinerariesNamesList= ItineraryController.getItinerariesTitles(itinerariesIDList);
-					if (itinerariesNamesList.isEmpty()) {
+					if (poiArrayList.isEmpty()) {
 						error = new AlertDialog.Builder(context);
-						error.setMessage("No itinerary matches to your request");
+						error.setMessage("No poi matches to your request");
 						error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
 						error.show();
 					}
 					else{
-						itinerariesList = new String[itinerariesNamesList.size()];
-						itinerariesNamesList.toArray(itinerariesList);
-						adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,itinerariesList);
-						itinerariesListView.setAdapter(adapter);
-						//adapter.notifyDataSetChanged();
+						poiNamesList = new String[poiArrayList.size()];
+						poiArrayList.toArray(poiNamesList);
+						adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,poiNamesList);
+						poiListView.setAdapter(adapter);
 					}
 
 				}

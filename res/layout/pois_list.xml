@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/city"
         android:layout_marginLeft="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff" />
 
     <TextView
@@ -33,35 +33,35 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/listroundedcorners"
-        android:cacheColorHint="#00000000" >
+        android:cacheColorHint="#00ffffff" >
     </ListView>
 
     <LinearLayout
         android:id="@+id/contentLayoutBottom"
         style="@style/LinearLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/add_poi"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="35dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/buttonroundedcorners"
             android:text="@string/add_poi_label"
             android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/start"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/buttonroundedcorners"
             android:text="@string/start_label"
             android:textColor="#ffffff" />

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:padding="20dip" >
 
-    <LinearLayout
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -12,44 +12,44 @@
             android:layout_width="199dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/poi_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/poi"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/select_poi_text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff" />
+            
+    		<TextView
+        		android:id="@+id/city_title"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginLeft="10dp"
+        		android:text="@string/city"
+        		android:textAppearance="?android:attr/textAppearanceLarge"
+        		android:textColor="#ffffff" />
+    		
+    	   <TextView
+           		android:id="@+id/title"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:layout_marginLeft="10dp"
+            	android:text="@string/itinerary_delete"
+            	android:textAppearance="?android:attr/textAppearanceSmall"
+            	android:textColor="#ffffff" />
         </LinearLayout>
 
-         <Button
+        <Button
             android:id="@+id/filtersbutton"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
             android:background="@drawable/buttonroundedcorners2"
+            android:layout_gravity="center_vertical"
             android:text="@string/filters"
             android:textColor="#ffffff" />
-         
+        
     </LinearLayout>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
-        android:layout_height="224dp"
+        android:layout_height="220dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/listroundedcorners"
         android:cacheColorHint="#00000000" >
     </ListView>
-            
+
 </LinearLayout>

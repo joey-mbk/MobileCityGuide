@@ -14,21 +14,20 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textViewCity"
+                android:id="@+id/poi_title_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/city"
+                android:text="@string/poi"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="#ffffff" />
 
             <TextView
-                android:id="@+id/textDescritpion"
+           		android:id="@+id/title"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="0.52"
-                android:text="@string/pois_of_city"
+				android:text="@string/select_poiToDelete_text"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="#ffffff" />
         </LinearLayout>
@@ -45,20 +44,11 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="fill_parent"
+        android:layout_height="276dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/listroundedcorners"
-        android:cacheColorHint="#00ffffff" >
+        android:cacheColorHint="#00000000" >
     </ListView>
-            
-    <Button
-        android:id="@+id/start"
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/buttonroundedcorners"
-        android:text="@string/start_label"
-        android:textColor="#ffffff" />
 
 </LinearLayout>
