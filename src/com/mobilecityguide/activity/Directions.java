@@ -70,12 +70,7 @@ public class Directions extends Activity implements LocationListener {
 
 	private void addDirections() {
 		TextView poiTitle = new TextView(this);
-		String poiName = null;
-		for (String lang : UserController.activeUser.getLanguage()) {
-			poiName = poi.getName(lang);
-			if (poiName != null)
-				break;
-		}
+		String poiName = POIController.getPOIName(poi);
 		poiTitle.setText(poiName);
 		poiTitle.setTextAppearance(this, android.R.style.TextAppearance_Large);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.directions);

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
@@ -39,12 +40,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		/* Set window titles */
 		((TextView) findViewById(R.id.city_title)).setText(UserController.city);
 		String[] languages = UserController.activeUser.getLanguage();
-		String itineraryTitle = null;
-		for (String lang : languages) {
-			itineraryTitle = UserController.selectedItinerary.getTitle(lang);
-			if (itineraryTitle != null)
-				break;
-		}
+		String itineraryTitle = ItineraryController.getItineraryTitle(UserController.selectedItinerary);
 		((TextView) findViewById(R.id.itinerary_title)).setText(itineraryTitle);
 		
 		setListeners();
