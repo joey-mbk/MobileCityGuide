@@ -37,7 +37,7 @@ public class GPSController {
 		return handler.mRoad;
 	}
 
-	public static String getUrl(Location userLocation, POI poi) {
+	public static String getUrl(Location userLocation, Location poi) {
 		StringBuffer urlString = new StringBuffer();
 		urlString.append("http://maps.google.com/maps?f=d&hl=fr");
 		urlString.append("&saddr="); // start point

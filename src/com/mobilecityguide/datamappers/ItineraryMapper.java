@@ -7,6 +7,8 @@ import android.content.Context;
 
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
+import com.mobilecityguide.controllers.UserController;
+import com.mobilecityguide.exceptions.RecordSetException;
 import com.mobilecityguide.gateways.ItineraryGateway;
 import com.mobilecityguide.gateways.RecordSet;
 import com.mobilecityguide.gateways.SQL.SQLItineraryGateway;
@@ -57,7 +59,12 @@ public class ItineraryMapper {
 	}
 
 	public boolean addItinerary(Itinerary itinerary) throws Exception {
-		return this.itineraryGateway.addItinerary(itinerary);
+		if (this.itineraryGateway.addItinerary(itinerary)) {
+			UserController.activeUser.getUserItinerariesID().add(new Integer(itinerary.getId()));
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public HashMap<String,String>getItineraryTitles(int id){
@@ -129,8 +136,19 @@ public class ItineraryMapper {
 	}
 	
 	public int getLastItineraryID() {
-		System.out.println(itineraryGateway.getLastItineraryID());
-		return itineraryGateway.getLastItineraryID();
+		RecordSet ids = itineraryGateway.getLastItineraryID();
+		if (ids == null) // if there is no itinerary in the database
+			return 0;
+		else {
+			try {
+				ids.first();
+				return ids.getInt("itineraryID");
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error while retrieving last itinerary ID.");
+			}
+			return 0;
+		}
 	}
 
 }
