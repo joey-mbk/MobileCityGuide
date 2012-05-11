@@ -12,13 +12,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.Category;
+import com.mobilecityguide.models.User;
 
 public class CreateProfile extends Activity implements OnClickListener {
 
@@ -32,6 +35,8 @@ public class CreateProfile extends Activity implements OnClickListener {
 	ArrayList<String> langTemp = new ArrayList<String>(); // buffer list of languages chosen by the user
 	ArrayList<Category> cat = new ArrayList<Category>(); // list of interests chosen by the user
 
+	boolean isCreatingUser = false;
+
 	/* Error dialog */
 	AlertDialog.Builder error;
 
@@ -39,6 +44,24 @@ public class CreateProfile extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// retrieve the variables from previous intent
+		Bundle extras = getIntent().getExtras(); 
+		try {
+			if (extras != null) {
+				String b = extras.getString("new");
+				if(b.equals("yes"))
+					isCreatingUser = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(!isCreatingUser) {
+			lang.clear();
+			langTemp.clear();
+			cat.clear();
+		}
 
 		try {
 			/* Retrieve all languages */
@@ -63,7 +86,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		selections_i = new boolean[ options_i.length ];
-
+		
 		setContentView(R.layout.create_profile);
 		setListeners();
 	}
@@ -86,8 +109,26 @@ public class CreateProfile extends Activity implements OnClickListener {
 	}
 
 	private void setListeners() {
-		View saveButton = findViewById(R.id.save);
-		saveButton.setOnClickListener(this);
+		if(!isCreatingUser) {
+			((EditText)findViewById(R.id.username)).setText(UserController.activeUser.getName());
+
+			Button button = (Button) findViewById(R.id.ages);
+			String age = UserController.activeUser.getAge();
+			if(age.equals("kid")){
+				selections_a = 1;
+				button.setText("Kid");
+			}
+			else {
+				selections_a = 0;
+				button.setText("Adult");
+			}			
+
+			Button button2 = (Button) findViewById(R.id.choose_languages);
+			button2.setText("Rechoose your language(s)");
+
+			Button button3 = (Button) findViewById(R.id.choose_interests);
+			button3.setText("Rechoose your interest(s)");
+		}
 
 		View chooseAgeButton = findViewById(R.id.ages);
 		chooseAgeButton.setOnClickListener(this);
@@ -97,6 +138,9 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 		View chooseInterestsButton = findViewById(R.id.choose_interests);
 		chooseInterestsButton.setOnClickListener(this);
+
+		View saveButton = findViewById(R.id.save);
+		saveButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -105,7 +149,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 		case R.id.save:
 			String userName = ((EditText)findViewById(R.id.username)).getText().toString();
 			/* if specified username is already used, alert the user */
-			if (UserController.isUserNameAlreadyUsed(userName)) {
+			if (isCreatingUser && UserController.isUserNameAlreadyUsed(userName)) {
 				error = new AlertDialog.Builder(this);
 				error.setTitle(R.string.create_profile_error_title);
 				error.setMessage(R.string.create_profile_error_alreadyused_text);
@@ -136,11 +180,20 @@ public class CreateProfile extends Activity implements OnClickListener {
 				error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
 				error.show();
 			}
+
 			/* if everything check was ok, add the user */
 			else {
-				UserController.addNewUser(userName, options_a[selections_a].toString().toLowerCase(), lang.toArray(new String[lang.size()]), cat);
-				intent = new Intent(this, Connect.class);
-				startActivity(intent);
+				if(!isCreatingUser){
+					UserController.delActiveUser();
+					UserController.addNewUser(userName, options_a[selections_a].toString().toLowerCase(), lang.toArray(new String[lang.size()]), cat);
+					intent = new Intent(this, Connect.class);
+					startActivity(intent);
+				}
+				else {
+					UserController.addNewUser(userName, options_a[selections_a].toString().toLowerCase(), lang.toArray(new String[lang.size()]), cat);
+					intent = new Intent(this, Connect.class);
+					startActivity(intent);
+				}
 			}
 			break;
 		case R.id.ages:
@@ -189,6 +242,13 @@ public class CreateProfile extends Activity implements OnClickListener {
 	public class DialogSingleSelectionClickHandler implements android.content.DialogInterface.OnClickListener {
 		public void onClick(DialogInterface dialog, int which) {
 			selections_a = which;
+			Button button = (Button) findViewById(R.id.ages);
+			if(selections_a==1) {
+				button.setText("Kid");
+			}
+			else {
+				button.setText("Adult");
+			}
 		}
 	}
 
