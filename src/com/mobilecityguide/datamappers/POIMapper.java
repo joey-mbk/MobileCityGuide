@@ -66,6 +66,12 @@ public class POIMapper {
 			throw new Exception("Error in the RecordSet while getting POI '"+id+"' from the database.");
 		}
 		POIController.fetchedPOI.put(new Integer(id), poi);
+		rPoi.close();
+		rCat.close();
+		rNames.close();
+		rDesc.close();
+		rLG.close();
+		rImg.close();
 		return poi;
 	}
 	
@@ -77,6 +83,7 @@ public class POIMapper {
 			list[i] = getPOI(r.getInt("poiID")); // build the POI object and add it to the list
 			i++;
 		}
+		r.close();
 		return list;
 	}
 	
@@ -88,6 +95,7 @@ public class POIMapper {
 			list[i] = getPOI(r.getInt("poiID")); // build the POI object and add it to the list
 			i++;
 		}
+		r.close();
 		return list;
 	}
 
@@ -97,6 +105,7 @@ public class POIMapper {
 		while (r.next()) {
 			citiesNames.add(r.getString("city"));
 		}
+		r.close();
 		return citiesNames;
 		
 	}

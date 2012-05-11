@@ -58,6 +58,10 @@ public class Itinerary  {
 		this.id = id;
 	}
 	
+	public void clear() {
+		this.POIList.clear();
+	}
+	
 	public void reOrder(int currentStep, int newStep) {
         
 		POI poiToMove = this.POIList.get(currentStep);

@@ -91,8 +91,9 @@ public class ItineraryController {
 	public static ArrayList<Integer> getItineraryOfCategory(ArrayList<Integer>itineraryID, Category category) throws Exception{
 		ArrayList<Integer>itinerariesOfCategory = new ArrayList<Integer>();
 		for(int id: itineraryID){
-			if(itineraryMapper.getItineraryCategory(id).equals(category))
+			if(itineraryMapper.getItineraryCategory(id).getCategory().equals(category.getCategory())){
 				itinerariesOfCategory.add(id);
+			}
 		}
 		return itinerariesOfCategory;
 	}

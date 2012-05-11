@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
@@ -34,7 +35,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 	ArrayList<String> pois = new ArrayList<String>(); // list of pois chosen by the user
 	ArrayList<String> poiTemp = new ArrayList<String>(); // buffer list of languages chosen by the user
 	
-	private String[] poiList;
+	private ArrayAdapter<String> adapter;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -119,19 +120,19 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		HashMap<Integer, POI> poiHashMap;
 		try {
 			poiHashMap = UserController.selectedItinerary.getPOIList();
-			poiList = new String[poiHashMap.size()];
 			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
-				poiList[entry.getKey()-1] = POIController.getPOIName(entry.getValue());
+				pois.add(entry.getKey(), POIController.getPOIName(entry.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		poiListView.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,poiList));
+		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pois);
+		poiListView.setAdapter(adapter);
 		poiListView.setOnItemClickListener(this);
 	}
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		Intent intent = new Intent(this, PoiDetails.class);
-		intent.putExtra("poi", poiList[(int) id]);
+		intent.putExtra("poi", pois.get((int) id));
 		startActivity(intent);
 	}
 
@@ -146,7 +147,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 			addPoi.show();
 			break;
 		case R.id.start:
-			//TODO Commencement de la visite 
+			startActivity(new Intent(this, Directions.class));
 			break;
 		}
 	}
@@ -181,7 +182,16 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 				case DialogInterface.BUTTON_POSITIVE:
 					if (window.equals("add_poi")) {
 						pois.addAll(poiTemp); // if the user had previously selected pois, pois is outdated so we change it
+						try {
+							UserController.selectedItinerary.clear(); // reset the list of POIs of this itinerary
+							for (int i = 0; i < pois.size(); i++)
+								UserController.selectedItinerary.addPOI(i+1, POIController.getPOI(pois.get(i)));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 						poiTemp.clear(); // we flush the buffer, in case of future use
+						adapter.notifyDataSetChanged(); // refresh the list of POIs
+						//ItineraryController.saveItinerary(UserController.selectedItinerary); // Comment mettre à jour l'itinéraire ?
 					}
 				break;
 			}

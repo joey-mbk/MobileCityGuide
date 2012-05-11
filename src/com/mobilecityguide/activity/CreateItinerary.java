@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
 import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.Itinerary;
 
@@ -96,8 +97,15 @@ public class CreateItinerary extends Activity implements OnClickListener {
 				break;
 			case R.id.add_pois:
 				Itinerary itinerary = new Itinerary();
-				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.create_itinerary)).getText().toString());
+				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.itineraryname)).getText().toString());
 				itinerary.setTheme(CategoryController.getCategory( ((Button) findViewById(R.id.theme)).getText().toString() ));
+				try {
+					ItineraryController.addItinerary(itinerary);
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Error while creating a new itinerary.");
+				}
+				UserController.selectedItinerary = itinerary;
 				intent = new Intent(this, PoisList.class);
 				startActivity(intent);
 				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
