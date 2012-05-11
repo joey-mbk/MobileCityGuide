@@ -36,7 +36,7 @@ public class Directions extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		step = 0;
+		step = 1;
 		
 		/* Get user's location */
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
