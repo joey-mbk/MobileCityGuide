@@ -39,7 +39,6 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		
 		/* Set window titles */
 		((TextView) findViewById(R.id.city_title)).setText(UserController.city);
-		String[] languages = UserController.activeUser.getLanguage();
 		String itineraryTitle = ItineraryController.getItineraryTitle(UserController.selectedItinerary);
 		((TextView) findViewById(R.id.itinerary_title)).setText(itineraryTitle);
 		
@@ -109,6 +108,9 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.add_poi:
+			startActivity(new Intent(this, AddPoi.class));
+			break;
+		case R.id.delete_poiButton:
 			startActivity(new Intent(this, DeletePoi.class));
 			break;
 		case R.id.start:

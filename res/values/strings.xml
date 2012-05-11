@@ -29,6 +29,7 @@
     <string name="quit_application">Quit application</string>
     <string name="change_user">Change user</string>
     <string name="add_poi_label">Add POI</string>
+    <string name="delete_poi_label">Delete POI</string>
     <string name="create_new_itinerary">Create new itinerary</string>
     <string name="username">Username</string>
     <string name="disconnect">Disconnect</string>
