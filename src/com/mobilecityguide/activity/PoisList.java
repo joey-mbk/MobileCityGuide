@@ -111,7 +111,7 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 			startActivity(new Intent(this, AddPoi.class));
 			break;
 		case R.id.delete_poiButton:
-			startActivity(new Intent(this, AddPoi.class));
+			startActivity(new Intent(this, DeletePoi.class));
 			break;
 		case R.id.start:
 			Intent intent = new Intent(this, Directions.class);
