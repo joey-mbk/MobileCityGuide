@@ -78,6 +78,9 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 	private void setListeners() {
 		View addPoiButton = findViewById(R.id.add_poi);
 		addPoiButton.setOnClickListener(this);
+		
+		View delPoiButton = findViewById(R.id.delete_poiButton);
+		delPoiButton.setOnClickListener(this);
 
 		View startButton = findViewById(R.id.start);
 		startButton.setOnClickListener(this);

@@ -77,6 +77,7 @@ public class Connect extends Activity implements OnClickListener, OnItemClickLis
 		switch (v.getId()) {
 		case R.id.create_profile:
 			intent = new Intent(this, CreateProfile.class);
+			intent.putExtra("new", "yes");
 			startActivity(intent);
 			break;
 		}
