@@ -1,64 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainStyle"
-    android:orientation="vertical"
-    android:padding="20dip" >
+    style="@style/MainStyleNoBg" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:layout_width="199dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    <com.google.android.maps.MapView
+        android:id="@+id/myMapView1"
 
-            <TextView
-                android:id="@+id/textViewCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/city"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:id="@+id/textDescritpion"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="0.52"
-                android:text="@string/pois_of_city"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/filtersbutton"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/buttonroundedcorners2"
-            android:text="@string/filters"
-            android:textColor="#ffffff" />
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/listroundedcorners"
-        android:cacheColorHint="#00ffffff" >
-    </ListView>
-            
-    <Button
-        android:id="@+id/start"
         android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/buttonroundedcorners"
-        android:text="@string/start_label"
-        android:textColor="#ffffff" />
+        android:layout_height="fill_parent"
+        android:layout_x="0px"
+        android:layout_y="105px"
+        android:apiKey="06OP9wNxcE1Xo_YipWg5m6ounF-NrTVBcMwSh6w"
+        android:clickable="true"
+        android:enabled="true" >
+    </com.google.android.maps.MapView>
 
 </LinearLayout>
