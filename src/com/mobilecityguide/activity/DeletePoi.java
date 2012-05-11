@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
@@ -77,6 +78,9 @@ public class DeletePoi extends Activity implements OnClickListener , OnItemClick
 		}
 
 		setContentView(R.layout.delete_poi);
+		
+		((TextView) findViewById(R.id.poi_title_menu)).setText(UserController.city); // setting window title
+		
 		setListeners();
 	}
 
@@ -102,7 +106,7 @@ public class DeletePoi extends Activity implements OnClickListener , OnItemClick
 			startActivity(intent);
 			return true;
 		case R.id.edit_profile:
-			intent = new Intent(this, MobileCityGuideActivity.class);
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}

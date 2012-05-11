@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
@@ -81,6 +82,9 @@ public class AddPoi extends Activity implements OnClickListener , OnItemClickLis
 		}
 
 		setContentView(R.layout.add_poi);
+		
+		((TextView) findViewById(R.id.poi_title)).setText(UserController.city); // setting window title
+		
 		setListeners();
 	}
 
@@ -106,7 +110,7 @@ public class AddPoi extends Activity implements OnClickListener , OnItemClickLis
 			startActivity(intent);
 			return true;
 		case R.id.edit_profile:
-			intent = new Intent(this, MobileCityGuideActivity.class);
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}

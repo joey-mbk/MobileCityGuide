@@ -72,7 +72,7 @@ public class DeleteItinerary extends Activity implements OnClickListener, OnItem
 
 		setContentView(R.layout.delete_itinerary);
 
-		//((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
+		((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
 
 		setListeners();
 	}
@@ -99,7 +99,7 @@ public class DeleteItinerary extends Activity implements OnClickListener, OnItem
 			startActivity(intent);
 			return true;
 		case R.id.edit_profile:
-			intent = new Intent(this, MobileCityGuideActivity.class);
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}

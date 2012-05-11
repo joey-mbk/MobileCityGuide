@@ -18,8 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
+        android:background="#CC0101"
+        android:padding="7dp"
+        android:paddingLeft="15dp"
         android:text="@string/splash_screen_text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

@@ -36,12 +36,18 @@ public class MobileCityGuideActivity extends Activity implements OnClickListener
 	private void setListeners() {
 		View enterButton = findViewById(R.id.contentLayout);
 		enterButton.setOnClickListener(this);
+		View logoButton = findViewById(R.id.logo);
+		logoButton.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.contentLayout:
+			intent = new Intent(this, Connect.class);
+			startActivity(intent);
+			break;
+		case R.id.logo:
 			intent = new Intent(this, Connect.class);
 			startActivity(intent);
 			break;

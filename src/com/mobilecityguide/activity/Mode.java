@@ -47,7 +47,7 @@ public class Mode extends Activity implements OnClickListener, OnItemClickListen
 			startActivity(intent);
 			return true;
 		case R.id.edit_profile:
-			intent = new Intent(this, MobileCityGuideActivity.class);
+			intent = new Intent(this, CreateProfile.class);
 			startActivity(intent);
 			return true;
 		}
