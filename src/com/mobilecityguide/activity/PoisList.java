@@ -120,8 +120,10 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		HashMap<Integer, POI> poiHashMap;
 		try {
 			poiHashMap = UserController.selectedItinerary.getPOIList();
-			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
-				pois.add(entry.getKey(), POIController.getPOIName(entry.getValue()));
+			pois = new ArrayList<String>();
+			for (int i = 1; i < poiHashMap.size(); i++) {
+				pois.add(POIController.getPOIName(poiHashMap.get(new Integer(i))));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
