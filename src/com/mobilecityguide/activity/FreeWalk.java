@@ -44,7 +44,7 @@ public class FreeWalk extends MapActivity{
 
 	MapView mapView; 
 	MapController mc;
-	GeoPoint p;
+	GeoPoint p, q;
 
 	class MapOverlay extends com.google.android.maps.Overlay
 	{
@@ -129,26 +129,47 @@ public class FreeWalk extends MapActivity{
 		setContentView(R.layout.free_map);
 
 		mapView = (MapView) findViewById(R.id.myMapView1);
-	    
+
 
 		mc = mapView.getController();
 		String coordinates[] = {"1.352566007", "103.78921587"};
 		double lat = 50.670558;
 		double lng = 4.616135;
+		
+		double dest_lat = 50.667969; // the testing destination 
+		double dest_long = 4.591487;
+
+		/* Get user's location */
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		criteria.setAltitudeRequired(false);
+		Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
+
+		//double fromLat = lastKnownLocation.getLatitude();
+		//double fromLon = lastKnownLocation.getLongitude();
 
 		p = new GeoPoint(
 				(int) (lat * 1E6), 
 				(int) (lng * 1E6));
+		q = new GeoPoint(
+				(int) (dest_lat * 1E6), 
+				(int) (dest_long * 1E6));
 
-
+        
 		mc.animateTo(p);
+		mc.animateTo(q);
+		
+		
 		mc.setZoom(17); 
 
 		//---Add a location marker---
 		MapOverlay mapOverlay = new MapOverlay();
+		
 		List<Overlay> listOfOverlays = mapView.getOverlays();
 		listOfOverlays.clear();
 		listOfOverlays.add(mapOverlay); 
+
 		
 		//mapView.getOverlays().add(new MyOverLay(gp1,gp2,3,color)); 
 
