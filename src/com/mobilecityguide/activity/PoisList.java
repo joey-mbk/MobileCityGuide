@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,45 +20,19 @@ import android.widget.TextView;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
 
 public class PoisList extends Activity implements OnClickListener, OnItemClickListener {
 
-	protected CharSequence[] options;
-	protected boolean[] selections;
-	
 	ArrayList<String> pois = new ArrayList<String>(); // list of pois chosen by the user
-	ArrayList<String> poiTemp = new ArrayList<String>(); // buffer list of languages chosen by the user
-	
 	private ArrayAdapter<String> adapter;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		/* Retrieve all pois */
-		try {
-			ArrayList<String> pois = POIController.getPOINamesOfCity();
-			
-			/* Delete pois who are already present in itinerary */
-			ArrayList<String> itineraryPois = new ArrayList<String>();
-			HashMap<Integer, POI> poiHashMap = UserController.selectedItinerary.getPOIList();
-			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
-				itineraryPois.add(POIController.getPOIName(entry.getValue()).toString());
-			pois.removeAll(itineraryPois);
-			
-			options = new CharSequence[pois.size()];
-			for (int i = 0; i < pois.size(); i++)
-				options[i] = pois.get(i);
-		} catch (Exception e) {
-			options = null;
-			e.printStackTrace();
-		}
-		selections = new boolean[ options.length ];
 		
 		setContentView(R.layout.pois_list);
 		
@@ -120,15 +92,14 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		HashMap<Integer, POI> poiHashMap;
 		try {
 			poiHashMap = UserController.selectedItinerary.getPOIList();
-			pois = new ArrayList<String>();
-			for (int i = 1; i < poiHashMap.size(); i++) {
-				pois.add(POIController.getPOIName(poiHashMap.get(new Integer(i))));
-			}
+			for (Entry<Integer, POI> entry : poiHashMap.entrySet())
+				pois.add(entry.getKey()-1, POIController.getPOIName(entry.getValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pois);
 		poiListView.setAdapter(adapter);
+		poiListView.invalidateViews();
 		poiListView.setOnItemClickListener(this);
 	}
 
@@ -142,61 +113,11 @@ public class PoisList extends Activity implements OnClickListener, OnItemClickLi
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.add_poi:
-			AlertDialog.Builder addPoi = new AlertDialog.Builder(this);
-			addPoi.setTitle(R.string.add_poi_title);
-			addPoi.setMultiChoiceItems(options, selections, new DialogSelectionClickHandler("add_poi"));
-			addPoi.setPositiveButton("OK", new DialogButtonClickHandler("add_poi"));
-			addPoi.show();
+			startActivity(new Intent(this, AddPoi.class));
 			break;
 		case R.id.start:
 			startActivity(new Intent(this, Directions.class));
 			break;
-		}
-	}
-	
-	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
-		
-		private String window;
-		
-		public DialogSelectionClickHandler(String window) {
-			this.window = window;
-		}
-		
-		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
-			if (window.equals("add_poi"))
-				if (selected)
-					poiTemp.add(options[clicked].toString());
-				else
-					poiTemp.remove(options[clicked].toString());
-		}
-	}
-
-	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
-		
-		private String window;
-		
-		public DialogButtonClickHandler(String window) {
-			this.window = window;
-		}
-		
-		public void onClick(DialogInterface dialog, int clicked) {
-			switch(clicked)	{
-				case DialogInterface.BUTTON_POSITIVE:
-					if (window.equals("add_poi")) {
-						pois.addAll(poiTemp); // if the user had previously selected pois, pois is outdated so we change it
-						try {
-							UserController.selectedItinerary.clear(); // reset the list of POIs of this itinerary
-							for (int i = 0; i < pois.size(); i++)
-								UserController.selectedItinerary.addPOI(i+1, POIController.getPOI(pois.get(i)));
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						poiTemp.clear(); // we flush the buffer, in case of future use
-						adapter.notifyDataSetChanged(); // refresh the list of POIs
-						//ItineraryController.saveItinerary(UserController.selectedItinerary); // Comment mettre à jour l'itinéraire ?
-					}
-				break;
-			}
 		}
 	}
 }

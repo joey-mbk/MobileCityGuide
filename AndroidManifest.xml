@@ -80,6 +80,10 @@
             android:name=".activity.Directions"
             android:label="Guided tour directions" >
        	</activity>
+       	<activity
+            android:name=".activity.DeleteItinerary"
+            android:label="Delete itinerary" >
+        </activity>
     </application>
 
 </manifest>

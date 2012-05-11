@@ -114,4 +114,8 @@ public class ItineraryController {
 	public static void addItinerary(Itinerary itinerary) throws Exception{
 		itineraryMapper.addItinerary(itinerary);
 	}
+	
+	public static Itinerary getLastAddedItinerary() throws Exception{
+		return getItinerary(itineraryMapper.getLastItineraryID());
+	}
 }

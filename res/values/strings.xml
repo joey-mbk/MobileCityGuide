@@ -48,6 +48,8 @@
     <string name="back_connect">Back</string>
     <string name="signup_register">Signup</string>
     <string name="filters">Filters</string>
+    <string name="itinerary_delete">Select an itinerary to delete it</string>
+    <string name="itinerary_deleteButton">Delete itinerary</string>
     <string name="about_text">\
 All rights reserved.
 For educational use only.</string>

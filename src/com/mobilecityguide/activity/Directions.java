@@ -11,7 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +30,7 @@ import com.mobilecityguide.controllers.GPSController;
 import com.mobilecityguide.controllers.POIController;
 import com.mobilecityguide.controllers.UserController;
 
-public class Directions extends Activity {
+public class Directions extends Activity implements LocationListener {
 	
 	private Road mRoad;
 	private int step;
@@ -42,11 +44,13 @@ public class Directions extends Activity {
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Criteria criteria = new Criteria();
 		criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		criteria.setAltitudeRequired(false);
 		Location userLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
 
+		/* Monitor position changes */
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+		
 		String url = GPSController.getUrl(userLocation, UserController.selectedItinerary.getPOIList().get(new Integer(step)));
-		System.out.println(url);
 		InputStream is = getConnection(url);
 		mRoad = GPSController.getRoute(is);
 		
@@ -71,6 +75,28 @@ public class Directions extends Activity {
 		}
 	}
 
+	@Override
+	public void onLocationChanged(Location arg0) {
+		System.out.println("Location changed");
+		System.out.println(arg0.getLatitude());
+		System.out.println(arg0.getLongitude());
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		System.out.println("Provider disabled: "+arg0);
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		System.out.println("Provider enabled: "+arg0);
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		System.out.println("Status changed: "+arg0);
+	}
+	
 	private InputStream getConnection(String url) {
 		InputStream is = null;
 		try {

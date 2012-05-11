@@ -34,20 +34,24 @@ public class CreateProfile extends Activity implements OnClickListener {
 
 	/* Error dialog */
 	AlertDialog.Builder error;
-	
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		/* Retrieve all languages */
-		ArrayList<String> lang = UserController.getAllLanguages();
-		options_l = new CharSequence[lang.size()];
-		for (int i = 0; i < lang.size(); i++)
-			options_l[i] = lang.get(i);
-		
+
+		try {
+			/* Retrieve all languages */
+			ArrayList<String> lang = UserController.getAllLanguages();
+			options_l = new CharSequence[lang.size()];
+			for (int i = 0; i < lang.size(); i++)
+				options_l[i] = lang.get(i);
+		} catch (Exception e) {
+			options_l = null;
+			e.printStackTrace();
+		}
 		selections_l = new boolean[ options_l.length ];
-		
+
 		try {
 			/* Retrieve all category titles */
 			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
@@ -59,7 +63,7 @@ public class CreateProfile extends Activity implements OnClickListener {
 			e.printStackTrace();
 		}
 		selections_i = new boolean[ options_i.length ];
-		
+
 		setContentView(R.layout.create_profile);
 		setListeners();
 	}
@@ -164,13 +168,13 @@ public class CreateProfile extends Activity implements OnClickListener {
 	}
 
 	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
-		
+
 		private String window;
-		
+
 		public DialogSelectionClickHandler(String window) {
 			this.window = window;
 		}
-		
+
 		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
 			if (window.equals("languages"))
 				if (selected)
@@ -189,31 +193,31 @@ public class CreateProfile extends Activity implements OnClickListener {
 	}
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
-		
+
 		private String window;
-		
+
 		public DialogButtonClickHandler(String window) {
 			this.window = window;
 		}
-		
+
 		public void onClick(DialogInterface dialog, int clicked) {
 			switch(clicked)	{
-				case DialogInterface.BUTTON_POSITIVE:
-					if (window.equals("languages")) {
-						lang.addAll(langTemp); // if the user had previously selected languages, lang is outdated so we change it
-						langTemp.clear(); // we flush the buffer, in case of future use
+			case DialogInterface.BUTTON_POSITIVE:
+				if (window.equals("languages")) {
+					lang.addAll(langTemp); // if the user had previously selected languages, lang is outdated so we change it
+					langTemp.clear(); // we flush the buffer, in case of future use
+				}
+
+				if (window.equals("interests")) {
+					Category category = null;
+					cat.clear(); // if the user had previously selected interests, cat is not empty so we clear it
+					for (int i = 0; i < options_i.length; i++) {
+						if (selections_i[i]) {
+							category = CategoryController.getCategory(options_i[i].toString());
+							cat.add(category);
+						}	
 					}
-					
-					if (window.equals("interests")) {
-						Category category = null;
-						cat.clear(); // if the user had previously selected interests, cat is not empty so we clear it
-						for (int i = 0; i < options_i.length; i++) {
-							if (selections_i[i]) {
-								category = CategoryController.getCategory(options_i[i].toString());
-								cat.add(category);
-							}	
-						}
-					}
+				}
 				break;
 			}
 		}

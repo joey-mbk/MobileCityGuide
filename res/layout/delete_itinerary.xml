@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="0.52"
-            android:text="@string/itinerary_prompt"
+            android:text="@string/itinerary_delete"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ffffff" />
 
@@ -45,23 +45,5 @@
         android:background="@drawable/listroundedcorners"
         android:cacheColorHint="#00000000" >
     </ListView>
-
-    <Button
-        android:id="@+id/create_itinerary"
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/buttonroundedcorners"
-        android:text="@string/create_itinerary_label"
-        android:textColor="#ffffff" />
-
-    <Button
-        android:id="@+id/delete_itinerary"
-        android:layout_width="fill_parent"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/buttonroundedcorners"
-        android:text="@string/itinerary_deleteButton"
-        android:textColor="#ffffff" />
 
 </LinearLayout>
