@@ -127,7 +127,6 @@ public class CreateItinerary extends Activity implements OnClickListener {
 			}
 			else
 			{
-				System.out.println("Itinerary create");
 				/* we create the itinerary object */
 				Itinerary itinerary = new Itinerary();
 				itinerary.setId(ItineraryController.itineraryMapper.getLastItineraryID()+1);

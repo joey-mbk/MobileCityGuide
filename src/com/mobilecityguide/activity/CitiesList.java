@@ -79,7 +79,6 @@ public class CitiesList extends Activity implements OnClickListener, OnItemClick
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
 		try {
 			UserController.setCity((citiesList[(int) id]));
-			System.out.println(UserController.getCity());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

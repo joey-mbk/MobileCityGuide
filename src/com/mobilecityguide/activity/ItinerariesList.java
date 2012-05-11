@@ -129,7 +129,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		chooseFiltersButton.setOnClickListener(this);
 
 		itinerariesListView = (ListView)findViewById(R.id.list);
-		System.out.println(itinerariesList.length);
 		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
 		itinerariesListView.setAdapter(adapter);
 		itinerariesListView.setOnItemClickListener(this);
@@ -214,12 +213,9 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 					for (int i = 2; i < options_f.length; i++) {
 						if (!selections_f[i]) {
 							try {
-								System.out.println(i);
 								System.out.println(CategoryController.getCategoryTitle(CategoryController.getCategory(options_f[i].toString()).getId()));
 								ArrayList<Integer> itOfCatList = ItineraryController.getItineraryOfCategory(itinerariesIDList,CategoryController.getCategory(options_f[i].toString()));
-								System.out.println(itOfCatList.isEmpty());
 								for(Integer id: itOfCatList){
-									System.out.println(id);
 									itinerariesIDList.remove(id);
 								}
 				
@@ -238,8 +234,6 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 					else{
 						itinerariesList = new String[itinerariesNamesList.size()];
 						itinerariesNamesList.toArray(itinerariesList);
-						for(String s :itinerariesList)
-							System.out.println(s);
 						adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,itinerariesList);
 						itinerariesListView.setAdapter(adapter);
 						adapter.notifyDataSetChanged();
