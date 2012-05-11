@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.mobilecityguide.activity.Connect;
-import com.mobilecityguide.activity.CreateItinerary;
 import com.mobilecityguide.controllers.CategoryController;
 import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
