@@ -1,14 +1,14 @@
 package com.mobilecityguide.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,22 +16,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.activity.ItinerariesList.DialogButtonClickHandler;
-import com.mobilecityguide.activity.ItinerariesList.DialogSelectionClickHandler;
 import com.mobilecityguide.controllers.CategoryController;
-import com.mobilecityguide.controllers.ItineraryController;
 import com.mobilecityguide.controllers.POIController;
-import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
 
-public class FreeWalk extends Activity implements OnClickListener , OnItemClickListener {
+public class FreeWalk extends Activity implements OnClickListener , OnItemClickListener, LocationListener {
     
 	protected CharSequence[] options_f;
 	protected boolean[] selections_f;
@@ -201,6 +196,30 @@ public class FreeWalk extends Activity implements OnClickListener , OnItemClickL
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
