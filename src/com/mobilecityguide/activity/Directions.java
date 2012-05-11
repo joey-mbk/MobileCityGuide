@@ -59,13 +59,25 @@ public class Directions extends Activity implements LocationListener {
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 		
-		String url = GPSController.getUrl(userLocation, poiLocation);
-		InputStream is = getConnection(url);
-		mRoad = GPSController.getRoute(is);
-		
 		setContentView(R.layout.directions);
 		
-		addDirections();
+		if (userLocation != null) {
+			String url = GPSController.getUrl(userLocation, poiLocation);
+			InputStream is = getConnection(url);
+			mRoad = GPSController.getRoute(is);
+			addDirections();
+		}
+		else {
+			TextView poiTitle = new TextView(this);
+			String poiName = POIController.getPOIName(poi);
+			poiTitle.setText(poiName);
+			poiTitle.setTextAppearance(this, android.R.style.TextAppearance_Large);
+			TextView error = new TextView(this);
+			poiTitle.setText(R.string.directions_error_gps);
+			LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
+			layout.addView(poiTitle);
+			layout.addView(error);
+		}
 	}
 
 	private void addDirections() {

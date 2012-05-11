@@ -88,6 +88,8 @@ you do not know well.
     <string name="create_profile_interests_title">Choose your interests</string>
     <string name="create_profile_languages_title">Select your languages in the order that suits you</string>
     
+    <string name="directions_error_gps">Error: no GPS signal.</string>
+    
     <string name="create_itinerary_label">Create new itinerary</string>
     
     <string name="settings_title">Settings</string>
