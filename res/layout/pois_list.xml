@@ -54,7 +54,7 @@
             android:id="@+id/add_poi"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:background="@drawable/buttonroundedcorners"
+            android:background="@drawable/buttonroundedcorners2"
             android:text="@string/add_poi_label"
             android:textColor="#ffffff" />
 
@@ -63,7 +63,7 @@
             android:layout_width="130dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/buttonroundedcorners"
+            android:background="@drawable/buttonroundedcorners3"
             android:text="@string/delete_poi_label"
             android:textColor="#ffffff" />
     </LinearLayout>
