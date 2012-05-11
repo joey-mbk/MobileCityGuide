@@ -41,14 +41,14 @@
             android:background="@drawable/buttonroundedcorners2"
             android:text="@string/filters"
             android:textColor="#ffffff" />
-
     </LinearLayout>
 
     <ListView
         android:id="@+id/list"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
+        android:layout_height="177dp"
         android:layout_marginTop="10dp"
+        android:layout_weight="0.11"
         android:background="@drawable/listroundedcorners"
         android:cacheColorHint="#00000000" >
     </ListView>

@@ -85,7 +85,7 @@ public class ItineraryMapper {
 		RecordSet r = itineraryGateway.getItineraryCategory(id);
 		Category category = null;
 		try {
-			if (r != null) {
+			if (r.first()) {
 				int catID = r.getInt("categoryID");
 				while (r.next()) {
 					categoryMap.put(r.getString("language"), r.getString("title"));

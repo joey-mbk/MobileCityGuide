@@ -129,6 +129,7 @@ public class ItinerariesList extends Activity implements OnClickListener, OnItem
 		chooseFiltersButton.setOnClickListener(this);
 
 		itinerariesListView = (ListView)findViewById(R.id.list);
+		System.out.println(itinerariesList.length);
 		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,itinerariesList);
 		itinerariesListView.setAdapter(adapter);
 		itinerariesListView.setOnItemClickListener(this);
