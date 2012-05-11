@@ -31,7 +31,6 @@ public class Connect extends Activity implements OnClickListener, OnItemClickLis
 		setListeners();
 	}
 
-
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.layout.menu, menu);
@@ -69,7 +68,7 @@ public class Connect extends Activity implements OnClickListener, OnItemClickLis
 			System.out.println(UserController.activeUser.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
+		}
 		startActivity(new Intent(this, CitiesList.class));
 	}
 	
