@@ -68,6 +68,10 @@
             android:name=".activity.AddPoi"
             android:label="Add POI" >
         </activity>
+         <activity
+            android:name=".activity.DeletePoi"
+            android:label="Delete POI" >
+        </activity>
         <activity
             android:name=".activity.PoiDetails"
             android:label="POI infos" >
