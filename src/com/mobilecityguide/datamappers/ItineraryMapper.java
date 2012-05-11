@@ -140,7 +140,9 @@ public class ItineraryMapper {
 			try {
 				ids.first();
 				System.out.println(ids.getInt("itineraryID"));
-				return ids.getInt("itineraryID");
+		        int result = ids.getInt("itineraryID");
+		        ids.close();
+				return result;
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Error while retrieving last itinerary ID.");
