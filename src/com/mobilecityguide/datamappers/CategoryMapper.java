@@ -36,7 +36,7 @@ public class CategoryMapper {
 			e.printStackTrace();
 		}
 		category = new Category(ID,categoriesMap);
-
+        r.close();
 		return category;
 	}
 
@@ -50,12 +50,12 @@ public class CategoryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+        r.close();
 		return categoriesID;
 	}
 	
 	public HashMap<String,String>getCategoryTitles(int id){
-		RecordSet r;
+		RecordSet r = null;
 		HashMap<String, String> titlesMap = new HashMap<String, String>();
 		try {
 			r = categoryGateway.getCategoryTitles(id);
@@ -65,6 +65,7 @@ public class CategoryMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		r.close();
 		return titlesMap;
 	}
 }
