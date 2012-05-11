@@ -15,8 +15,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.location.Address;
+import android.location.Criteria;
 import android.location.Geocoder;
+import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,6 +55,8 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 	private String[]poiNamesList;
 	GeoPoint points=null;
 	MapView mapView;
+	private Location userLocation;
+	private POI poi;
 
 	/* Error dialog */
 	AlertDialog.Builder error;
@@ -78,11 +83,7 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 				paint.setColor(Color.GREEN);
 				paint.setStrokeWidth(10);
 				canvas.drawPoint((float) point.x, (float) point.y, paint);
-				/*---add the marker---
-			Bitmap bmp = BitmapFactory.decodeResource(
-					getResources(), R.drawable.star);            
-			canvas.drawBitmap(bmp, point.x, point.y-50, null);        
-			return true;*/
+
 			}
 			return super.draw(canvas, mapView, shadow, when);
 		}
@@ -100,38 +101,44 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 		public boolean onTouchEvent(MotionEvent event, MapView mapView) 
 		{  
 			//---when user lifts his finger---
-			if (event.getAction() == 1) {                
-				GeoPoint p = mapView.getProjection().fromPixels(
-						(int) event.getX(),
-						(int) event.getY());
 
-				Geocoder geoCoder = new Geocoder(
-						getBaseContext(), Locale.getDefault());
-				try {
-					List<Address> addresses = geoCoder.getFromLocation(
-							p.getLatitudeE6()  / 1E6, 
-							p.getLongitudeE6() / 1E6, 1);
 
-					String add = "";
-					if (addresses.size() > 0) 
-					{
-						for (int i=0; i<addresses.get(0).getMaxAddressLineIndex(); 
-								i++)
-							add += addresses.get(0).getAddressLine(i) + "\n";
-					}
+			onLocationChanged(userLocation);
 
-					Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
-				}
-				catch (IOException e) {                
-					e.printStackTrace();
-				}   
-				return true;
-			}
-			else                
-				return false;
-		}        
+			return false;
+		}
 	} 
-	
+
+	@SuppressWarnings("null")
+	@Override
+	public void onLocationChanged(Location user) {
+
+		POI[] poiList=null;
+		try {
+			poiList = POIController.getPOIOfCity();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+        Location poiLocation = null;
+		
+        for (POI poi : poiList) {
+		
+			poiLocation.setLatitude(poi.getLatitude());
+			poiLocation.setLongitude(poi.getLongitude());
+			
+			/* if we're less than 50 meters away from the POI, show its informations */
+			if (user.distanceTo(poiLocation) <= 50) {
+				Intent intent = new Intent(this, PoiDetails.class);
+				intent.putExtra("id", true);
+				intent.putExtra("poi", poi.getId());
+				startActivity(intent);
+
+			}
+		}
+	}
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -181,6 +188,18 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 		setListeners();
 	}
 
+	public Location currentUserLocation (){
+
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		criteria.setAltitudeRequired(false);
+		Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
+
+		return lastKnownLocation;
+	}
+
+
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.layout.menu, menu);
@@ -194,34 +213,12 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 			intent = new Intent(this, MobileCityGuideActivity.class);
 			startActivity(intent);
 			return true;
-		case R.id.change_user:
-			intent = new Intent(this, Connect.class);
-			startActivity(intent);
-			return true;
-		case R.id.change_city:
-			intent = new Intent(this, CitiesList.class);
-			startActivity(intent);
-			return true;
-		case R.id.edit_profile:
-			intent = new Intent(this, MobileCityGuideActivity.class);
-			startActivity(intent);
-			return true;
 		}
 		return false;
 	}
 
 	private void setListeners() {
-		/*View guideTourButton = findViewById(R.id.start);
-		guideTourButton.setOnClickListener(this);
 
-
-		View chooseFiltersButton = findViewById(R.id.filtersbutton);
-		chooseFiltersButton.setOnClickListener(this);
-
-		poiListView = (ListView)findViewById(R.id.list);
-		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,poiNamesList);
-		poiListView.setAdapter(adapter);
-		poiListView.setOnItemClickListener(this);*/
 	}
 
 	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
@@ -231,19 +228,7 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 	}
 
 	public void onClick(View v) {
-		Intent intent;
-		/*switch (v.getId()) {
-		/*case R.id.start:
-			//TODO start freewalk
-			break;
-		case R.id.filtersbutton:
-			AlertDialog.Builder filters = new AlertDialog.Builder(this);
-			filters.setTitle("Select filter(s)");
-			filters.setMultiChoiceItems(options_f, selections_f, new DialogSelectionClickHandler("filters"));
-			filters.setPositiveButton("OK", new DialogButtonClickHandler("filters"));
-			filters.show();
-			break;
-		}*/
+
 	}
 	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
 
@@ -258,6 +243,9 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 				selections_f[clicked] = selected;
 		}
 	}
+
+
+
 
 	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
 
@@ -303,7 +291,5 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 			}
 		}
 	}
-
-	
 }
 
