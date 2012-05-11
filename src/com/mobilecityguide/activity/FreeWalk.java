@@ -1,14 +1,15 @@
 package com.mobilecityguide.activity;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -25,41 +26,177 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
 import com.mobilecityguide.MobileCityGuideActivity;
 import com.mobilecityguide.R;
-import com.mobilecityguide.controllers.CategoryController;
+import com.mobilecityguide.controllers.GPSController;
 import com.mobilecityguide.controllers.POIController;
+import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
+import com.mobilecityguide.models.Road;
 
-public abstract class FreeWalk extends Activity implements OnClickListener , OnItemClickListener, LocationListener {
+public class FreeWalk extends Activity implements LocationListener {
 
-	protected CharSequence[] options_f;
-	protected boolean[] selections_f;
-	AlertDialog.Builder filters = null;
-	ArrayList<String> filtersList = new ArrayList<String>();
-	ListView poiListView;
-	ArrayAdapter<String> adapter;
-	Context context;
-	private String[]poiNamesList;
-	GeoPoint points=null;
-	MapView mapView;
-	private Location userLocation;
-	private POI poi;
+	private Road mRoad;
+	private int step;
+	private POI[] poi;
+	private Location poiLocation;
+	private MapView mapView;
 
-	/* Error dialog */
-	AlertDialog.Builder error;
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		//step = 1;
+		try {
+			poi = POIController.getPOIOfCity();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // retrieve this step POI
+		
+		/* Get user's location */
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		Location userLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
+
+		/* Monitor position changes */
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
+
+		List<Overlay> listOfOverlays = null;
+		GeoPoint points = null;
+
+		for (POI currentPoi : poi) {
+			
+			poiLocation = new Location(LocationManager.GPS_PROVIDER);
+			poiLocation.setLatitude(currentPoi.getLatitude());
+			poiLocation.setLongitude(currentPoi.getLongitude());
+			
+			String url = GPSController.getUrl(userLocation, currentPoi);
+			InputStream is = getConnection(url);
+			mRoad = GPSController.getRoute(is);
+
+			points = new GeoPoint(
+					(int) (currentPoi.getLatitude() * 1E6), 
+					(int) (currentPoi.getLongitude() * 1E6));
+
+			MapOverlay mapOverlay = new MapOverlay(points);
+			listOfOverlays = mapView.getOverlays();
+			listOfOverlays.add(mapOverlay);
+
+		}
+
+		MapController mapController = mapView.getController();
+		mapController.animateTo(points); 
+		mapController.setZoom(17); 
+
+		mapView.setSatellite(true);
+		mapView.displayZoomControls(true);
+
+		setContentView(R.layout.free_walk);
+		//addDirections();
+	}
+
+	private void addDirections() {
+		for (int i = 0; i < mRoad.mPoints.length-1; i++) {
+			TextView container = new TextView(this);
+			if (i == mRoad.mPoints.length-2) // if it's the last direction, no need to show distance
+				container.setText(mRoad.mPoints[i].mName);
+			else
+				container.setText(mRoad.mPoints[i].mName+" "+mRoad.mPoints[i].mDescription);
+			container.setId(i);
+			container.setLayoutParams(new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.FILL_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT));
+			LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
+			layout.addView(container);
+		}
+	}
+/*
+	private void moveToNextPoi() {
+		this.step++;
+		this.previousPoi;
+		this.poi = UserController.selectedItinerary.getPOIList().get(new Integer(this.step));
+		this.poiLocation = new Location(LocationManager.GPS_PROVIDER);
+		this.poiLocation.setLatitude(poi.getLatitude());
+		this.poiLocation.setLongitude(poi.getLongitude());
+	}
+*/
+	@Override
+	public void onLocationChanged(Location arg0) {
+		System.out.println("Location changed");
+		System.out.println(arg0.getLatitude());
+		System.out.println(arg0.getLongitude());
+		System.out.println("Distance from POI: "+arg0.distanceTo(poiLocation));
+
+		/* if we're less than 50 meters away from the POI, show its informations */
+		for (POI poi2 : poi) {
+			
+			if (arg0.distanceTo(poiLocation) <= 50) {
+				Intent intent = new Intent(this, PoiDetails.class);
+				intent.putExtra("id", true);
+				intent.putExtra("poi", poi2.getId());
+				startActivity(intent);
+
+			}
+		}
+	}
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		System.out.println("Provider disabled: "+arg0);
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		System.out.println("Provider enabled: "+arg0);
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		System.out.println("Status changed: "+arg0);
+	}
+
+	private InputStream getConnection(String url) {
+		InputStream is = null;
+		try {
+			URLConnection conn = new URL(url).openConnection();
+			is = conn.getInputStream();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return is;
+	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.layout.menu, menu);
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+		case R.id.quit:
+			intent = new Intent(this, MobileCityGuideActivity.class);
+			startActivity(intent);
+			return true;
+		}
+		return false;
+	}
 
 	public class MapOverlay extends Overlay {
 		private GeoPoint data;  
@@ -83,7 +220,6 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 				paint.setColor(Color.GREEN);
 				paint.setStrokeWidth(10);
 				canvas.drawPoint((float) point.x, (float) point.y, paint);
-
 			}
 			return super.draw(canvas, mapView, shadow, when);
 		}
@@ -101,195 +237,36 @@ public abstract class FreeWalk extends Activity implements OnClickListener , OnI
 		public boolean onTouchEvent(MotionEvent event, MapView mapView) 
 		{  
 			//---when user lifts his finger---
+			if (event.getAction() == 1) {                
+				GeoPoint p = mapView.getProjection().fromPixels(
+						(int) event.getX(),
+						(int) event.getY());
 
+				Geocoder geoCoder = new Geocoder(
+						getBaseContext(), Locale.getDefault());
+				try {
+					List<Address> addresses = geoCoder.getFromLocation(
+							p.getLatitudeE6()  / 1E6, 
+							p.getLongitudeE6() / 1E6, 1);
 
-			onLocationChanged(userLocation);
+					String add = "";
+					if (addresses.size() > 0) 
+					{
+						for (int i=0; i<addresses.get(0).getMaxAddressLineIndex(); 
+								i++)
+							add += addresses.get(0).getAddressLine(i) + "\n";
+					}
 
-			return false;
-		}
+					Toast.makeText(getBaseContext(), add, Toast.LENGTH_SHORT).show();
+				}
+				catch (IOException e) {                
+					e.printStackTrace();
+				}   
+				return true;
+			}
+			else                
+				return false;
+		}        
 	} 
 
-	@SuppressWarnings("null")
-	@Override
-	public void onLocationChanged(Location user) {
-
-		POI[] poiList=null;
-		try {
-			poiList = POIController.getPOIOfCity();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-        Location poiLocation = null;
-		
-        for (POI poi : poiList) {
-		
-			poiLocation.setLatitude(poi.getLatitude());
-			poiLocation.setLongitude(poi.getLongitude());
-			
-			/* if we're less than 50 meters away from the POI, show its informations */
-			if (user.distanceTo(poiLocation) <= 50) {
-				Intent intent = new Intent(this, PoiDetails.class);
-				intent.putExtra("id", true);
-				intent.putExtra("poi", poi.getId());
-				startActivity(intent);
-
-			}
-		}
-	}
-
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		mapView = (MapView) findViewById(R.id.myMapView1);
-
-		context = this;
-
-		/* Fill the filter window menu */
-		try {
-			ArrayList<String> titles = CategoryController.getAllCategoriesTitles();
-			options_f = new CharSequence[titles.size()];
-			for (int i = 0; i < titles.size(); i++)
-				options_f[i] = titles.get(i);
-		} catch (Exception e) {
-			options_f = null;
-			e.printStackTrace();
-		}
-		selections_f = new boolean[ options_f.length ];
-
-		//Remplissage de la liste de nom des poi
-		POI[] poiList =null;
-		try {
-			poiList = POIController.getPOIOfCity();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		poiNamesList = new String[poiList.length];
-		for(int i=0; i<poiList.length;i++)
-			poiNamesList[i]=POIController.getPOIName(poiList[i]);
-
-		List<Overlay> listOfOverlays = null;
-		for (POI poi2 : poiList) {
-
-			points = new GeoPoint(
-					(int) (poi2.getLatitude() * 1E6), 
-					(int) (poi2.getLongitude() * 1E6));
-
-			MapOverlay mapOverlay = new MapOverlay(points);
-			listOfOverlays = mapView.getOverlays();
-			listOfOverlays.add(mapOverlay);
-
-		}
-
-		setContentView(R.layout.free_walk);
-		//((TextView) findViewById(R.id.city_title)).setText(UserController.city); // setting window title
-		setListeners();
-	}
-
-	public Location currentUserLocation (){
-
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		criteria.setAltitudeRequired(false);
-		Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, true));
-
-		return lastKnownLocation;
-	}
-
-
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.layout.menu, menu);
-		return true;
-	}
-
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
-		switch (item.getItemId()) {
-		case R.id.quit:
-			intent = new Intent(this, MobileCityGuideActivity.class);
-			startActivity(intent);
-			return true;
-		}
-		return false;
-	}
-
-	private void setListeners() {
-
-	}
-
-	public void onItemClick(AdapterView<?> arg0,View arg1, int arg2, long id) {
-		Intent intent = new Intent(this, PoiDetails.class);
-		intent.putExtra("poi", poiNamesList[(int) id]);
-		startActivity(intent);
-	}
-
-	public void onClick(View v) {
-
-	}
-	public class DialogSelectionClickHandler implements DialogInterface.OnMultiChoiceClickListener {
-
-		private String window;
-
-		public DialogSelectionClickHandler(String window) {
-			this.window = window;
-		}
-
-		public void onClick(DialogInterface dialog, int clicked, boolean selected) {
-			if (window.equals("filters"))
-				selections_f[clicked] = selected;
-		}
-	}
-
-
-
-
-	public class DialogButtonClickHandler implements DialogInterface.OnClickListener {
-
-		private String window;
-
-		public DialogButtonClickHandler(String window) {
-			this.window = window;
-		}
-
-		public void onClick(DialogInterface dialog, int clicked) {
-			switch(clicked)	{
-			case DialogInterface.BUTTON_POSITIVE:
-
-				if (window.equals("filters")) {
-					ArrayList<String> poiArrayList = new ArrayList<String>();
-					for (int i = 0; i < options_f.length; i++) {
-						if (selections_f[i]) {
-							try {
-								for(String poi: POIController.getPOINamesofCategory(((CategoryController.getCategory(options_f[i].toString()))))){
-									if(!poiArrayList.contains(poi))
-										poiArrayList.add(poi);
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}	
-					}
-					if (poiArrayList.isEmpty()) {
-						error = new AlertDialog.Builder(context);
-						error.setMessage("No poi matches to your request");
-						error.setPositiveButton("OK", new DialogButtonClickHandler("error"));
-						error.show();
-					}
-					else{
-						poiNamesList = new String[poiArrayList.size()];
-						poiArrayList.toArray(poiNamesList);
-						adapter = new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,poiNamesList);
-						poiListView.setAdapter(adapter);
-					}
-
-				}
-				break;
-			}
-		}
-	}
 }
-
