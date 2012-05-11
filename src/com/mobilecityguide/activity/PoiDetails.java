@@ -22,6 +22,7 @@ import android.widget.TextView;
 public class PoiDetails extends Activity implements OnClickListener {
 
 	private boolean inItinerary;
+	private boolean freewalk;
 	private int step;
 
 	/** Called when the activity is first created. */
@@ -35,10 +36,16 @@ public class PoiDetails extends Activity implements OnClickListener {
 		int poiID = 0;
 		POI poi = null;
 		try {
-			if (extras != null)
+			if (extras != null) {
 				this.inItinerary = extras.getBoolean("itinerary");
+				this.freewalk = extras.getBoolean("freewalk");
+			}
 			if (this.inItinerary) {
 				this.step = extras.getInt("step");
+				poiID = extras.getInt("poi");
+				poi = POIController.getPOI(poiID);
+			}
+			else if (this.freewalk) {
 				poiID = extras.getInt("poi");
 				poi = POIController.getPOI(poiID);
 			}
@@ -57,7 +64,16 @@ public class PoiDetails extends Activity implements OnClickListener {
 			if (desc != null)
 				break;
 		}
-
+		
+		/* if no suitable description was found, try to find anyone */
+		if (desc == null) {
+			for (String lang : languages) {
+				desc = poi.getDescription("adult", lang);
+				if (desc != null)
+					break;
+			}
+		}
+		
 		/* Set the details in corresponding text fields */
 		setContentView(R.layout.poi_details);
 		((TextView) findViewById(R.id.description)).setText(desc);
@@ -71,6 +87,17 @@ public class PoiDetails extends Activity implements OnClickListener {
 				container.setText("Finish");
 			else
 				container.setText("Next");
+			container.setLayoutParams(new LinearLayout.LayoutParams(
+					LinearLayout.LayoutParams.FILL_PARENT,
+					LinearLayout.LayoutParams.WRAP_CONTENT));
+			container.setOnClickListener(this);
+			container.setBackgroundResource(R.drawable.buttonroundedcorners);
+			LinearLayout layout = (LinearLayout) findViewById(R.id.info_list);
+			layout.addView(container);
+		}
+		else if (this.freewalk) {
+			Button container = new Button(this);
+			container.setText("Close");
 			container.setLayoutParams(new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.FILL_PARENT,
 					LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -114,11 +141,17 @@ public class PoiDetails extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		/* check if it's the last poi in the itinerary */
 		Intent intent;
-		if (UserController.selectedItinerary.getPOIList().size() == step)
-			intent = new Intent(this, ItinerariesList.class);
-		else
-			intent = new Intent(this, Directions.class); // get directions towards the next poi in the itinerary
-		intent.putExtra("step", this.step+1);
-		startActivity(intent);
+		if (this.inItinerary) {
+			if (UserController.selectedItinerary.getPOIList().size() == step)
+				intent = new Intent(this, ItinerariesList.class);
+			else
+				intent = new Intent(this, Directions.class); // get directions towards the next poi in the itinerary
+			intent.putExtra("step", this.step+1);
+			startActivity(intent);
+		}
+		else if (this.freewalk) {
+			intent = new Intent(this, FreeWalk.class);
+			startActivity(intent);
+		}
 	}
 }

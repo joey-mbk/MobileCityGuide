@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -43,7 +44,7 @@ import com.mobilecityguide.controllers.UserController;
 import com.mobilecityguide.models.POI;
 import com.mobilecityguide.models.Road;
 
-public class FreeWalk extends Activity implements LocationListener {
+public class FreeWalk extends MapActivity implements LocationListener {
 
 	private Road mRoad;
 	private int step;
@@ -54,14 +55,34 @@ public class FreeWalk extends Activity implements LocationListener {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		//step = 1;
+		
+		setContentView(R.layout.free_walk);
+		
+mapView = (MapView) findViewById(R.id.map);
+		
 		try {
 			poi = POIController.getPOIOfCity();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // retrieve this step POI
+		}
+
+		List<Overlay> listOfOverlays = null;
+		GeoPoint point = null;
+
+		for (POI currentPoi : poi) {
+			point = new GeoPoint((int) (currentPoi.getLatitude()*1E6), (int) (currentPoi.getLongitude()*1E6));
+			MapOverlay mapOverlay = new MapOverlay(point);
+			listOfOverlays = mapView.getOverlays();
+			listOfOverlays.add(mapOverlay);
+
+		}
+
+		MapController mapController = mapView.getController();
+		mapController.animateTo(point); 
+		mapController.setZoom(17); 
+
+		mapView.setSatellite(true);
+		mapView.displayZoomControls(true);
 
 		/* Get user's location */
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -72,83 +93,22 @@ public class FreeWalk extends Activity implements LocationListener {
 		/* Monitor position changes */
 		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
-
-		List<Overlay> listOfOverlays = null;
-		GeoPoint points = null;
-
-		for (POI currentPoi : poi) {
-
-			poiLocation = new Location(LocationManager.GPS_PROVIDER);
-			poiLocation.setLatitude(currentPoi.getLatitude());
-			poiLocation.setLongitude(currentPoi.getLongitude());
-
-			//String url = GPSController.getUrl(userLocation, currentPoi);
-			//InputStream is = getConnection(url);
-			//mRoad = GPSController.getRoute(is);
-
-			points = new GeoPoint(
-					(int) (currentPoi.getLatitude() * 1E6), 
-					(int) (currentPoi.getLongitude() * 1E6));
-
-			MapOverlay mapOverlay = new MapOverlay(points);
-			listOfOverlays = mapView.getOverlays();
-			listOfOverlays.add(mapOverlay);
-
-		}
-
-		MapController mapController = mapView.getController();
-		mapController.animateTo(points); 
-		mapController.setZoom(17); 
-
-		mapView.setSatellite(true);
-		mapView.displayZoomControls(true);
-
-		setContentView(R.layout.free_walk);
-		//addDirections();
 	}
 
-	private void addDirections() {
-		for (int i = 0; i < mRoad.mPoints.length-1; i++) {
-			TextView container = new TextView(this);
-			if (i == mRoad.mPoints.length-2) // if it's the last direction, no need to show distance
-				container.setText(mRoad.mPoints[i].mName);
-			else
-				container.setText(mRoad.mPoints[i].mName+" "+mRoad.mPoints[i].mDescription);
-			container.setId(i);
-			container.setLayoutParams(new LinearLayout.LayoutParams(
-					LinearLayout.LayoutParams.FILL_PARENT,
-					LinearLayout.LayoutParams.WRAP_CONTENT));
-			LinearLayout layout = (LinearLayout) findViewById(R.id.directions);
-			layout.addView(container);
-		}
-	}
-	/*
-	private void moveToNextPoi() {
-		this.step++;
-		this.previousPoi;
-		this.poi = UserController.selectedItinerary.getPOIList().get(new Integer(this.step));
-		this.poiLocation = new Location(LocationManager.GPS_PROVIDER);
-		this.poiLocation.setLatitude(poi.getLatitude());
-		this.poiLocation.setLongitude(poi.getLongitude());
-	}
-	 */
 	@Override
 	public void onLocationChanged(Location arg0) {
 		System.out.println("Location changed");
-		System.out.println(arg0.getLatitude());
-		System.out.println(arg0.getLongitude());
-		System.out.println("Distance from POI: "+arg0.distanceTo(poiLocation));
-
-		/* if we're less than 50 meters away from the POI, show its informations */
-		for (POI poi2 : poi) {
-
-			if (arg0.distanceTo(poiLocation) <= 50) {
+		/* if we're less than 20 meters away from a POI, show its informations */
+		for (POI aPoi : poi) {
+			poiLocation = new Location(LocationManager.GPS_PROVIDER);
+			poiLocation.setLatitude(aPoi.getLatitude());
+			poiLocation.setLongitude(aPoi.getLongitude());
+			
+			if (arg0.distanceTo(poiLocation) <= 20) {
 				Intent intent = new Intent(this, PoiDetails.class);
-				intent.putExtra("id", true);
-				intent.putExtra("poi", poi2.getId());
+				intent.putExtra("freewalk", true);
+				intent.putExtra("poi", aPoi.getId());
 				startActivity(intent);
-
 			}
 		}
 	}
@@ -166,19 +126,6 @@ public class FreeWalk extends Activity implements LocationListener {
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		System.out.println("Status changed: "+arg0);
-	}
-
-	private InputStream getConnection(String url) {
-		InputStream is = null;
-		try {
-			URLConnection conn = new URL(url).openConnection();
-			is = conn.getInputStream();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return is;
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -279,6 +226,12 @@ public class FreeWalk extends Activity implements LocationListener {
 			else                
 				return false;
 		}        
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
 	} 
 
 }

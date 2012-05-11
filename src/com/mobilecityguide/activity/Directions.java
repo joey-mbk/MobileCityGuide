@@ -105,14 +105,11 @@ public class Directions extends Activity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location arg0) {
 		System.out.println("Location changed");
-		System.out.println(arg0.getLatitude());
-		System.out.println(arg0.getLongitude());
-		System.out.println("Distance from POI: "+arg0.distanceTo(poiLocation));
-
 		/* if we're less than 50 meters away from the POI, show its informations */
 		if (arg0.distanceTo(poiLocation) <= 50) {
 			Intent intent = new Intent(this, PoiDetails.class);
 			intent.putExtra("itinerary", true);
+			intent.putExtra("freewalk", false);
 			intent.putExtra("step", this.step);
 			intent.putExtra("poi", poi.getId());
 			startActivity(intent);

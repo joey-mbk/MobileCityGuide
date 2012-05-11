@@ -88,6 +88,8 @@
             android:name=".activity.DeleteItinerary"
             android:label="Delete itinerary" >
         </activity>
+        
+        <uses-library android:required="true" android:name="com.google.android.maps" />
     </application>
 
 </manifest>
