@@ -48,15 +48,18 @@
     <string name="back_connect">Back</string>
     <string name="signup_register">Signup</string>
     <string name="filters">Filters</string>
-    <string name="itinerary_delete">Select an itinerary to delete it</string>
+    <string name="itinerary_delete">Delete an itinerary</string>
     <string name="itinerary_deleteButton">Delete itinerary</string>
     <string name="about_text">\
 All rights reserved.
-For educational use only.</string>
-    <string name="help_text">\<i>MobileCity</i>  is a traveling application.
+For educational use only.
+</string>
+    <string name="help_text">\
+<i>MobileCity</i>  is a traveling application.
 It will help you enhance your touristic experience
 in a city you are visiting for first time or
-you do not know well.</string>
+you do not know well.
+</string>
  	
     <string name="save">Save</string>
     
@@ -64,6 +67,7 @@ you do not know well.</string>
     
     <string name="itinerary">Itinerary</string>
     
+    <string name="poi">POI</string>
     <string name="pois_of_city">POIs of the city : </string>
     <string name="pois_of_itinerary">POIs of the itinerary : </string>
     

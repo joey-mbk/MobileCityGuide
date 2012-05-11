@@ -16,23 +16,29 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+         >
 
-        <TextView
+     <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:text="@string/select_profile_text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#FFFFFF" 
+            android:padding= "7dp"
+            android:paddingLeft= "15dp"
+            android:background="#CC0101" />
+        
         <ListView
             android:id="@+id/list"
             android:layout_width="fill_parent"
             android:layout_height="142dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             android:background="@drawable/listroundedcorners"
-            android:cacheColorHint="#00000000" >
+            android:cacheColorHint="#555555" 
+            >
+            
         </ListView>
 
         <Button
@@ -43,6 +49,7 @@
             android:background="@drawable/buttonroundedcorners"
             android:text="@string/select_profile_new"
             android:textColor="#ffffff" />
+        
     </LinearLayout>
 
 </LinearLayout>

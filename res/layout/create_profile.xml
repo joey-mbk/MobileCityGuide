@@ -24,7 +24,10 @@
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/buttonroundedcorners2"
-            android:text="@string/age_prompt" />
+            android:text="@string/age_prompt"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
 
         <Button
             android:id="@+id/choose_languages"
@@ -32,7 +35,10 @@
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/buttonroundedcorners2"
-            android:text="@string/languages_prompt" />
+            android:text="@string/languages_prompt" 
+            android:textColor="#FFFFFF" 
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
 
         <Button
             android:id="@+id/choose_interests"
@@ -40,7 +46,10 @@
             android:layout_height="35dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/buttonroundedcorners2"
-            android:text="@string/interests_prompt" />
+            android:text="@string/interests_prompt" 
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp" />
     </LinearLayout>
 
     <LinearLayout
