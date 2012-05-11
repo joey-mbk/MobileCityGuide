@@ -127,5 +127,10 @@ public class ItineraryMapper {
 	public void saveItinerary(Itinerary itinerary) {
 		itineraryGateway.saveItinerary(itinerary);
 	}
+	
+	public int getLastItineraryID() {
+		System.out.println(itineraryGateway.getLastItineraryID());
+		return itineraryGateway.getLastItineraryID();
+	}
 
 }

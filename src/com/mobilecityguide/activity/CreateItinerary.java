@@ -97,6 +97,7 @@ public class CreateItinerary extends Activity implements OnClickListener {
 				break;
 			case R.id.add_pois:
 				Itinerary itinerary = new Itinerary();
+				itinerary.setId(ItineraryController.itineraryMapper.getLastItineraryID()+1);
 				itinerary.addTitle(UserController.activeUser.getLanguage()[0], ((EditText)findViewById(R.id.itineraryname)).getText().toString());
 				itinerary.setTheme(CategoryController.getCategory( ((Button) findViewById(R.id.theme)).getText().toString() ));
 				try {
@@ -105,7 +106,12 @@ public class CreateItinerary extends Activity implements OnClickListener {
 					e.printStackTrace();
 					System.out.println("Error while creating a new itinerary.");
 				}
+			try {
 				UserController.selectedItinerary = itinerary;
+				//UserController.selectedItinerary = ItineraryController.getLastAddedItinerary();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 				intent = new Intent(this, PoisList.class);
 				startActivity(intent);
 				Toast.makeText(this, R.string.createitinerary_added_text, Toast.LENGTH_SHORT).show();
