@@ -139,9 +139,9 @@ public class PoiDetails extends Activity implements OnClickListener {
 			image.setImageResource(R.drawable.univ3);
 		else if(path.equals("wallons1"))
 			image.setImageResource(R.drawable.wallons1);		
-		else if(path.equals("museeherge31"))
+		else if(path.equals("musee-herge31"))
 			image.setImageResource(R.drawable.museeherge31);	
-		else if(path.equals("museeherge5"))
+		else if(path.equals("musee-herge5"))
 			image.setImageResource(R.drawable.museeherge5);	
 		else if(path.equals("museelln1"))
 			image.setImageResource(R.drawable.museelln1);	
